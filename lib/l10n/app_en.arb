@@ -104,5 +104,70 @@
       }
     }
   },
-  "couldNotOpen": "Couldn’t open this link."
+  "couldNotOpen": "Couldn’t open this link.",
+  "savedTitle": "Saved!",
+  "savedMeta": "{domain} · added to {collection}",
+  "@savedMeta": {
+    "placeholders": {
+      "domain": {
+        "type": "String"
+      },
+      "collection": {
+        "type": "String"
+      }
+    }
+  },
+  "changeCollection": "Change collection",
+  "done": "Done",
+  "closesSoon": "Closes by itself in a few seconds",
+  "duplicateTitle": "You already saved this one",
+  "savedOnIn": "Saved on {date} in {collection}",
+  "@savedOnIn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "collection": {
+        "type": "String"
+      }
+    }
+  },
+  "savedOn": "Saved on {date}",
+  "@savedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "saveCopy": "Save a copy",
+  "openSaved": "Open saved link",
+  "noLinkShared": "We couldn’t find a link in what you shared.",
+  "moveTitle": "{count, plural, =1{Move this link to…} other{Move {count} links to…}}",
+  "@moveTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "moveHelp": "Pick a collection. Links can only be in one.",
+  "noCollection": "No collection",
+  "linkCount": "{count, plural, =1{1 link} other{{count} links}}",
+  "@linkCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "moveTo": "Move to {name}",
+  "@moveTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "clipboardTitle": "Save the link you copied?"
 }

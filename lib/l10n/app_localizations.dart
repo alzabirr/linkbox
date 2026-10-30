@@ -541,6 +541,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn’t open this link.'**
   String get couldNotOpen;
+
+  /// No description provided for @savedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved!'**
+  String get savedTitle;
+
+  /// No description provided for @savedMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'{domain} · added to {collection}'**
+  String savedMeta(String domain, String collection);
+
+  /// No description provided for @changeCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'Change collection'**
+  String get changeCollection;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @closesSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Closes by itself in a few seconds'**
+  String get closesSoon;
+
+  /// No description provided for @duplicateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You already saved this one'**
+  String get duplicateTitle;
+
+  /// No description provided for @savedOnIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved on {date} in {collection}'**
+  String savedOnIn(String date, String collection);
+
+  /// No description provided for @savedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved on {date}'**
+  String savedOn(String date);
+
+  /// No description provided for @saveCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Save a copy'**
+  String get saveCopy;
+
+  /// No description provided for @openSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Open saved link'**
+  String get openSaved;
+
+  /// No description provided for @noLinkShared.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn’t find a link in what you shared.'**
+  String get noLinkShared;
+
+  /// No description provided for @moveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Move this link to…} other{Move {count} links to…}}'**
+  String moveTitle(int count);
+
+  /// No description provided for @moveHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a collection. Links can only be in one.'**
+  String get moveHelp;
+
+  /// No description provided for @noCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'No collection'**
+  String get noCollection;
+
+  /// No description provided for @linkCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 link} other{{count} links}}'**
+  String linkCount(int count);
+
+  /// No description provided for @moveTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to {name}'**
+  String moveTo(String name);
+
+  /// No description provided for @clipboardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save the link you copied?'**
+  String get clipboardTitle;
 }
 
 class _AppLocalizationsDelegate

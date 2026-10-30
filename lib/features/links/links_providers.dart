@@ -56,3 +56,8 @@ Stream<int> linkCount(Ref ref) => ref
 @Riverpod(keepAlive: true)
 Future<void> startup(Ref ref) =>
     ref.read(linkRepositoryProvider).resumePending();
+
+/// Links per collection id (null key = no collection).
+@riverpod
+Stream<Map<int?, int>> collectionCounts(Ref ref) =>
+    ref.watch(linkRepositoryProvider).watchCounts();

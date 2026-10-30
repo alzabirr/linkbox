@@ -249,4 +249,79 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get couldNotOpen => 'Couldn’t open this link.';
+
+  @override
+  String get savedTitle => 'Saved!';
+
+  @override
+  String savedMeta(String domain, String collection) {
+    return '$domain · added to $collection';
+  }
+
+  @override
+  String get changeCollection => 'Change collection';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get closesSoon => 'Closes by itself in a few seconds';
+
+  @override
+  String get duplicateTitle => 'You already saved this one';
+
+  @override
+  String savedOnIn(String date, String collection) {
+    return 'Saved on $date in $collection';
+  }
+
+  @override
+  String savedOn(String date) {
+    return 'Saved on $date';
+  }
+
+  @override
+  String get saveCopy => 'Save a copy';
+
+  @override
+  String get openSaved => 'Open saved link';
+
+  @override
+  String get noLinkShared => 'We couldn’t find a link in what you shared.';
+
+  @override
+  String moveTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Move $count links to…',
+      one: 'Move this link to…',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get moveHelp => 'Pick a collection. Links can only be in one.';
+
+  @override
+  String get noCollection => 'No collection';
+
+  @override
+  String linkCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count links',
+      one: '1 link',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String moveTo(String name) {
+    return 'Move to $name';
+  }
+
+  @override
+  String get clipboardTitle => 'Save the link you copied?';
 }

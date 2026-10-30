@@ -40,19 +40,35 @@ class LinkRepository {
     return row == null ? null : _toItem(row);
   }
 
+  Future<LinkItem?> findById(int id) async {
+    final row = await (_db.select(_db.links)..where((l) => l.id.equals(id)))
+        .getSingleOrNull();
+    return row == null ? null : _toItem(row);
+  }
+
   /// Saves a link at once. With [meta] (preview already shown in the Add
-  /// sheet) it is stored as-is; otherwise the preview is fetched afterwards.
-  Future<int> add(String url, {int? collectionId, LinkMetadata? meta}) async {
+  /// sheet) it is stored as-is; otherwise the preview is fetched afterwards
+  /// and [title] (e.g. the page title another app shared) is shown meanwhile.
+  /// [allowDuplicate] is "Save a copy" (07).
+  Future<int> add(
+    String url, {
+    int? collectionId,
+    LinkMetadata? meta,
+    String? title,
+    bool allowDuplicate = false,
+  }) async {
     final clean = url.trim();
-    final existing = await findByUrl(clean);
-    if (existing != null) throw DuplicateLinkException(existing);
+    if (!allowDuplicate) {
+      final existing = await findByUrl(clean);
+      if (existing != null) throw DuplicateLinkException(existing);
+    }
 
     final now = DateTime.now().toUtc();
     final id = await _db.into(_db.links).insert(LinksCompanion.insert(
           url: clean,
           normalizedUrl: UrlUtils.normalize(clean),
           domain: UrlUtils.domainOf(clean),
-          title: Value(meta?.title),
+          title: Value(meta?.title ?? _cleanTitle(title, clean)),
           description: Value(meta?.description),
           imageUrl: Value(meta?.imageUrl),
           siteName: Value(meta?.siteName),
@@ -65,6 +81,26 @@ class LinkRepository {
         ));
     if (meta == null) _queueFetch(id, clean);
     return id;
+  }
+
+  /// Puts links into a collection (null = "No collection").
+  Future<void> moveLinks(List<int> ids, int? collectionId) =>
+      (_db.update(_db.links)..where((l) => l.id.isIn(ids))).write(
+          LinksCompanion(
+              collectionId: Value(collectionId),
+              updatedAt: Value(DateTime.now().toUtc())));
+
+  /// Number of links per collection id (null key = no collection).
+  Stream<Map<int?, int>> watchCounts() {
+    final count = _db.links.id.count();
+    final q = _db.selectOnly(_db.links)
+      ..addColumns([_db.links.collectionId, count])
+      ..where(_db.links.deletedAt.isNull())
+      ..groupBy([_db.links.collectionId]);
+    return q.watch().map((rows) => {
+          for (final r in rows)
+            r.read(_db.links.collectionId): r.read(count) ?? 0,
+        });
   }
 
   /// "Try again" on a failed card.
@@ -88,13 +124,22 @@ class LinkRepository {
     }
   }
 
+  /// A shared subject that is just the link again is not a title.
+  static String? _cleanTitle(String? title, String url) {
+    final t = title?.trim();
+    if (t == null || t.isEmpty || t.contains('://') || t == url) return null;
+    return t.length > MetadataParser.maxTitle
+        ? t.substring(0, MetadataParser.maxTitle)
+        : t;
+  }
+
   void _queueFetch(int id, String url) {
     _queue.add(id, () async {
       try {
         final meta = await _metadata.fetch(url);
         await (_db.update(_db.links)..where((l) => l.id.equals(id))).write(
           LinksCompanion(
-            title: Value(meta.title),
+            title: meta.title == null ? const Value.absent() : Value(meta.title),
             description: Value(meta.description),
             imageUrl: Value(meta.imageUrl),
             siteName: Value(meta.siteName),

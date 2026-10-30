@@ -288,7 +288,9 @@ class _Picture extends StatelessWidget {
             : CachedNetworkImage(
                 imageUrl: imageUrl!,
                 fit: BoxFit.cover,
-                placeholder: (_, _) => scene,
+                fadeInDuration: AppMotion.select,
+                fadeOutDuration: Duration.zero,
+                placeholder: (_, _) => const ColoredBox(color: AppColors.sand),
                 errorWidget: (_, _, _) => scene,
               ),
       ),

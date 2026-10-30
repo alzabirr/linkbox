@@ -33,6 +33,12 @@ enum BoldButtonSize {
   large(AppSizes.buttonHeightLg, AppShape.rCard, 17, FontWeight.w800,
       AppShadows.offMd),
 
+  /// Share overlay buttons (22): 52 high, radius 16, 14 / 800.
+  overlay(52, AppShape.rControlSm, 14, FontWeight.w800, AppShadows.offSm),
+
+  /// Share overlay buttons (07): 54 high, radius 18, 15 / 800.
+  overlayLarge(54, AppShape.rControl, 15, FontWeight.w800, AppShadows.offSm),
+
   /// "Add link" floating button: 58 high, radius 20, 16 / 700.
   fab(AppSizes.fabHeight, AppShape.rCard, 16, FontWeight.w700,
       AppShadows.offMd);
@@ -57,6 +63,7 @@ class BoldButton extends StatelessWidget {
     this.trailingIcon,
     this.expand = false,
     this.shadow,
+    this.weight,
   });
 
   final String label;
@@ -71,6 +78,9 @@ class BoldButton extends StatelessWidget {
 
   /// Override the default shadow (primary / danger have one).
   final bool? shadow;
+
+  /// Override the size's font weight (e.g. 700 on secondary buttons).
+  final FontWeight? weight;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +119,8 @@ class BoldButton extends StatelessWidget {
           child: Text(
             label,
             textAlign: TextAlign.center,
-            style: AppText.body(size.fontSize, weight: size.weight, color: fg),
+            style: AppText.body(size.fontSize,
+                weight: weight ?? size.weight, color: fg),
           ),
         ),
         if (trailingIcon != null) ...[

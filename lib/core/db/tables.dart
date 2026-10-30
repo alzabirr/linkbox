@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 
+@TableIndex(name: 'links_normalized_url', columns: {#normalizedUrl})
 @TableIndex(name: 'links_collection_id', columns: {#collectionId})
 @TableIndex(name: 'links_created_at', columns: {#createdAt})
 @TableIndex(name: 'links_title', columns: {#title})
@@ -9,8 +10,9 @@ class Links extends Table {
   /// Exactly as shared or typed.
   TextColumn get url => text()();
 
-  /// For the duplicate check (see url_normalizer.dart).
-  TextColumn get normalizedUrl => text().unique()();
+  /// For the duplicate check (see url_normalizer.dart). Not unique:
+  /// "Save a copy" (07) can keep the same link twice.
+  TextColumn get normalizedUrl => text()();
   TextColumn get title => text().nullable()();
   TextColumn get description => text().nullable()();
   TextColumn get imageUrl => text().nullable()();

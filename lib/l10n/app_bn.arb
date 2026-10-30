@@ -73,5 +73,22 @@
   "emptyBody": "যেকোনো অ্যাপ থেকে লিংক শেয়ার করুন, বা এখানে পেস্ট করুন। আপনার লিংক এই ফোনেই থাকে।",
   "emptyCollection": "এই কালেকশনে এখনো কোনো লিংক নেই।",
   "linkSubtitle": "{domain} · {collection}",
-  "couldNotOpen": "লিংকটি খোলা গেল না।"
+  "couldNotOpen": "লিংকটি খোলা গেল না।",
+  "savedTitle": "সেভ হয়েছে!",
+  "savedMeta": "{domain} · {collection}-এ যোগ হয়েছে",
+  "changeCollection": "কালেকশন বদলান",
+  "done": "ঠিক আছে",
+  "closesSoon": "কয়েক সেকেন্ডে নিজে থেকেই বন্ধ হবে",
+  "duplicateTitle": "এটি আগেই সেভ করেছেন",
+  "savedOnIn": "{date} তারিখে {collection}-এ সেভ করা",
+  "savedOn": "{date} তারিখে সেভ করা",
+  "saveCopy": "আরেকটি কপি সেভ করুন",
+  "openSaved": "সেভ করা লিংক খুলুন",
+  "noLinkShared": "শেয়ার করা লেখায় কোনো লিংক পাওয়া যায়নি।",
+  "moveTitle": "{count, plural, =1{এই লিংকটি সরান…} other{{count}টি লিংক সরান…}}",
+  "moveHelp": "একটি কালেকশন বাছুন। একটি লিংক শুধু একটি কালেকশনে থাকে।",
+  "noCollection": "কোনো কালেকশন নয়",
+  "linkCount": "{count, plural, =1{১টি লিংক} other{{count}টি লিংক}}",
+  "moveTo": "{name}-এ সরান",
+  "clipboardTitle": "কপি করা লিংকটি সেভ করবেন?"
 }

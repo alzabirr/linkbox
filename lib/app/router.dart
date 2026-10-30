@@ -5,6 +5,7 @@ import '../core/widgets/app_icon.dart';
 import '../core/widgets/main_nav_bar.dart';
 import '../features/collections/collections_page.dart';
 import '../features/dev/widget_gallery_page.dart';
+import '../features/links/clipboard_prompt.dart';
 import '../features/links/home_page.dart';
 import '../features/settings/settings_page.dart';
 import '../l10n/app_localizations.dart';
@@ -44,6 +45,12 @@ final appRouter = GoRouter(
         ]),
       ],
     ),
+    // linkbox://open/link/<id> (share overlay "Open saved link").
+    // Opens Home for now; Quick look (04) arrives in M3.
+    GoRoute(
+      path: '/link/:id',
+      redirect: (context, state) => Routes.links,
+    ),
     GoRoute(
       path: Routes.gallery,
       builder: (context, state) => const WidgetGalleryPage(),
@@ -61,7 +68,7 @@ class _TabShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     return Scaffold(
-      body: shell,
+      body: ClipboardPromptHost(child: shell),
       bottomNavigationBar: MainNavBar(
         currentIndex: shell.currentIndex,
         onTap: (i) => shell.goBranch(i, initialLocation: i == shell.currentIndex),

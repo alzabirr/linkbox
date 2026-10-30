@@ -483,7 +483,6 @@ class $LinksTable extends Links with TableInfo<$LinksTable, Link> {
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'),
   );
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
@@ -842,7 +841,8 @@ class Link extends DataClass implements Insertable<Link> {
   /// Exactly as shared or typed.
   final String url;
 
-  /// For the duplicate check (see url_normalizer.dart).
+  /// For the duplicate check (see url_normalizer.dart). Not unique:
+  /// "Save a copy" (07) can keep the same link twice.
   final String normalizedUrl;
   final String? title;
   final String? description;
@@ -1322,6 +1322,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $CollectionsTable collections = $CollectionsTable(this);
   late final $LinksTable links = $LinksTable(this);
+  late final Index linksNormalizedUrl = Index(
+    'links_normalized_url',
+    'CREATE INDEX links_normalized_url ON links (normalized_url)',
+  );
   late final Index linksCollectionId = Index(
     'links_collection_id',
     'CREATE INDEX links_collection_id ON links (collection_id)',
@@ -1341,6 +1345,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   List<DatabaseSchemaEntity> get allSchemaEntities => [
     collections,
     links,
+    linksNormalizedUrl,
     linksCollectionId,
     linksCreatedAt,
     linksTitle,

@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.linkbox"
-    compileSdk = 37 // receive_sharing_intent needs 37
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

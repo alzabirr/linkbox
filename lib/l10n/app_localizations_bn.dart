@@ -249,4 +249,80 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get couldNotOpen => 'লিংকটি খোলা গেল না।';
+
+  @override
+  String get savedTitle => 'সেভ হয়েছে!';
+
+  @override
+  String savedMeta(String domain, String collection) {
+    return '$domain · $collection-এ যোগ হয়েছে';
+  }
+
+  @override
+  String get changeCollection => 'কালেকশন বদলান';
+
+  @override
+  String get done => 'ঠিক আছে';
+
+  @override
+  String get closesSoon => 'কয়েক সেকেন্ডে নিজে থেকেই বন্ধ হবে';
+
+  @override
+  String get duplicateTitle => 'এটি আগেই সেভ করেছেন';
+
+  @override
+  String savedOnIn(String date, String collection) {
+    return '$date তারিখে $collection-এ সেভ করা';
+  }
+
+  @override
+  String savedOn(String date) {
+    return '$date তারিখে সেভ করা';
+  }
+
+  @override
+  String get saveCopy => 'আরেকটি কপি সেভ করুন';
+
+  @override
+  String get openSaved => 'সেভ করা লিংক খুলুন';
+
+  @override
+  String get noLinkShared => 'শেয়ার করা লেখায় কোনো লিংক পাওয়া যায়নি।';
+
+  @override
+  String moveTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countটি লিংক সরান…',
+      one: 'এই লিংকটি সরান…',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get moveHelp =>
+      'একটি কালেকশন বাছুন। একটি লিংক শুধু একটি কালেকশনে থাকে।';
+
+  @override
+  String get noCollection => 'কোনো কালেকশন নয়';
+
+  @override
+  String linkCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countটি লিংক',
+      one: '১টি লিংক',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String moveTo(String name) {
+    return '$name-এ সরান';
+  }
+
+  @override
+  String get clipboardTitle => 'কপি করা লিংকটি সেভ করবেন?';
 }

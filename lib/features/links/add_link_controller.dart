@@ -74,7 +74,8 @@ class AddLinkController extends _$AddLinkController {
   }
 
   void setUrl(String input) {
-    final url = input.trim();
+    // Drop invisible control characters some keyboards insert.
+    final url = input.replaceAll(RegExp(r'[\u0000-\u001F\u007F-\u009F\u200B-\u200D\uFEFF]'), '').trim();
     _request++;
     _debounce.cancel();
     if (url.isEmpty) {

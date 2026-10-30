@@ -83,7 +83,9 @@ class _AddLinkSheetState extends ConsumerState<AddLinkSheet> {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              clipBehavior: Clip.none,
+              // Clip so content never draws under the Save button; the
+              // padding leaves room for the 3 px field shadow.
+              padding: const EdgeInsets.only(right: 4, bottom: 4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -272,7 +274,9 @@ class _Preview extends StatelessWidget {
                       : CachedNetworkImage(
                           imageUrl: meta!.imageUrl!,
                           fit: BoxFit.cover,
-                          placeholder: (_, _) => scene,
+                          fadeInDuration: AppMotion.select,
+                fadeOutDuration: Duration.zero,
+                placeholder: (_, _) => const ColoredBox(color: AppColors.sand),
                           errorWidget: (_, _, _) => scene,
                         ),
             ),

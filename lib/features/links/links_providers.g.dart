@@ -285,3 +285,47 @@ final class StartupProvider
 }
 
 String _$startupHash() => r'da16e0a6baf365124e200d7e6a5fd4c7ba23ba96';
+
+/// Links per collection id (null key = no collection).
+
+@ProviderFor(collectionCounts)
+final collectionCountsProvider = CollectionCountsProvider._();
+
+/// Links per collection id (null key = no collection).
+
+final class CollectionCountsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<Map<int?, int>>,
+          Map<int?, int>,
+          Stream<Map<int?, int>>
+        >
+    with $FutureModifier<Map<int?, int>>, $StreamProvider<Map<int?, int>> {
+  /// Links per collection id (null key = no collection).
+  CollectionCountsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'collectionCountsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$collectionCountsHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<Map<int?, int>> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<Map<int?, int>> create(Ref ref) {
+    return collectionCounts(ref);
+  }
+}
+
+String _$collectionCountsHash() => r'8483d0bc49d79cec2f1a3d19dc94c79d6ca046fc';

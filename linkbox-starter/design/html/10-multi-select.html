@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Multi-select</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Outfit:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414}a:hover{color:#000000}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #FDF6EC; font-family: 'Outfit', system-ui, sans-serif; color: #141414; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; gap: 10px; margin: 16px 16px 0 16px; padding: 6px 6px 6px 6px; background: #141414; border-radius: 20px; color: #FFFFFF">
+    <a href="Main.dc.html" aria-label="Cancel selection" style="width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #FFFFFF"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></a>
+    <h1 style="margin: 0; flex: 1; font-family: 'Bricolage Grotesque', sans-serif; font-size: 22px; font-weight: 800">3 selected</h1>
+    <button style="height: 44px; padding: 0 14px; border: 2.5px solid #FFFFFF; border-radius: 14px; background: transparent; color: #FFFFFF; font-size: 14px; font-weight: 700">Select all</button>
+  </header>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 18px 18px 0 16px; flex: 1; overflow: hidden; align-content: start">
+    <sc-for list="{{items}}" as="item" hint-placeholder-count="6">
+      <article style="position: relative; background: {{item.frame}}; border: {{item.border}}; border-radius: 20px; box-shadow: {{item.shadow}}; padding: 8px; display: flex; flex-direction: column; gap: 7px; opacity: {{item.opacity}}">
+        <div style="height: 88px; border: 2.5px solid #141414; border-radius: 14px; overflow: hidden; background: {{item.sky}}">
+          <svg width="100%" height="88" viewBox="0 0 160 88" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="128" cy="24" r="10" fill="#FFD23F" stroke="#141414" stroke-width="2.5"/><path d="M-4 66 Q36 50 80 62 T164 56 V92 H-4Z" fill="{{item.ground}}" stroke="#141414" stroke-width="2.5"/></svg>
+        </div>
+        <h3 style="margin: 0; padding: 0 2px 2px 2px; font-size: 14px; font-weight: 700; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{item.title}}</h3>
+        <span style="position: absolute; right: -6px; top: -6px; width: 30px; height: 30px; box-sizing: border-box; border-radius: 15px; border: 2.5px solid #141414; background: {{item.checkBg}}; display: flex; align-items: center; justify-content: center">
+          <sc-if value="{{item.on}}" hint-placeholder-val="{{ true }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></sc-if>
+        </span>
+      </article>
+    </sc-for>
+  </div>
+  <div role="toolbar" aria-label="Selection actions" style="margin: 0 16px 20px 16px; padding: 8px; background: #FFFFFF; border: 2.5px solid #141414; border-radius: 24px; box-shadow: 4px 4px 0 #141414; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+    <a href="MoveSheet.dc.html" style="height: 60px; border-radius: 16px; background: #7CC4FF; border: 2.5px solid #141414; box-sizing: border-box; text-decoration: none; color: #141414; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 13px; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 13h6M12 10l3 3-3 3"/></svg>Move</a>
+    <button style="height: 60px; border-radius: 16px; background: #7DDBA3; border: 2.5px solid #141414; color: #141414; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 13px; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Share</button>
+    <a href="DeleteDialog.dc.html" style="height: 60px; border-radius: 16px; background: #FF6B5E; border: 2.5px solid #141414; box-sizing: border-box; text-decoration: none; color: #141414; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 13px; font-weight: 700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-14"/></svg>Delete</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mk = (title, frame, sky, ground, on) => ({ title, frame, sky, ground, on,
+      border: on ? '3.5px solid #141414' : '2.5px solid #141414',
+      shadow: on ? '5px 5px 0 #141414' : 'none',
+      opacity: on ? 1 : 0.7,
+      checkBg: on ? '#141414' : '#FFFFFF' });
+    const items = [
+      mk('Small kitchen layout ideas that actually work', '#FF9FC4', '#7CC4FF', '#7DDBA3', true),
+      mk('Material 3 theming in Flutter', '#7CC4FF', '#FFF1C7', '#B79CFF', false),
+      mk('Courtyard house plans – what would you change?', '#FFD23F', '#B79CFF', '#FF9F6B', true),
+      mk('Chicken biryani, step by step', '#FF9F6B', '#7DDBA3', '#FF9FC4', false),
+      mk('Natural light in narrow homes', '#B79CFF', '#FFF1C7', '#7CC4FF', true),
+      mk('Riverpod: getting started', '#7DDBA3', '#7CC4FF', '#FFD23F', false)
+    ];
+    return { items };
+  }
+}
+</script>
+</body>
+</html>

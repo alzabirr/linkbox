@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Search with sort sheet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Outfit:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414}a:hover{color:#000000}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #FDF6EC; font-family: 'Outfit', system-ui, sans-serif; color: #141414; display: flex; flex-direction: column">
+  <div style="display: flex; align-items: center; gap: 10px; padding: 18px 16px 8px 16px">
+    <a href="Main.dc.html" aria-label="Back" style="width: 48px; height: 48px; flex-shrink: 0; box-sizing: border-box; border: 2.5px solid #141414; border-radius: 16px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; color: #141414"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></a>
+    <label for="q" style="flex: 1; display: flex; align-items: center; gap: 8px; height: 52px; padding: 0 6px 0 16px; background: #FFFFFF; border: 2.5px solid #141414; border-radius: 18px; box-shadow: 3px 3px 0 #141414">
+      <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search links</span>
+      <input id="q" value="flutter" style="flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-family: inherit; font-size: 16px; font-weight: 600; color: #141414">
+      <button aria-label="Clear search" style="width: 38px; height: 38px; border: 2px solid #141414; border-radius: 12px; background: #FF9FC4; color: #141414; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </label>
+  </div>
+  <div style="display: flex; gap: 8px; padding: 10px 16px">
+    <button style="height: 38px; padding: 0 12px 0 14px; border-radius: 19px; border: 2.5px solid #141414; background: #FFD23F; color: #141414; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px">Newest first<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+    <button style="height: 38px; padding: 0 12px 0 14px; border-radius: 19px; border: 2.5px solid #141414; background: #FFFFFF; color: #141414; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px">All collections<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+  </div>
+  <p style="margin: 6px 20px 10px 20px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 800">3 links match “flutter”</p>
+  <ul style="list-style: none; margin: 0; padding: 0 18px 0 16px; display: flex; flex-direction: column; gap: 10px">
+    <sc-for list="{{items}}" as="item" hint-placeholder-count="3">
+      <li style="display: flex; align-items: center; gap: 12px; padding: 8px 10px 8px 8px; background: #FFFFFF; border: 2.5px solid #141414; border-radius: 18px; box-shadow: 3px 3px 0 #141414">
+        <span style="width: 52px; height: 52px; flex-shrink: 0; box-sizing: border-box; border-radius: 13px; border: 2.5px solid #141414; background: {{item.frame}}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M7 6h10M7 12h10M7 18h6"/></svg></span>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+          <span style="font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{item.before}}<mark style="background: #FFD23F; color: #141414; font-weight: 800; border-radius: 4px; padding: 0 3px">{{item.match}}</mark>{{item.after}}</span>
+          <span style="font-size: 12px; font-weight: 500; color: #4A4A4A">{{item.domain}}</span>
+        </div>
+      </li>
+    </sc-for>
+  </ul>
+  <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(20,20,20,0.45)"></div>
+  <section aria-label="Sort links" style="position: absolute; left: 0; right: 0; bottom: 0; background: #FDF6EC; border-top: 2.5px solid #141414; border-radius: 28px 28px 0 0; padding: 12px 18px 28px 16px; display: flex; flex-direction: column; gap: 10px">
+    <span aria-hidden="true" style="align-self: center; width: 44px; height: 5px; border-radius: 3px; background: #141414; margin-bottom: 8px"></span>
+    <h2 style="margin: 0 4px 4px 4px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 800">Sort links</h2>
+    <sc-for list="{{sorts}}" as="s" hint-placeholder-count="4">
+      <button style="display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 16px; border: 2.5px solid #141414; border-radius: 16px; background: {{s.bg}}; box-shadow: {{s.shadow}}; color: #141414; font-size: 16px; font-weight: {{s.weight}}; text-align: left">
+        <span>{{s.label}}</span>
+        <sc-if value="{{s.on}}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></sc-if>
+      </button>
+    </sc-for>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const items = [
+      { before: 'Material 3 theming in ', match: 'Flutter', after: '', domain: 'docs.flutter.dev', frame: '#7CC4FF' },
+      { before: '', match: 'Flutter', after: ' share intent, explained', domain: 'medium.com', frame: '#FF9FC4' },
+      { before: 'Drift database for ', match: 'Flutter', after: ' apps', domain: 'drift.simonbinder.eu', frame: '#7DDBA3' }
+    ];
+    const mk = (label, on) => ({ label, on, bg: on ? '#FFD23F' : '#FFFFFF', shadow: on ? '3px 3px 0 #141414' : 'none', weight: on ? 800 : 600 });
+    const sorts = [mk('Newest first', true), mk('Oldest first', false), mk('Name A–Z', false), mk('Name Z–A', false)];
+    return { items, sorts };
+  }
+}
+</script>
+</body>
+</html>

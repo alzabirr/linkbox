@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Add link sheet</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Outfit:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414}a:hover{color:#000000}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #FDF6EC; font-family: 'Outfit', system-ui, sans-serif; color: #141414">
+  <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(20,20,20,0.5)"></div>
+  <section aria-label="Add link" style="position: absolute; left: 0; right: 0; bottom: 0; top: 84px; background: #FDF6EC; border-top: 2.5px solid #141414; border-radius: 28px 28px 0 0; padding: 12px 20px 24px 18px; display: flex; flex-direction: column; gap: 18px; box-sizing: border-box">
+    <span aria-hidden="true" style="align-self: center; width: 44px; height: 5px; border-radius: 3px; background: #141414"></span>
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -0.5px">Add a link</h2>
+      <a href="Main.dc.html" aria-label="Close" style="width: 46px; height: 46px; box-sizing: border-box; border: 2.5px solid #141414; border-radius: 14px; background: #FFFFFF; color: #141414; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></a>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <label for="url" style="font-size: 14px; font-weight: 700">Link</label>
+      <div style="display: flex; align-items: center; gap: 8px; height: 58px; padding: 0 7px 0 16px; background: #FFFFFF; border: 2.5px solid #141414; border-radius: 18px; box-shadow: 3px 3px 0 #141414">
+        <input id="url" value="https://docs.flutter.dev/ui/design/material" style="flex: 1; min-width: 0; border: 0; outline: 0; font-family: inherit; font-size: 15px; font-weight: 500; color: #141414">
+        <button style="height: 40px; padding: 0 12px; border: 2px solid #141414; border-radius: 12px; background: #FFD23F; color: #141414; font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>Paste</button>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 14px; font-weight: 700">Preview</span>
+      <div style="display: flex; gap: 12px; padding: 10px; background: #7CC4FF; border: 2.5px solid #141414; border-radius: 20px">
+        <span style="width: 92px; height: 92px; flex-shrink: 0; box-sizing: border-box; border: 2.5px solid #141414; border-radius: 14px; background: #FFF1C7; overflow: hidden; position: relative; display: block"><svg width="92" height="92" viewBox="0 0 92 92" aria-hidden="true"><circle cx="68" cy="22" r="9" fill="#FF8A3D" stroke="#141414" stroke-width="2.5"/><path d="M-4 66 Q22 52 46 62 T96 58 V96 H-4Z" fill="#B79CFF" stroke="#141414" stroke-width="2.5"/></svg></span>
+        <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+          <strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 800; line-height: 1.15">Material Design for Flutter</strong>
+          <span style="font-size: 13px; line-height: 1.4; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">Learn how to use Material 3 components and theming in your Flutter app.</span>
+          <span style="font-size: 12px; font-weight: 700">docs.flutter.dev</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #14532D"><span style="width: 20px; height: 20px; border-radius: 10px; background: #7DDBA3; border: 2px solid #141414; display: flex; align-items: center; justify-content: center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>Found the title, summary and image</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 14px; font-weight: 700">Collection</span>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <button style="height: 40px; padding: 0 16px; border-radius: 20px; border: 2.5px solid #141414; background: #FFFFFF; color: #141414; font-size: 14px; font-weight: 600">None</button>
+        <button style="height: 40px; padding: 0 14px; border-radius: 20px; border: 2.5px solid #141414; background: #141414; color: #FFFFFF; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dev</button>
+        <button style="height: 40px; padding: 0 16px; border-radius: 20px; border: 2.5px solid #141414; background: #FF9FC4; color: #141414; font-size: 14px; font-weight: 600">Design</button>
+        <button style="height: 40px; padding: 0 16px; border-radius: 20px; border: 2.5px solid #141414; background: #FFD23F; color: #141414; font-size: 14px; font-weight: 600">Recipes</button>
+        <button style="height: 40px; padding: 0 16px; border-radius: 20px; border: 2.5px solid #141414; background: #7DDBA3; color: #141414; font-size: 14px; font-weight: 600">Read later</button>
+        <button style="height: 40px; padding: 0 14px; border-radius: 20px; border: 2.5px dashed #141414; background: transparent; color: #141414; font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 6px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>New</button>
+      </div>
+    </div>
+    <div style="flex: 1"></div>
+    <button style="height: 60px; border: 2.5px solid #141414; border-radius: 20px; background: {{accent}}; box-shadow: 4px 4px 0 #141414; color: #141414; font-size: 17px; font-weight: 800">Save link</button>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FF8A3D","options":["#FF8A3D","#FFD23F","#7DDBA3","#B79CFF"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { accent: this.props.accent ?? '#FF8A3D' };
+  }
+}
+</script>
+</body>
+</html>

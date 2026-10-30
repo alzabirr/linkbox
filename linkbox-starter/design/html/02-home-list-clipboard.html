@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home – list view with clipboard prompt</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Outfit:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414}a:hover{color:#000000}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #FDF6EC; font-family: 'Outfit', system-ui, sans-serif; color: #141414; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 20px 16px 6px 20px">
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 14px; font-weight: 600; color: #4A4A4A">Hey there!</span>
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: -0.8px; line-height: 1">Your links</h1>
+    </div>
+    <div style="display: flex; gap: 8px">
+      <button aria-label="Sort" style="width: 46px; height: 46px; border: 2.5px solid #141414; border-radius: 14px; background: #FFFFFF; color: #141414; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button>
+      <button aria-label="Switch to grid view" style="width: 46px; height: 46px; border: 2.5px solid #141414; border-radius: 14px; background: #FFD23F; color: #141414; display: flex; align-items: center; justify-content: center; box-shadow: 3px 3px 0 #141414"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
+    </div>
+  </header>
+  <nav aria-label="Collections" style="display: flex; gap: 8px; padding: 14px 16px 4px 16px; overflow: hidden">
+    <button style="height: 38px; padding: 0 16px; border-radius: 19px; border: 2.5px solid #141414; background: #141414; color: #FFFFFF; font-size: 14px; font-weight: 700; white-space: nowrap">All</button>
+    <button style="height: 38px; padding: 0 16px; border-radius: 19px; border: 2.5px solid #141414; background: #FF9FC4; color: #141414; font-size: 14px; font-weight: 600; white-space: nowrap">Design</button>
+    <button style="height: 38px; padding: 0 16px; border-radius: 19px; border: 2.5px solid #141414; background: #7CC4FF; color: #141414; font-size: 14px; font-weight: 600; white-space: nowrap">Dev</button>
+    <button style="height: 38px; padding: 0 16px; border-radius: 19px; border: 2.5px solid #141414; background: #FFD23F; color: #141414; font-size: 14px; font-weight: 600; white-space: nowrap">Recipes</button>
+    <button style="height: 38px; padding: 0 16px; border-radius: 19px; border: 2.5px solid #141414; background: #7DDBA3; color: #141414; font-size: 14px; font-weight: 600; white-space: nowrap">Read later</button>
+  </nav>
+  <ul style="list-style: none; margin: 0; padding: 14px 18px 0 16px; flex: 1; overflow: hidden; display: flex; flex-direction: column; gap: 10px">
+    <sc-for list="{{items}}" as="item" hint-placeholder-count="6">
+      <li style="display: flex; align-items: center; gap: 12px; padding: 8px 4px 8px 8px; background: #FFFFFF; border: 2.5px solid #141414; border-radius: 18px; box-shadow: 3px 3px 0 #141414">
+        <span style="width: 52px; height: 52px; flex-shrink: 0; border-radius: 13px; border: 2.5px solid #141414; background: {{item.frame}}; display: flex; align-items: center; justify-content: center; box-sizing: border-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="#141414" stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="{{item.glyph}}"/></svg></span>
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+          <span style="font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{item.title}}</span>
+          <span style="font-size: 12px; font-weight: 500; color: #4A4A4A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{item.domain}} · {{item.collection}}</span>
+        </div>
+        <button aria-label="More options" style="width: 44px; height: 44px; border: 0; background: transparent; color: #141414; border-radius: 12px; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+      </li>
+    </sc-for>
+  </ul>
+  <div role="status" style="position: absolute; left: 14px; right: 16px; bottom: 98px; background: #FFD23F; border: 2.5px solid #141414; border-radius: 22px; box-shadow: 4px 4px 0 #141414; padding: 14px 14px 12px 14px; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; gap: 12px; align-items: center">
+      <svg width="46" height="52" viewBox="0 0 64 72" aria-hidden="true" style="flex-shrink: 0"><path d="M10 6h44a4 4 0 0 1 4 4v56L32 52 6 66V10a4 4 0 0 1 4-4z" fill="#FFFFFF" stroke="#141414" stroke-width="3" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" fill="#FFFFFF" stroke="#141414" stroke-width="2.5"/><circle cx="26" cy="27" r="3" fill="#141414"/><circle cx="40" cy="26" r="7" fill="#FFFFFF" stroke="#141414" stroke-width="2.5"/><circle cx="42" cy="27" r="3" fill="#141414"/><path d="M26 38q6 6 12 0" fill="none" stroke="#141414" stroke-width="2.5" stroke-linecap="round"/><circle cx="16" cy="37" r="3" fill="#FF8FB8"/><circle cx="48" cy="37" r="3" fill="#FF8FB8"/></svg>
+      <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+        <strong style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 800">Save the link you copied?</strong>
+        <span style="font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">youtube.com/watch?v=k3Lm2…</span>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: flex-end; gap: 8px">
+      <button style="height: 42px; padding: 0 16px; border: 2.5px solid #141414; border-radius: 14px; background: #FFFFFF; color: #141414; font-size: 14px; font-weight: 700">Not now</button>
+      <button style="height: 42px; padding: 0 18px; border: 2.5px solid #141414; border-radius: 14px; background: #141414; color: #FFFFFF; font-size: 14px; font-weight: 700">Save link</button>
+    </div>
+  </div>
+  <nav aria-label="Main" style="height: 84px; flex-shrink: 0; background: #FFFFFF; border-top: 2.5px solid #141414; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center">
+    <a href="Main.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #141414; font-size: 12px; font-weight: 700">
+      <span style="width: 60px; height: 32px; border-radius: 16px; background: #FFD23F; border: 2px solid #141414; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"/></svg></span>Links</a>
+    <a href="Collections.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A4A4A; font-size: 12px; font-weight: 600">
+      <span style="width: 60px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>Collections</a>
+    <a href="Settings.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A4A4A; font-size: 12px; font-weight: 600">
+      <span style="width: 60px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg></span>Settings</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const play = 'M9 7v10l8-5z';
+    const doc = 'M7 6h10M7 12h10M7 18h6';
+    const items = [
+      { title: 'Small kitchen layout ideas that actually work', domain: 'youtube.com', collection: 'Design', glyph: play, frame: '#FF9FC4' },
+      { title: 'Material 3 theming in Flutter', domain: 'docs.flutter.dev', collection: 'Dev', glyph: doc, frame: '#7CC4FF' },
+      { title: 'Courtyard house plans – what would you change?', domain: 'reddit.com', collection: 'Design', glyph: doc, frame: '#FFD23F' },
+      { title: 'Chicken biryani, step by step', domain: 'youtube.com', collection: 'Recipes', glyph: play, frame: '#FF9F6B' },
+      { title: 'Riverpod: getting started', domain: 'riverpod.dev', collection: 'Dev', glyph: doc, frame: '#7DDBA3' },
+      { title: 'Rooftop garden on a budget', domain: 'medium.com', collection: 'Read later', glyph: doc, frame: '#B79CFF' },
+      { title: 'Natural light in narrow homes', domain: 'archdaily.com', collection: 'Design', glyph: doc, frame: '#7CC4FF' }
+    ];
+    return { items };
+  }
+}
+</script>
+</body>
+</html>

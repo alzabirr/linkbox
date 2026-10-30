@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Collections</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Outfit:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414}a:hover{color:#000000}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #FDF6EC; font-family: 'Outfit', system-ui, sans-serif; color: #141414; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: flex-end; justify-content: space-between; padding: 22px 16px 8px 20px">
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 14px; font-weight: 600; color: #4A4A4A">5 collections · 89 links</span>
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: -0.8px; line-height: 1">Collections</h1>
+    </div>
+    <button style="height: 46px; padding: 0 16px 0 12px; border: 2.5px solid #141414; border-radius: 14px; background: {{accent}}; box-shadow: 3px 3px 0 #141414; color: #141414; font-size: 14px; font-weight: 800; display: flex; align-items: center; gap: 6px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>New</button>
+  </header>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 16px 18px 0 16px; flex: 1; overflow: hidden; align-content: start">
+    <a href="Main.dc.html" style="grid-column: span 2; height: 112px; box-sizing: border-box; padding: 16px; background: #141414; color: #FFFFFF; border: 2.5px solid #141414; border-radius: 22px; text-decoration: none; display: flex; justify-content: space-between; align-items: flex-end; position: relative; overflow: hidden">
+      <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 800; line-height: 1">89</span><span style="font-size: 15px; font-weight: 700">All links</span></span>
+      <svg width="120" height="90" viewBox="0 0 120 90" aria-hidden="true" style="position: absolute; right: 10px; top: 10px"><rect x="42" y="14" width="60" height="44" rx="10" fill="#FF9FC4" stroke="#FFFFFF" stroke-width="2.5" transform="rotate(10 72 36)"/><rect x="24" y="22" width="60" height="44" rx="10" fill="#FFD23F" stroke="#FFFFFF" stroke-width="2.5" transform="rotate(-8 54 44)"/></svg>
+    </a>
+    <sc-for list="{{cols}}" as="c" hint-placeholder-count="4">
+      <a href="Main.dc.html" style="height: 168px; box-sizing: border-box; padding: 14px; background: {{c.color}}; border: 2.5px solid #141414; border-radius: 22px; box-shadow: 4px 4px 0 #141414; text-decoration: none; color: #141414; display: flex; flex-direction: column; justify-content: space-between">
+        <span style="display: flex; justify-content: space-between; align-items: flex-start">
+          <span style="width: 46px; height: 46px; box-sizing: border-box; border: 2.5px solid #141414; border-radius: 14px; background: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{c.icon}}"/></svg></span>
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 800; line-height: 1">{{c.count}}</span>
+        </span>
+        <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 800">{{c.name}}</span><span style="font-size: 12px; font-weight: 600">Updated {{c.when}}</span></span>
+      </a>
+    </sc-for>
+    <button style="grid-column: span 2; height: 60px; border: 2.5px dashed #141414; border-radius: 20px; background: transparent; color: #141414; font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Create a collection</button>
+  </div>
+  <nav aria-label="Main" style="height: 84px; flex-shrink: 0; background: #FFFFFF; border-top: 2.5px solid #141414; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center">
+    <a href="Main.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A4A4A; font-size: 12px; font-weight: 600">
+      <span style="width: 60px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"/></svg></span>Links</a>
+    <a href="Collections.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #141414; font-size: 12px; font-weight: 700">
+      <span style="width: 60px; height: 32px; border-radius: 16px; background: #FFD23F; border: 2px solid #141414; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>Collections</a>
+    <a href="Settings.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A4A4A; font-size: 12px; font-weight: 600">
+      <span style="width: 60px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg></span>Settings</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FF8A3D","options":["#FF8A3D","#FFD23F","#7DDBA3","#B79CFF"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const cols = [
+      { name: 'Design', count: 24, when: 'today', color: '#FF9FC4', icon: 'M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z' },
+      { name: 'Dev', count: 17, when: 'yesterday', color: '#7CC4FF', icon: 'M8 7l-5 5 5 5M16 7l5 5-5 5' },
+      { name: 'Recipes', count: 9, when: '3 days ago', color: '#FFD23F', icon: 'M4 11h16a8 8 0 0 1-16 0zM12 3v4M8 4v3M16 4v3' },
+      { name: 'Read later', count: 31, when: 'last week', color: '#7DDBA3', icon: 'M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z' }
+    ];
+    return { accent: this.props.accent ?? '#FF8A3D', cols };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Delete confirmation</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Outfit:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414}a:hover{color:#000000}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #FDF6EC; font-family: 'Outfit', system-ui, sans-serif; color: #141414">
+  <div aria-hidden="true" style="padding: 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding-top: 90px">
+    <div style="height: 170px; border-radius: 20px; background: #FF9FC4; border: 2.5px solid #141414"></div>
+    <div style="height: 170px; border-radius: 20px; background: #7CC4FF; border: 2.5px solid #141414"></div>
+    <div style="height: 170px; border-radius: 20px; background: #FFD23F; border: 2.5px solid #141414"></div>
+    <div style="height: 170px; border-radius: 20px; background: #FF9F6B; border: 2.5px solid #141414"></div>
+  </div>
+  <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(20,20,20,0.55)"></div>
+  <section role="alertdialog" aria-labelledby="dt" aria-describedby="dd" style="position: absolute; left: 24px; right: 24px; top: 210px; background: #FDF6EC; border: 2.5px solid #141414; border-radius: 28px; box-shadow: 6px 6px 0 #141414; padding: 24px 20px 20px 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center">
+    <svg width="84" height="94" viewBox="0 0 64 72" aria-hidden="true"><path d="M10 6h44a4 4 0 0 1 4 4v56L32 52 6 66V10a4 4 0 0 1 4-4z" fill="#FF9FC4" stroke="#141414" stroke-width="3" stroke-linejoin="round"/><path d="M17 22l10 4M47 22l-10 4" stroke="#141414" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="31" r="3.5" fill="#141414"/><circle cx="40" cy="31" r="3.5" fill="#141414"/><path d="M25 44q7 -6 14 0" fill="none" stroke="#141414" stroke-width="2.5" stroke-linecap="round"/><path d="M45 36q3 5 0 7q-3 -2 0 -7z" fill="#7CC4FF" stroke="#141414" stroke-width="1.8"/></svg>
+    <h2 id="dt" style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 800">Delete 3 links?</h2>
+    <p id="dd" style="margin: 0 0 8px 0; font-size: 15px; line-height: 1.5; font-weight: 500">They'll be removed from this phone. This can't be undone unless you have a backup.</p>
+    <div style="display: flex; flex-direction: column; gap: 10px; width: 100%">
+      <button style="height: 56px; border: 2.5px solid #141414; border-radius: 18px; background: #FF6B5E; box-shadow: 4px 4px 0 #141414; color: #141414; font-size: 16px; font-weight: 800">Delete 3 links</button>
+      <a href="MultiSelect.dc.html" style="height: 56px; box-sizing: border-box; border: 2.5px solid #141414; border-radius: 18px; background: #FFFFFF; color: #141414; text-decoration: none; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center">Keep them</a>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

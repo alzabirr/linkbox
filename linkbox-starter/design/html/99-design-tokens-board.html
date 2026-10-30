@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Developer handoff and UX copy</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Outfit:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="width: 1280px; height: 3200px; box-sizing: border-box; background: #FDF6EC; font-family: 'Outfit', system-ui, sans-serif; color: #141414; padding: 56px 64px; display: flex; flex-direction: column; gap: 32px">
+
+  <header style="display: flex; align-items: center; gap: 28px; padding: 28px 32px; background: #FFD23F; border: 3px solid #141414; border-radius: 28px; box-shadow: 6px 6px 0 #141414">
+    <svg width="96" height="108" viewBox="0 0 64 72" aria-hidden="true"><path d="M10 6h44a4 4 0 0 1 4 4v56L32 52 6 66V10a4 4 0 0 1 4-4z" fill="#FFFFFF" stroke="#141414" stroke-width="3" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" fill="#FFFFFF" stroke="#141414" stroke-width="2.5"/><circle cx="26" cy="27" r="3" fill="#141414"/><circle cx="40" cy="26" r="7" fill="#FFFFFF" stroke="#141414" stroke-width="2.5"/><circle cx="42" cy="27" r="3" fill="#141414"/><path d="M26 38q6 6 12 0" fill="none" stroke="#141414" stroke-width="2.5" stroke-linecap="round"/><circle cx="16" cy="37" r="3" fill="#FF8FB8"/><circle cx="48" cy="37" r="3" fill="#FF8FB8"/></svg>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 56px; font-weight: 800; letter-spacing: -1.5px; line-height: 1">Linkbox · Flutter handoff</h1>
+      <p style="margin: 0; font-size: 18px; font-weight: 500">Bold flat style: 2.5 px ink outlines, bright fills, hard offset shadows. Material 3 under the hood, custom ThemeData on top. “Linkbox” is a placeholder name.</p>
+    </div>
+  </header>
+
+  <div style="display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px">
+    <section style="background: #FFFFFF; border: 3px solid #141414; border-radius: 26px; padding: 26px; display: flex; flex-direction: column; gap: 16px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 800">Color tokens</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+        <sc-for list="{{colors}}" as="c" hint-placeholder-count="12">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <span style="height: 56px; border: 2.5px solid #141414; border-radius: 14px; background: {{c.hex}}"></span>
+            <span style="font-size: 13px; font-weight: 800">{{c.name}}</span>
+            <span style="font-size: 12px; font-weight: 500">{{c.hex}} · {{c.use}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin: 0; font-size: 13px; font-weight: 500">Text on every fill is always ink #141414; all pairs pass 4.5:1. Dark/AMOLED: background #000000, outlines and text flip to #FFFFFF, card fills stay the same.</p>
+    </section>
+    <section style="background: #FFFFFF; border: 3px solid #141414; border-radius: 26px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 800">Type</h2>
+      <sc-for list="{{type}}" as="t" hint-placeholder-count="8">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 8px; border-bottom: 2px dashed #D9CDB8">
+          <span style="font-family: {{t.family}}; font-size: {{t.size}}; font-weight: {{t.weight}}; line-height: 1.1">{{t.sample}}</span>
+          <span style="font-size: 12px; font-weight: 600; white-space: nowrap">{{t.token}}</span>
+        </div>
+      </sc-for>
+      <p style="margin: 0; font-size: 13px; font-weight: 500">Display: Bricolage Grotesque 800. Body: Outfit 400–700. Bundle both with google_fonts or as assets.</p>
+    </section>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px">
+    <section style="background: #7CC4FF; border: 3px solid #141414; border-radius: 26px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 800">Shape, stroke &amp; spacing</h2>
+      <sc-for list="{{shape}}" as="s" hint-placeholder-count="8">
+        <div style="display: grid; grid-template-columns: 200px 90px 1fr; gap: 12px; padding: 10px 14px; background: #FFFFFF; border: 2.5px solid #141414; border-radius: 14px; font-size: 14px">
+          <span style="font-weight: 800">{{s.token}}</span><span style="font-weight: 700">{{s.value}}</span><span style="font-weight: 500">{{s.use}}</span>
+        </div>
+      </sc-for>
+    </section>
+    <section style="background: #B79CFF; border: 3px solid #141414; border-radius: 26px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 800">Motion</h2>
+      <sc-for list="{{motion}}" as="m" hint-placeholder-count="7">
+        <div style="display: grid; grid-template-columns: 150px 1fr 110px; gap: 12px; padding: 10px 14px; background: #FFFFFF; border: 2.5px solid #141414; border-radius: 14px; font-size: 14px">
+          <span style="font-weight: 800">{{m.el}}</span><span style="font-weight: 500">{{m.anim}}</span><span style="font-weight: 700">{{m.time}}</span>
+        </div>
+      </sc-for>
+      <p style="margin: 0; font-size: 13px; font-weight: 600">Respect MediaQuery.disableAnimations: swap springs for a 120 ms fade.</p>
+    </section>
+  </div>
+
+  <section style="background: #FFFFFF; border: 3px solid #141414; border-radius: 26px; padding: 26px; display: flex; flex-direction: column; gap: 10px">
+    <h2 style="margin: 0 0 6px 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 800">Components → Flutter widgets</h2>
+    <div style="display: grid; grid-template-columns: 200px 260px 1fr 300px; gap: 12px; padding: 10px 14px; background: #141414; color: #FFFFFF; border-radius: 12px; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px">
+      <span>Component</span><span>Variants</span><span>Props / behaviour</span><span>Build with</span>
+    </div>
+    <sc-for list="{{components}}" as="r" hint-placeholder-count="10">
+      <div style="display: grid; grid-template-columns: 200px 260px 1fr 300px; gap: 12px; padding: 10px 14px; border: 2.5px solid #141414; border-radius: 12px; font-size: 14px; background: {{r.bg}}">
+        <span style="font-weight: 800">{{r.name}}</span><span style="font-weight: 600">{{r.variants}}</span><span style="font-weight: 500">{{r.props}}</span><span style="font-weight: 600; font-family: ui-monospace, Menlo, monospace; font-size: 13px">{{r.widget}}</span>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="background: #FFFFFF; border: 3px solid #141414; border-radius: 26px; padding: 26px; display: flex; flex-direction: column; gap: 10px">
+    <h2 style="margin: 0 0 6px 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 800">States &amp; interactions</h2>
+    <sc-for list="{{states}}" as="r" hint-placeholder-count="10">
+      <div style="display: grid; grid-template-columns: 220px 180px 1fr; gap: 12px; padding: 10px 14px; border: 2.5px solid #141414; border-radius: 12px; font-size: 14px">
+        <span style="font-weight: 800">{{r.el}}</span><span style="font-weight: 700">{{r.state}}</span><span style="font-weight: 500">{{r.behaviour}}</span>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="background: #7DDBA3; border: 3px solid #141414; border-radius: 26px; padding: 26px; display: flex; flex-direction: column; gap: 10px">
+    <h2 style="margin: 0 0 6px 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 28px; font-weight: 800">UX copy deck</h2>
+    <sc-for list="{{copy}}" as="r" hint-placeholder-count="14">
+      <div style="display: grid; grid-template-columns: 240px 1fr; gap: 14px; padding: 10px 14px; background: #FFFFFF; border: 2.5px solid #141414; border-radius: 12px; font-size: 14px">
+        <span style="font-weight: 800">{{r.where}}</span><span style="font-weight: 500">{{r.text}}</span>
+      </div>
+    </sc-for>
+    <p style="margin: 4px 0 0 0; font-size: 13px; font-weight: 600">Voice: friendly, short, verb-first buttons. Same words everywhere: “link” (never bookmark/URL in UI), “collection” (never folder).</p>
+  </section>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px">
+    <sc-for list="{{notes}}" as="n" hint-placeholder-count="3">
+      <section style="background: {{n.bg}}; border: 3px solid #141414; border-radius: 26px; padding: 24px; display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 800">{{n.title}}</h2>
+        <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.45; font-weight: 500">
+          <sc-for list="{{n.items}}" as="i" hint-placeholder-count="5"><li>{{i}}</li></sc-for>
+        </ul>
+      </section>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":3200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const colors = [
+      { name: 'ink', hex: '#141414', use: 'text, outlines' },
+      { name: 'paper', hex: '#FDF6EC', use: 'app background' },
+      { name: 'surface', hex: '#FFFFFF', use: 'cards, inputs' },
+      { name: 'sand', hex: '#F3EBDD', use: 'disabled, tracks' },
+      { name: 'primary', hex: '#FF8A3D', use: 'main CTA, FAB' },
+      { name: 'sun', hex: '#FFD23F', use: 'selected, prompts' },
+      { name: 'pink', hex: '#FF9FC4', use: 'card fill' },
+      { name: 'sky', hex: '#7CC4FF', use: 'card fill' },
+      { name: 'mint', hex: '#7DDBA3', use: 'card fill, success' },
+      { name: 'grape', hex: '#B79CFF', use: 'card fill' },
+      { name: 'peach', hex: '#FF9F6B', use: 'card fill' },
+      { name: 'danger', hex: '#FF6B5E', use: 'delete actions' }
+    ];
+    const D = "'Bricolage Grotesque', sans-serif", B = "'Outfit', sans-serif";
+    const type = [
+      { sample: 'Display XL', family: D, size: '40px', weight: 800, token: 'displayLarge · 40/1.0' },
+      { sample: 'Screen title', family: D, size: '32px', weight: 800, token: 'headlineLarge · 32/1.0' },
+      { sample: 'Sheet title', family: D, size: '26px', weight: 800, token: 'headlineMedium · 26' },
+      { sample: 'Card heading', family: D, size: '20px', weight: 800, token: 'titleLarge · 20' },
+      { sample: 'Button label', family: B, size: '16px', weight: 800, token: 'labelLarge · 16' },
+      { sample: 'Body text', family: B, size: '15px', weight: 500, token: 'bodyLarge · 15/1.5' },
+      { sample: 'Card title', family: B, size: '14px', weight: 700, token: 'titleSmall · 14/1.3' },
+      { sample: 'Meta · domain', family: B, size: '12px', weight: 600, token: 'labelSmall · 12' }
+    ];
+    const shape = [
+      { token: 'stroke.default', value: '2.5 px', use: 'every card, chip, input, button' },
+      { token: 'stroke.heavy', value: '3.5 px', use: 'selected card in multi-select' },
+      { token: 'shadow.sm / md / lg', value: '3 / 4 / 5', use: 'hard offset (x=y), blur 0, ink' },
+      { token: 'radius.chip', value: '19 px', use: 'pills, collection chips' },
+      { token: 'radius.control', value: '14–16', use: 'icon buttons, inputs, buttons' },
+      { token: 'radius.card', value: '20–22', use: 'link cards, sections' },
+      { token: 'radius.sheet', value: '28 px', use: 'bottom sheets, dialogs' },
+      { token: 'space scale', value: '4·8·12·16·20', use: 'screen gutter 16, card gap 14' }
+    ];
+    const motion = [
+      { el: 'Card press', anim: 'Shadow 4→0, translate +4,+4 (card “pushes in”)', time: '90 ms easeOut' },
+      { el: 'Bottom sheet', anim: 'Slide up + scrim fade 0→50%', time: '280 ms emphasized' },
+      { el: 'Clipboard prompt', anim: 'Slide up from bottom, small overshoot', time: '320 ms spring' },
+      { el: 'Selection check', anim: 'Badge scale 0.6→1, card border 2.5→3.5', time: '160 ms' },
+      { el: 'Grid ↔ list', anim: 'AnimatedSwitcher cross-fade', time: '200 ms' },
+      { el: 'Mascot', anim: 'Blink every 4 s on empty state only', time: '120 ms' },
+      { el: 'Delete', anim: 'Cards shrink + fade, grid reflows', time: '220 ms' }
+    ];
+    const W = '#FFFFFF', Y = '#FFF6D6';
+    const components = [
+      { name: 'LinkCard', variants: 'grid · selected · dark', props: 'title (2 lines), domain, collection, kind, image|scene fallback, number', widget: 'Container + BoxDecoration(border, boxShadow) + InkWell', bg: W },
+      { name: 'LinkTile', variants: 'list · search-highlight', props: '52 px thumb, 1-line title, “domain · collection”, ⋮ menu', widget: 'custom Row; RichText for match highlight', bg: Y },
+      { name: 'CollectionChip', variants: 'default · selected (ink)', props: 'label, color; horizontal scroll', widget: 'ChoiceChip with custom shape/side', bg: W },
+      { name: 'PrimaryButton', variants: 'primary · secondary · danger', props: 'height 54–60, label verb-first, shadow 3–4', widget: 'FilledButton.styleFrom + custom side', bg: Y },
+      { name: 'IconButtonBox', variants: 'white · sun', props: '46×46, 2.5 border, semantic label required', widget: 'IconButton.outlined / custom', bg: W },
+      { name: 'SearchField', variants: 'idle · focused · with clear', props: 'height 52, radius 18', widget: 'TextField + InputDecoration outline', bg: Y },
+      { name: 'ClipboardPrompt', variants: 'single', props: 'url preview, Not now / Save link; auto-hide 8 s', widget: 'custom overlay (not SnackBar)', bg: W },
+      { name: 'Sheet', variants: 'add · sort · move · quick look', props: 'grabber 44×5 ink, top border', widget: 'showModalBottomSheet(isScrollControlled)', bg: Y },
+      { name: 'SegmentedPicker', variants: '3 options', props: 'sand track, selected = sun + border', widget: 'SegmentedButton themed', bg: W },
+      { name: 'ToggleSwitch', variants: 'on (mint) · off (sand)', props: '58×34, thumb 23', widget: 'Switch themed / custom', bg: Y },
+      { name: 'BottomNav', variants: '3 tabs', props: 'Links · Collections · Settings; active pill sun', widget: 'NavigationBar + indicatorShape', bg: W },
+      { name: 'Mascot', variants: 'happy · surprised · sad · sleepy', props: 'SVG, decorative', widget: 'flutter_svg, ExcludeSemantics', bg: Y }
+    ];
+    const states = [
+      { el: 'LinkCard', state: 'Pressed', behaviour: 'Push-in: shadow drops to 0, card moves 4 px down-right' },
+      { el: 'LinkCard', state: 'Long-press', behaviour: 'Enters multi-select, haptic, check badge appears top-right' },
+      { el: 'LinkCard', state: 'Loading preview', behaviour: 'Scene placeholder with shimmer stripes; title shows the URL' },
+      { el: 'LinkCard', state: 'No image', behaviour: 'Generated flat scene (sky/sun/hill) using the card’s colour set' },
+      { el: 'Add link', state: 'Fetching', behaviour: 'Preview box shows spinner + “Getting the preview…”; Save stays enabled' },
+      { el: 'Add link', state: 'Invalid URL', behaviour: 'Field border danger, message under the field, Save disabled' },
+      { el: 'Share intent', state: 'New link', behaviour: 'Saves instantly, toast “Saved to Linkbox” with Change collection' },
+      { el: 'Share intent', state: 'Duplicate', behaviour: 'Sheet: You already saved this one → Open saved link / Save a copy' },
+      { el: 'Clipboard', state: 'URL detected on resume', behaviour: 'Prompt once per copied URL; never for links already saved' },
+      { el: 'Tap action', state: 'Setting', behaviour: 'Quick look (default) · Open site · Copy link (toast “Link copied”)' }
+    ];
+    const copy = [
+      { where: 'Empty state', text: 'Save it now. Find it later. — Share a link from any app, or paste one here. Your links stay on this phone.' },
+      { where: 'Search placeholder', text: 'Search by name or link' },
+      { where: 'No search results', text: 'No links match “{query}”. Try a shorter word or search the link itself.' },
+      { where: 'Clipboard prompt', text: 'Save the link you copied?  [Not now] [Save link]' },
+      { where: 'Saved toast', text: 'Saved to Linkbox  [Change collection]' },
+      { where: 'Duplicate', text: 'You already saved this one · Saved on {date} in {collection}  [Save a copy] [Open saved link]' },
+      { where: 'Preview failed', text: 'Couldn’t get a preview. Your link is saved, and you can add a title yourself.' },
+      { where: 'Offline', text: 'You’re offline. We saved the link and will get the preview when you’re back online.' },
+      { where: 'Invalid link', text: 'That doesn’t look like a link. It should start with http:// or https://' },
+      { where: 'Delete dialog', text: 'Delete {n} links? They’ll be removed from this phone. This can’t be undone unless you have a backup.  [Delete {n} links] [Keep them]' },
+      { where: 'Copied', text: 'Link copied' },
+      { where: 'Import done', text: 'Imported {n} links. Skipped {m} you already had.' },
+      { where: 'Import error', text: 'We couldn’t read that file. Pick the .html file your browser exported.' },
+      { where: 'Backup failed', text: 'Backup didn’t finish. Free up some space on your phone and try again.' }
+    ];
+    const notes = [
+      { title: 'Edge cases', bg: '#FFFFFF', items: [
+        'Very long titles: 2 lines on cards, 1 line in lists, then ellipsis',
+        'Links with no title: show the domain, then the full URL',
+        '1,000+ links: paginate the database query; lazy-load the grid',
+        'Empty collection: show the mascot and “Nothing here yet”',
+        'Same link with tracking params (?utm_…): strip before the duplicate check'
+      ] },
+      { title: 'Accessibility', bg: '#FF9FC4', items: [
+        'Every icon-only button needs a Semantics label (Sort, Close, More options)',
+        'Touch targets ≥ 44×44; chips are 38 high, so pad the hit area to 44',
+        'Focus order: header → search → chips → cards → FAB → nav',
+        'Announce “3 selected” when the count changes in multi-select',
+        'Colour is never the only signal: selected = ink fill + check icon'
+      ] },
+      { title: 'Bangla & localization', bg: '#FFD23F', items: [
+        'Outfit and Bricolage have no Bengali glyphs: add Hind Siliguri or Noto Sans Bengali as fallback',
+        'Bangla runs ~20–30% longer: buttons must wrap or grow, never clip',
+        'Raise line-height to 1.6 for Bangla body text',
+        'Use intl plurals for “{n} links” — don’t build strings by hand',
+        'Dates via DateFormat with the device locale'
+      ] }
+    ];
+    return { colors, type, shape, motion, components, states, copy, notes };
+  }
+}
+</script>
+</body>
+</html>

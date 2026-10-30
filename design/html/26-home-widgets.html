@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home-screen widgets</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Outfit:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414}a:hover{color:#000000}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #5ED3C6; font-family: 'Outfit', system-ui, sans-serif; color: #141414">
+  <div aria-hidden="true" style="position: absolute; left: -60px; top: 420px; width: 300px; height: 300px; border-radius: 150px; background: #7CC4FF; border: 2.5px solid #141414"></div>
+  <div aria-hidden="true" style="position: absolute; right: -80px; top: 120px; width: 240px; height: 240px; border-radius: 120px; background: #FFD23F; border: 2.5px solid #141414"></div>
+  <div style="position: absolute; left: 16px; right: 16px; top: 36px; display: flex; flex-direction: column; gap: 16px">
+    <section aria-label="Quick save widget" style="height: 72px; box-sizing: border-box; background: #FDF6EC; border: 2.5px solid #141414; border-radius: 36px; box-shadow: 4px 4px 0 #141414; padding: 8px 8px 8px 10px; display: flex; align-items: center; gap: 10px">
+      <svg width="40" height="46" viewBox="0 0 64 72" aria-hidden="true"><path d="M10 6h44a4 4 0 0 1 4 4v56L32 52 6 66V10a4 4 0 0 1 4-4z" fill="#FFD23F" stroke="#141414" stroke-width="4" stroke-linejoin="round"/><circle cx="24" cy="27" r="5" fill="#141414"/><circle cx="40" cy="27" r="5" fill="#141414"/></svg>
+      <button style="flex: 1; height: 50px; border: 2.5px solid #141414; border-radius: 25px; background: #FFFFFF; color: #141414; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; padding: 0 14px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Search links</button>
+      <button aria-label="Paste and save link" style="width: 52px; height: 52px; border: 2.5px solid #141414; border-radius: 26px; background: #FF8A3D; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+    </section>
+    <section aria-label="Recent links widget" style="background: #FDF6EC; border: 2.5px solid #141414; border-radius: 28px; box-shadow: 4px 4px 0 #141414; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 800">Recently saved</h2>
+        <span style="font-size: 12px; font-weight: 700">Linkbox</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <sc-for list="{{recent}}" as="r" hint-placeholder-count="4">
+          <a href="QuickLook.dc.html" style="display: flex; gap: 8px; align-items: center; padding: 6px; background: {{r.bg}}; border: 2.5px solid #141414; border-radius: 14px; text-decoration: none; color: #141414; min-height: 52px; box-sizing: border-box">
+            <span style="width: 36px; height: 36px; flex-shrink: 0; box-sizing: border-box; border: 2px solid #141414; border-radius: 10px; background: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="15" height="15" viewBox="0 0 24 24" fill="#141414" stroke="#141414" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="{{r.glyph}}"/></svg></span>
+            <span style="font-size: 12px; font-weight: 700; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{r.title}}</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+    <div style="display: flex; gap: 16px">
+      <section aria-label="Read later widget" style="width: 165px; height: 165px; box-sizing: border-box; background: #7DDBA3; border: 2.5px solid #141414; border-radius: 28px; box-shadow: 4px 4px 0 #141414; padding: 14px; display: flex; flex-direction: column; justify-content: space-between">
+        <span style="width: 40px; height: 40px; box-sizing: border-box; border: 2.5px solid #141414; border-radius: 12px; background: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4zM20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg></span>
+        <span style="display: flex; flex-direction: column"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 40px; font-weight: 800; line-height: 1">31</span><span style="font-size: 14px; font-weight: 700">Read later</span></span>
+      </section>
+      <div aria-hidden="true" style="flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-content: start">
+        <span style="height: 60px; border-radius: 18px; background: rgba(255,255,255,0.7); border: 2px solid #141414"></span>
+        <span style="height: 60px; border-radius: 18px; background: rgba(255,255,255,0.7); border: 2px solid #141414"></span>
+        <span style="height: 60px; border-radius: 18px; background: rgba(255,255,255,0.7); border: 2px solid #141414"></span>
+        <span style="height: 60px; border-radius: 18px; background: rgba(255,255,255,0.7); border: 2px solid #141414"></span>
+      </div>
+    </div>
+  </div>
+  <div aria-hidden="true" style="position: absolute; left: 24px; right: 24px; bottom: 28px; height: 84px; border-radius: 30px; background: rgba(253,246,236,0.75); border: 2.5px solid #141414; display: flex; align-items: center; justify-content: space-around">
+    <span style="width: 54px; height: 54px; border-radius: 18px; background: #FFFFFF; border: 2px solid #141414"></span>
+    <span style="width: 54px; height: 54px; border-radius: 18px; background: #FFFFFF; border: 2px solid #141414"></span>
+    <span style="width: 54px; height: 54px; border-radius: 18px; background: #FFD23F; border: 2.5px solid #141414; display: flex; align-items: center; justify-content: center"><svg width="26" height="30" viewBox="0 0 64 72"><path d="M10 6h44a4 4 0 0 1 4 4v56L32 52 6 66V10a4 4 0 0 1 4-4z" fill="#FFFFFF" stroke="#141414" stroke-width="5" stroke-linejoin="round"/><circle cx="24" cy="27" r="5" fill="#141414"/><circle cx="40" cy="27" r="5" fill="#141414"/></svg></span>
+    <span style="width: 54px; height: 54px; border-radius: 18px; background: #FFFFFF; border: 2px solid #141414"></span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const play = 'M9 7v10l8-5z', doc = 'M7 6h10M7 12h10M7 18h6';
+    const recent = [
+      { title: 'Chicken biryani, step by step', glyph: play, bg: '#FFD23F' },
+      { title: 'Small kitchen layout ideas', glyph: play, bg: '#FF9FC4' },
+      { title: 'Material 3 theming in Flutter', glyph: doc, bg: '#7CC4FF' },
+      { title: 'Rooftop garden on a budget', glyph: doc, bg: '#B79CFF' }
+    ];
+    return { recent };
+  }
+}
+</script>
+</body>
+</html>

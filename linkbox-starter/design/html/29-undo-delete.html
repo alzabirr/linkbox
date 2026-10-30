@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deleted – undo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Outfit:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414}a:hover{color:#000000}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #FDF6EC; font-family: 'Outfit', system-ui, sans-serif; color: #141414; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 20px 16px 6px 20px">
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="font-size: 14px; font-weight: 600; color: #4A4A4A">Hey there!</span>
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: -0.8px; line-height: 1">Your links</h1>
+    </div>
+  </header>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; padding: 20px 18px 0 16px; flex: 1; overflow: hidden; align-content: start">
+    <sc-for list="{{items}}" as="item" hint-placeholder-count="4">
+      <article style="background: {{item.frame}}; border: 2.5px solid #141414; border-radius: 20px; box-shadow: 4px 4px 0 #141414; padding: 8px; display: flex; flex-direction: column; gap: 7px">
+        <div style="height: 92px; border: 2.5px solid #141414; border-radius: 14px; overflow: hidden; background: {{item.sky}}">
+          <svg width="100%" height="92" viewBox="0 0 160 92" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="130" cy="24" r="11" fill="#FFD23F" stroke="#141414" stroke-width="2.5"/><path d="M-4 70 Q36 52 80 66 T164 60 V96 H-4Z" fill="{{item.ground}}" stroke="#141414" stroke-width="2.5"/></svg>
+        </div>
+        <h3 style="margin: 0; padding: 0 2px 2px 2px; font-size: 14px; font-weight: 700; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{item.title}}</h3>
+      </article>
+    </sc-for>
+  </div>
+  <div role="status" style="position: absolute; left: 14px; right: 16px; bottom: 104px; background: #141414; color: #FFFFFF; border-radius: 20px; overflow: hidden; box-shadow: 4px 4px 0 #FF8A3D">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 12px 10px 12px 16px">
+      <span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 10px; background: #FF6B5E; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-14"/></svg></span>
+      <span style="flex: 1; font-size: 15px; font-weight: 600">Deleted 3 links</span>
+      <button style="height: 44px; padding: 0 18px; border: 2.5px solid #FFFFFF; border-radius: 14px; background: #FFD23F; color: #141414; font-size: 15px; font-weight: 800">Undo</button>
+    </div>
+    <div aria-hidden="true" style="height: 5px; background: #3A3A3A"><div style="width: 62%; height: 5px; background: #FFD23F"></div></div>
+  </div>
+  <nav aria-label="Main" style="height: 84px; flex-shrink: 0; background: #FFFFFF; border-top: 2.5px solid #141414; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center">
+    <a href="Main.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #141414; font-size: 12px; font-weight: 700">
+      <span style="width: 60px; height: 32px; border-radius: 16px; background: #FFD23F; border: 2px solid #141414; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 0 0 7.07 7.07l1.5-1.5"/></svg></span>Links</a>
+    <a href="Collections.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A4A4A; font-size: 12px; font-weight: 600">
+      <span style="width: 60px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>Collections</a>
+    <a href="Settings.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; color: #4A4A4A; font-size: 12px; font-weight: 600">
+      <span style="width: 60px; height: 32px; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg></span>Settings</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const items = [
+      { title: 'Material 3 theming in Flutter', frame: '#7CC4FF', sky: '#FFF1C7', ground: '#B79CFF' },
+      { title: 'Chicken biryani, step by step', frame: '#FF9F6B', sky: '#7DDBA3', ground: '#FF9FC4' },
+      { title: 'Riverpod: getting started', frame: '#7DDBA3', sky: '#7CC4FF', ground: '#FFD23F' },
+      { title: 'Rooftop garden on a budget', frame: '#B79CFF', sky: '#FFF1C7', ground: '#7DDBA3' }
+    ];
+    return { items };
+  }
+}
+</script>
+</body>
+</html>

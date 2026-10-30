@@ -1,0 +1,5 @@
+package com.example.linkbox
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity : FlutterActivity()

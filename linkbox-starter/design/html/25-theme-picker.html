@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Theme color picker</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&amp;family=Outfit:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#141414}a:hover{color:#000000}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #FDF6EC; font-family: 'Outfit', system-ui, sans-serif; color: #141414; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; gap: 12px; padding: 18px 16px 10px 16px">
+    <a href="Settings.dc.html" aria-label="Back" style="width: 46px; height: 46px; flex-shrink: 0; box-sizing: border-box; border: 2.5px solid #141414; border-radius: 14px; background: #FFFFFF; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></a>
+    <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 26px; font-weight: 800">Theme color</h1>
+  </header>
+  <div style="padding: 8px 18px 0 16px; display: flex; flex-direction: column; gap: 18px">
+    <section aria-label="Preview" style="background: #FFFFFF; border: 2.5px solid #141414; border-radius: 24px; padding: 14px; display: flex; flex-direction: column; gap: 12px">
+      <span style="font-size: 13px; font-weight: 700">Preview</span>
+      <div style="display: flex; gap: 8px">
+        <span style="height: 34px; padding: 0 14px; display: flex; align-items: center; border: 2.5px solid #141414; border-radius: 17px; background: #141414; color: #FFFFFF; font-size: 13px; font-weight: 700">All</span>
+        <span style="height: 34px; padding: 0 14px; display: flex; align-items: center; border: 2.5px solid #141414; border-radius: 17px; background: {{picked}}; font-size: 13px; font-weight: 700">Design</span>
+        <span style="height: 34px; padding: 0 14px; display: flex; align-items: center; border: 2.5px solid #141414; border-radius: 17px; background: #FFFFFF; font-size: 13px; font-weight: 600">Dev</span>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center">
+        <span style="flex: 1; height: 52px; border: 2.5px solid #141414; border-radius: 16px; background: {{picked}}; box-shadow: 3px 3px 0 #141414; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800">Save link</span>
+        <span style="width: 58px; height: 34px; box-sizing: border-box; border: 2.5px solid #141414; border-radius: 17px; background: {{picked}}; position: relative"><span style="position: absolute; right: 3px; top: 3px; width: 23px; height: 23px; box-sizing: border-box; border-radius: 12px; background: #FFFFFF; border: 2.5px solid #141414"></span></span>
+      </div>
+    </section>
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 800">Pick a color</h2>
+      <div role="radiogroup" aria-label="Theme color" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+        <sc-for list="{{swatches}}" as="s" hint-placeholder-count="12">
+          <button role="radio" aria-checked="{{s.checked}}" aria-label="{{s.name}}" onClick="{{s.pick}}" style="height: 72px; border: {{s.border}}; border-radius: 20px; background: {{s.hex}}; box-shadow: {{s.shadow}}; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 6px; color: #141414; font-size: 11px; font-weight: 800">
+            <sc-if value="{{s.on}}" hint-placeholder-val="{{ false }}"><span style="width: 24px; height: 24px; margin-bottom: auto; margin-top: 6px; border-radius: 12px; background: #141414; display: flex; align-items: center; justify-content: center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span></sc-if>
+            {{s.name}}
+          </button>
+        </sc-for>
+      </div>
+    </section>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="hex" style="font-size: 14px; font-weight: 700">Or type a hex code</label>
+      <div style="display: flex; gap: 10px">
+        <input id="hex" value="{{picked}}" style="flex: 1; height: 52px; padding: 0 14px; box-sizing: border-box; background: #FFFFFF; border: 2.5px solid #141414; border-radius: 16px; outline: 0; font-family: ui-monospace, Menlo, monospace; font-size: 16px; font-weight: 700; color: #141414">
+        <span aria-hidden="true" style="width: 52px; height: 52px; box-sizing: border-box; border: 2.5px solid #141414; border-radius: 16px; background: {{picked}}"></span>
+      </div>
+    </div>
+  </div>
+  <div style="flex: 1"></div>
+  <div style="padding: 0 18px 24px 16px">
+    <button style="width: 100%; height: 60px; border: 2.5px solid #141414; border-radius: 20px; background: #141414; color: #FFFFFF; font-size: 17px; font-weight: 800">Use this color</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { picked: '#FF8A3D' }; }
+  renderVals() {
+    const list = [['Orange','#FF8A3D'],['Sun','#FFD23F'],['Mint','#7DDBA3'],['Sky','#7CC4FF'],['Grape','#B79CFF'],['Pink','#FF9FC4'],['Peach','#FF9F6B'],['Lime','#C6EB5B'],['Teal','#5ED3C6'],['Coral','#FF6B5E'],['Lilac','#D7B8FF'],['Sand','#E8C9A0']];
+    const picked = this.state.picked;
+    const swatches = list.map(([name, hex]) => {
+      const on = hex === picked;
+      return { name, hex, on, checked: on ? 'true' : 'false', border: on ? '3.5px solid #141414' : '2.5px solid #141414', shadow: on ? '4px 4px 0 #141414' : 'none', pick: () => this.setState({ picked: hex }) };
+    });
+    return { picked, swatches };
+  }
+}
+</script>
+</body>
+</html>

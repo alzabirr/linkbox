@@ -6,6 +6,8 @@ import '../core/widgets/app_icon.dart';
 import '../core/widgets/main_nav_bar.dart';
 import '../features/collections/collection_detail_page.dart';
 import '../features/collections/collections_page.dart';
+import '../features/data/data_page.dart';
+import '../features/data/restore_page.dart';
 import '../features/dev/widget_gallery_page.dart';
 import '../features/links/clipboard_prompt.dart';
 import '../features/links/edit_link_page.dart';
@@ -24,6 +26,8 @@ class Routes {
   static const settings = '/settings';
   static const gallery = '/gallery';
   static const search = '/search';
+  static const data = '/settings/data';
+  static const restore = '/settings/data/restore';
 
   static String editLink(int id) => '/link/$id/edit';
   static String collection(int id) => '/collections/$id';
@@ -73,6 +77,16 @@ final appRouter = GoRouter(
           path: 'edit',
           builder: (context, state) =>
               EditLinkPage(linkId: int.parse(state.pathParameters['id']!)),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: Routes.data,
+      builder: (context, state) => const DataPage(),
+      routes: [
+        GoRoute(
+          path: 'restore',
+          builder: (context, state) => const RestorePage(),
         ),
       ],
     ),

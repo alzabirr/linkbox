@@ -753,4 +753,161 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get colorSand => 'Sand';
+
+  @override
+  String get dataTitle => 'Your data';
+
+  @override
+  String get dataRowTitle => 'Import, export & backup';
+
+  @override
+  String lastBackup(String when) {
+    return 'Last backup: $when';
+  }
+
+  @override
+  String get lastBackupNever => 'No backup yet';
+
+  @override
+  String get downloadFolder => 'Download/Linkbox';
+
+  @override
+  String get backupTitle => 'Backup';
+
+  @override
+  String backupBody(String folder) {
+    return 'Saves every link and collection to $folder on this phone.';
+  }
+
+  @override
+  String get backupNow => 'Back up now';
+
+  @override
+  String get restore => 'Restore';
+
+  @override
+  String get importTitle => 'Import from a browser';
+
+  @override
+  String get importBody =>
+      'In Chrome, Firefox, Edge or Brave, export your bookmarks as an HTML file. Then pick that file here.';
+
+  @override
+  String get chooseHtml => 'Choose HTML file';
+
+  @override
+  String get exportTitle => 'Export';
+
+  @override
+  String get exportBody =>
+      'HTML opens in any browser. JSON keeps everything for re-importing later.';
+
+  @override
+  String get exportHtml => 'Export HTML';
+
+  @override
+  String get exportJson => 'Export JSON';
+
+  @override
+  String importDone(int imported, int skipped) {
+    return 'Imported $imported links. Skipped $skipped you already had.';
+  }
+
+  @override
+  String get importError =>
+      'We couldn’t read that file. Pick the .html file your browser exported.';
+
+  @override
+  String get backupFailed =>
+      'Backup didn’t finish. Free up some space on your phone and try again.';
+
+  @override
+  String get backupDone => 'Backup saved to Download/Linkbox';
+
+  @override
+  String exportDone(String name) {
+    return 'Saved to Download/Linkbox/$name';
+  }
+
+  @override
+  String restorePick(String folder) {
+    return 'Pick a backup from $folder.';
+  }
+
+  @override
+  String collectionCountLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count collections',
+      one: '1 collection',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String restoreMeta(String links, String collections, String size) {
+    return '$links · $collections · $size';
+  }
+
+  @override
+  String get restoreHow => 'How should we restore?';
+
+  @override
+  String get restoreAdd => 'Add to my links';
+
+  @override
+  String get restoreAddSub =>
+      'Keeps everything you have now. Duplicates are skipped.';
+
+  @override
+  String get restoreReplace => 'Replace everything';
+
+  @override
+  String restoreReplaceSub(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Your current $count links are removed first.',
+      one: 'Your current link is removed first.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String restoreButton(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Restore $count links',
+      one: 'Restore 1 link',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get restoreChooseFile => 'Choose a backup file';
+
+  @override
+  String get restoreNone =>
+      'No backups found here. If you reinstalled the app, choose the backup file yourself.';
+
+  @override
+  String get restoreError =>
+      'That isn’t a Linkbox backup. Pick a linkbox-backup file (.json).';
+
+  @override
+  String restoreDone(int imported, int skipped) {
+    return 'Restored $imported links. Skipped $skipped you already had.';
+  }
+
+  @override
+  String get replaceConfirmTitle => 'Replace everything?';
+
+  @override
+  String get replaceConfirmBody =>
+      'Your current links and collections are removed, then the backup is restored.';
+
+  @override
+  String get chosenFile => 'Chosen file';
 }

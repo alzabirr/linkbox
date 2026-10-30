@@ -420,5 +420,124 @@
   "colorTeal": "Teal",
   "colorCoral": "Coral",
   "colorLilac": "Lilac",
-  "colorSand": "Sand"
+  "colorSand": "Sand",
+  "dataTitle": "Your data",
+  "dataRowTitle": "Import, export & backup",
+  "lastBackup": "Last backup: {when}",
+  "@lastBackup": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "lastBackupNever": "No backup yet",
+  "downloadFolder": "Download/Linkbox",
+  "backupTitle": "Backup",
+  "backupBody": "Saves every link and collection to {folder} on this phone.",
+  "@backupBody": {
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "backupNow": "Back up now",
+  "restore": "Restore",
+  "importTitle": "Import from a browser",
+  "importBody": "In Chrome, Firefox, Edge or Brave, export your bookmarks as an HTML file. Then pick that file here.",
+  "chooseHtml": "Choose HTML file",
+  "exportTitle": "Export",
+  "exportBody": "HTML opens in any browser. JSON keeps everything for re-importing later.",
+  "exportHtml": "Export HTML",
+  "exportJson": "Export JSON",
+  "importDone": "Imported {imported} links. Skipped {skipped} you already had.",
+  "@importDone": {
+    "placeholders": {
+      "imported": {
+        "type": "int"
+      },
+      "skipped": {
+        "type": "int"
+      }
+    }
+  },
+  "importError": "We couldn’t read that file. Pick the .html file your browser exported.",
+  "backupFailed": "Backup didn’t finish. Free up some space on your phone and try again.",
+  "backupDone": "Backup saved to Download/Linkbox",
+  "exportDone": "Saved to Download/Linkbox/{name}",
+  "@exportDone": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "restorePick": "Pick a backup from {folder}.",
+  "@restorePick": {
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "collectionCountLabel": "{count, plural, =1{1 collection} other{{count} collections}}",
+  "@collectionCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "restoreMeta": "{links} · {collections} · {size}",
+  "@restoreMeta": {
+    "placeholders": {
+      "links": {
+        "type": "String"
+      },
+      "collections": {
+        "type": "String"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "restoreHow": "How should we restore?",
+  "restoreAdd": "Add to my links",
+  "restoreAddSub": "Keeps everything you have now. Duplicates are skipped.",
+  "restoreReplace": "Replace everything",
+  "restoreReplaceSub": "{count, plural, =1{Your current link is removed first.} other{Your current {count} links are removed first.}}",
+  "@restoreReplaceSub": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "restoreButton": "{count, plural, =1{Restore 1 link} other{Restore {count} links}}",
+  "@restoreButton": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "restoreChooseFile": "Choose a backup file",
+  "restoreNone": "No backups found here. If you reinstalled the app, choose the backup file yourself.",
+  "restoreError": "That isn’t a Linkbox backup. Pick a linkbox-backup file (.json).",
+  "restoreDone": "Restored {imported} links. Skipped {skipped} you already had.",
+  "@restoreDone": {
+    "placeholders": {
+      "imported": {
+        "type": "int"
+      },
+      "skipped": {
+        "type": "int"
+      }
+    }
+  },
+  "replaceConfirmTitle": "Replace everything?",
+  "replaceConfirmBody": "Your current links and collections are removed, then the backup is restored.",
+  "chosenFile": "Chosen file"
 }

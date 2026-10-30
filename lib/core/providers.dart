@@ -5,7 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'db/database.dart';
 import 'repositories/collection_repository.dart';
+import 'repositories/data_repository.dart';
 import 'repositories/link_repository.dart';
+import 'services/file_store.dart';
 import 'services/metadata_service.dart';
 
 part 'providers.g.dart';
@@ -42,3 +44,10 @@ LinkRepository linkRepository(Ref ref) => LinkRepository(
 @Riverpod(keepAlive: true)
 CollectionRepository collectionRepository(Ref ref) =>
     CollectionRepository(ref.watch(databaseProvider));
+
+@Riverpod(keepAlive: true)
+DataRepository dataRepository(Ref ref) => DataRepository(
+    ref.watch(databaseProvider), ref.watch(linkRepositoryProvider));
+
+@Riverpod(keepAlive: true)
+FileStore fileStore(Ref ref) => FileStore();

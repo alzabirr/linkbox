@@ -221,3 +221,85 @@ final class CollectionRepositoryProvider
 
 String _$collectionRepositoryHash() =>
     r'61a383d72e58e3da5589c6b3b35486e29ba18b0a';
+
+@ProviderFor(dataRepository)
+final dataRepositoryProvider = DataRepositoryProvider._();
+
+final class DataRepositoryProvider
+    extends $FunctionalProvider<DataRepository, DataRepository, DataRepository>
+    with $Provider<DataRepository> {
+  DataRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'dataRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$dataRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<DataRepository> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  DataRepository create(Ref ref) {
+    return dataRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(DataRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<DataRepository>(value),
+    );
+  }
+}
+
+String _$dataRepositoryHash() => r'10f0c7ccb784182db06b6ec6052047df4c12fe0e';
+
+@ProviderFor(fileStore)
+final fileStoreProvider = FileStoreProvider._();
+
+final class FileStoreProvider
+    extends $FunctionalProvider<FileStore, FileStore, FileStore>
+    with $Provider<FileStore> {
+  FileStoreProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'fileStoreProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$fileStoreHash();
+
+  @$internal
+  @override
+  $ProviderElement<FileStore> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  FileStore create(Ref ref) {
+    return fileStore(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FileStore value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FileStore>(value),
+    );
+  }
+}
+
+String _$fileStoreHash() => r'0da29fbc0de93a330169ed3907ca891bca05f760';

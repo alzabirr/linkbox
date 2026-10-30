@@ -1339,6 +1339,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sand'**
   String get colorSand;
+
+  /// No description provided for @dataTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data'**
+  String get dataTitle;
+
+  /// No description provided for @dataRowTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Import, export & backup'**
+  String get dataRowTitle;
+
+  /// No description provided for @lastBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Last backup: {when}'**
+  String lastBackup(String when);
+
+  /// No description provided for @lastBackupNever.
+  ///
+  /// In en, this message translates to:
+  /// **'No backup yet'**
+  String get lastBackupNever;
+
+  /// No description provided for @downloadFolder.
+  ///
+  /// In en, this message translates to:
+  /// **'Download/Linkbox'**
+  String get downloadFolder;
+
+  /// No description provided for @backupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup'**
+  String get backupTitle;
+
+  /// No description provided for @backupBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Saves every link and collection to {folder} on this phone.'**
+  String backupBody(String folder);
+
+  /// No description provided for @backupNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Back up now'**
+  String get backupNow;
+
+  /// No description provided for @restore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore'**
+  String get restore;
+
+  /// No description provided for @importTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Import from a browser'**
+  String get importTitle;
+
+  /// No description provided for @importBody.
+  ///
+  /// In en, this message translates to:
+  /// **'In Chrome, Firefox, Edge or Brave, export your bookmarks as an HTML file. Then pick that file here.'**
+  String get importBody;
+
+  /// No description provided for @chooseHtml.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose HTML file'**
+  String get chooseHtml;
+
+  /// No description provided for @exportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Export'**
+  String get exportTitle;
+
+  /// No description provided for @exportBody.
+  ///
+  /// In en, this message translates to:
+  /// **'HTML opens in any browser. JSON keeps everything for re-importing later.'**
+  String get exportBody;
+
+  /// No description provided for @exportHtml.
+  ///
+  /// In en, this message translates to:
+  /// **'Export HTML'**
+  String get exportHtml;
+
+  /// No description provided for @exportJson.
+  ///
+  /// In en, this message translates to:
+  /// **'Export JSON'**
+  String get exportJson;
+
+  /// No description provided for @importDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Imported {imported} links. Skipped {skipped} you already had.'**
+  String importDone(int imported, int skipped);
+
+  /// No description provided for @importError.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn’t read that file. Pick the .html file your browser exported.'**
+  String get importError;
+
+  /// No description provided for @backupFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup didn’t finish. Free up some space on your phone and try again.'**
+  String get backupFailed;
+
+  /// No description provided for @backupDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Backup saved to Download/Linkbox'**
+  String get backupDone;
+
+  /// No description provided for @exportDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved to Download/Linkbox/{name}'**
+  String exportDone(String name);
+
+  /// No description provided for @restorePick.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a backup from {folder}.'**
+  String restorePick(String folder);
+
+  /// No description provided for @collectionCountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 collection} other{{count} collections}}'**
+  String collectionCountLabel(int count);
+
+  /// No description provided for @restoreMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'{links} · {collections} · {size}'**
+  String restoreMeta(String links, String collections, String size);
+
+  /// No description provided for @restoreHow.
+  ///
+  /// In en, this message translates to:
+  /// **'How should we restore?'**
+  String get restoreHow;
+
+  /// No description provided for @restoreAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to my links'**
+  String get restoreAdd;
+
+  /// No description provided for @restoreAddSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Keeps everything you have now. Duplicates are skipped.'**
+  String get restoreAddSub;
+
+  /// No description provided for @restoreReplace.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace everything'**
+  String get restoreReplace;
+
+  /// No description provided for @restoreReplaceSub.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Your current link is removed first.} other{Your current {count} links are removed first.}}'**
+  String restoreReplaceSub(int count);
+
+  /// No description provided for @restoreButton.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Restore 1 link} other{Restore {count} links}}'**
+  String restoreButton(int count);
+
+  /// No description provided for @restoreChooseFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a backup file'**
+  String get restoreChooseFile;
+
+  /// No description provided for @restoreNone.
+  ///
+  /// In en, this message translates to:
+  /// **'No backups found here. If you reinstalled the app, choose the backup file yourself.'**
+  String get restoreNone;
+
+  /// No description provided for @restoreError.
+  ///
+  /// In en, this message translates to:
+  /// **'That isn’t a Linkbox backup. Pick a linkbox-backup file (.json).'**
+  String get restoreError;
+
+  /// No description provided for @restoreDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Restored {imported} links. Skipped {skipped} you already had.'**
+  String restoreDone(int imported, int skipped);
+
+  /// No description provided for @replaceConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace everything?'**
+  String get replaceConfirmTitle;
+
+  /// No description provided for @replaceConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your current links and collections are removed, then the backup is restored.'**
+  String get replaceConfirmBody;
+
+  /// No description provided for @chosenFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Chosen file'**
+  String get chosenFile;
 }
 
 class _AppLocalizationsDelegate

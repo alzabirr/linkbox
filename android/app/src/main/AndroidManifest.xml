@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Only used to fetch link previews. -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Only Android 9 and older need this to save backups in Download/Linkbox. -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"/>
     <application
         android:label="Linkbox"
         android:name="${applicationName}"

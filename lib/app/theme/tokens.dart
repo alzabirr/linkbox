@@ -225,7 +225,7 @@ class AppTokens extends ThemeExtension<AppTokens> {
     text: AppColors.white,
     muted: AppColors.darkMuted,
     shadow: const Color(0x00000000),
-    sand: AppColors.darkRaised,
+    sand: Color(0xFF2A2A2A), // a step lighter than surfaces (stripes, tracks)
     sandDeep: const Color(0xFF3A3A3A),
     sandLine: const Color(0xFF3A3A3A),
     accent: accent,

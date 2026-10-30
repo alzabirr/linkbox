@@ -754,4 +754,160 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get colorSand => 'বালু';
+
+  @override
+  String get dataTitle => 'আপনার ডেটা';
+
+  @override
+  String get dataRowTitle => 'ইমপোর্ট, এক্সপোর্ট ও ব্যাকআপ';
+
+  @override
+  String lastBackup(String when) {
+    return 'শেষ ব্যাকআপ: $when';
+  }
+
+  @override
+  String get lastBackupNever => 'এখনো কোনো ব্যাকআপ নেই';
+
+  @override
+  String get downloadFolder => 'Download/Linkbox';
+
+  @override
+  String get backupTitle => 'ব্যাকআপ';
+
+  @override
+  String backupBody(String folder) {
+    return 'সব লিংক আর কালেকশন এই ফোনের $folder-এ সেভ করে।';
+  }
+
+  @override
+  String get backupNow => 'এখনই ব্যাকআপ';
+
+  @override
+  String get restore => 'রিস্টোর';
+
+  @override
+  String get importTitle => 'ব্রাউজার থেকে ইমপোর্ট';
+
+  @override
+  String get importBody =>
+      'Chrome, Firefox, Edge বা Brave-এ আপনার বুকমার্ক HTML ফাইল হিসেবে এক্সপোর্ট করুন। তারপর সেই ফাইলটি এখানে বাছুন।';
+
+  @override
+  String get chooseHtml => 'HTML ফাইল বাছুন';
+
+  @override
+  String get exportTitle => 'এক্সপোর্ট';
+
+  @override
+  String get exportBody =>
+      'HTML যেকোনো ব্রাউজারে খোলে। JSON-এ সবকিছু থাকে, পরে আবার ইমপোর্ট করা যায়।';
+
+  @override
+  String get exportHtml => 'HTML এক্সপোর্ট';
+
+  @override
+  String get exportJson => 'JSON এক্সপোর্ট';
+
+  @override
+  String importDone(int imported, int skipped) {
+    return '$importedটি লিংক ইমপোর্ট হয়েছে। আগে থেকে থাকা $skippedটি বাদ দেওয়া হয়েছে।';
+  }
+
+  @override
+  String get importError =>
+      'ফাইলটি পড়া গেল না। আপনার ব্রাউজারের এক্সপোর্ট করা .html ফাইলটি বাছুন।';
+
+  @override
+  String get backupFailed =>
+      'ব্যাকআপ শেষ হয়নি। ফোনে কিছু জায়গা খালি করে আবার চেষ্টা করুন।';
+
+  @override
+  String get backupDone => 'ব্যাকআপ Download/Linkbox-এ সেভ হয়েছে';
+
+  @override
+  String exportDone(String name) {
+    return 'Download/Linkbox/$name-এ সেভ হয়েছে';
+  }
+
+  @override
+  String restorePick(String folder) {
+    return '$folder থেকে একটি ব্যাকআপ বাছুন।';
+  }
+
+  @override
+  String collectionCountLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countটি কালেকশন',
+      one: '১টি কালেকশন',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String restoreMeta(String links, String collections, String size) {
+    return '$links · $collections · $size';
+  }
+
+  @override
+  String get restoreHow => 'কীভাবে রিস্টোর করবেন?';
+
+  @override
+  String get restoreAdd => 'আমার লিংকের সাথে যোগ করুন';
+
+  @override
+  String get restoreAddSub => 'এখন যা আছে সব থাকবে। একই লিংক দুবার আসবে না।';
+
+  @override
+  String get restoreReplace => 'সব বদলে দিন';
+
+  @override
+  String restoreReplaceSub(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'আপনার বর্তমান $countটি লিংক আগে মুছে যাবে।',
+      one: 'আপনার বর্তমান লিংকটি আগে মুছে যাবে।',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String restoreButton(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countটি লিংক রিস্টোর করুন',
+      one: '১টি লিংক রিস্টোর করুন',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get restoreChooseFile => 'ব্যাকআপ ফাইল বাছুন';
+
+  @override
+  String get restoreNone =>
+      'এখানে কোনো ব্যাকআপ পাওয়া যায়নি। অ্যাপ আবার ইনস্টল করে থাকলে ব্যাকআপ ফাইলটি নিজে বাছুন।';
+
+  @override
+  String get restoreError =>
+      'এটি Linkbox-এর ব্যাকআপ নয়। linkbox-backup (.json) ফাইল বাছুন।';
+
+  @override
+  String restoreDone(int imported, int skipped) {
+    return '$importedটি লিংক রিস্টোর হয়েছে। আগে থেকে থাকা $skippedটি বাদ দেওয়া হয়েছে।';
+  }
+
+  @override
+  String get replaceConfirmTitle => 'সব বদলে দেবেন?';
+
+  @override
+  String get replaceConfirmBody =>
+      'আপনার বর্তমান লিংক আর কালেকশন মুছে যাবে, তারপর ব্যাকআপ রিস্টোর হবে।';
+
+  @override
+  String get chosenFile => 'বাছাই করা ফাইল';
 }

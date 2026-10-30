@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/router.dart';
@@ -9,14 +10,17 @@ import '../../core/widgets/bold_card.dart';
 import '../../core/widgets/coming_soon.dart';
 import '../../core/widgets/page_header.dart';
 import '../../l10n/app_localizations.dart';
+import '../data/data_controller.dart';
+import '../links/link_actions.dart';
 
 /// Settings tab (13). Filled in M6; for now it links to the widget gallery.
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
+    final last = ref.watch(lastBackupProvider);
     return SafeArea(
       bottom: false,
       child: Column(
@@ -25,6 +29,17 @@ class SettingsPage extends StatelessWidget {
           PageHeader(title: l.settingsTitle),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 18, 0),
+            child: _RowCard(
+              icon: AppIcons.download,
+              title: l.dataRowTitle,
+              subtitle: last == null
+                  ? l.lastBackupNever
+                  : l.lastBackup(relativeDay(context, last)),
+              onTap: () => context.push(Routes.data),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 14, 18, 0),
             child: _RowCard(
               icon: AppIcons.grid,
               title: l.widgetGallery,

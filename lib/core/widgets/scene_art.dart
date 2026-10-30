@@ -120,19 +120,21 @@ class _ScenePainter extends CustomPainter {
 
   final SceneColors c;
 
-  // Mockup viewBox: 160 × 92, preserveAspectRatio="xMidYMid slice".
-  static const _vw = 160.0;
-  static const _vh = 92.0;
-
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawRect(Offset.zero & size, Paint()..color = c.sky);
 
-    final scale =
-        (size.width / _vw) > (size.height / _vh) ? size.width / _vw : size.height / _vh;
+    // Wide pictures use the card scene (viewBox 160 × 92), square thumbs
+    // the Add link preview scene (92 × 92); both "xMidYMid slice".
+    final square = size.width / size.height < 1.3;
+    final vw = square ? 92.0 : 160.0;
+    const vh = 92.0;
+    final scale = (size.width / vw) > (size.height / vh)
+        ? size.width / vw
+        : size.height / vh;
     canvas.save();
     canvas.translate(
-        (size.width - _vw * scale) / 2, (size.height - _vh * scale) / 2);
+        (size.width - vw * scale) / 2, (size.height - vh * scale) / 2);
     canvas.scale(scale);
 
     final stroke = Paint()
@@ -141,16 +143,25 @@ class _ScenePainter extends CustomPainter {
       ..strokeWidth = AppShape.stroke
       ..strokeJoin = StrokeJoin.round;
 
-    const sun = Offset(130, 24);
-    canvas.drawCircle(sun, 11, Paint()..color = c.sun);
-    canvas.drawCircle(sun, 11, stroke);
+    final sun = square ? const Offset(68, 22) : const Offset(130, 24);
+    final r = square ? 9.0 : 11.0;
+    canvas.drawCircle(sun, r, Paint()..color = c.sun);
+    canvas.drawCircle(sun, r, stroke);
 
-    // M-4 70 Q36 52 80 66 T164 60 V96 H-4Z
-    final hill = Path()
-      ..moveTo(-4, 70)
-      ..quadraticBezierTo(36, 52, 80, 66)
-      ..quadraticBezierTo(124, 80, 164, 60)
-      ..lineTo(164, 96)
+    // Card:  M-4 70 Q36 52 80 66 T164 60 V96 H-4Z
+    // Thumb: M-4 66 Q22 52 46 62 T96 58 V96 H-4Z
+    final hill = square
+        ? (Path()
+          ..moveTo(-4, 66)
+          ..quadraticBezierTo(22, 52, 46, 62)
+          ..quadraticBezierTo(70, 72, 96, 58)
+          ..lineTo(96, 96))
+        : (Path()
+          ..moveTo(-4, 70)
+          ..quadraticBezierTo(36, 52, 80, 66)
+          ..quadraticBezierTo(124, 80, 164, 60)
+          ..lineTo(164, 96));
+    hill
       ..lineTo(-4, 96)
       ..close();
     canvas.drawPath(hill, Paint()..color = c.ground);

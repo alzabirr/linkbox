@@ -195,4 +195,58 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tapCopy => 'Copy link';
+
+  @override
+  String get addLinkTitle => 'Add a link';
+
+  @override
+  String get linkLabel => 'Link';
+
+  @override
+  String get linkFieldHint => 'Paste or type a link';
+
+  @override
+  String get previewLabel => 'Preview';
+
+  @override
+  String get collectionLabel => 'Collection';
+
+  @override
+  String get previewFound => 'Found the title, summary and image';
+
+  @override
+  String get previewLoading => 'Getting the preview…';
+
+  @override
+  String get previewFailed =>
+      'Couldn’t get a preview. Your link is saved, and you can add a title yourself.';
+
+  @override
+  String get previewOffline =>
+      'You’re offline. We saved the link and will get the preview when you’re back online.';
+
+  @override
+  String get invalidLink =>
+      'That doesn’t look like a link. It should start with http:// or https://';
+
+  @override
+  String get alreadySaved => 'You already saved this one';
+
+  @override
+  String get emptyTitle => 'Save it now. Find it later.';
+
+  @override
+  String get emptyBody =>
+      'Share a link from any app, or paste one here. Your links stay on this phone.';
+
+  @override
+  String get emptyCollection => 'No links in this collection yet.';
+
+  @override
+  String linkSubtitle(String domain, String collection) {
+    return '$domain · $collection';
+  }
+
+  @override
+  String get couldNotOpen => 'Couldn’t open this link.';
 }

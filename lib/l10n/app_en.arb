@@ -24,7 +24,11 @@
   "kindPost": "Post",
   "linkNumber": "NO.{number}",
   "@linkNumber": {
-    "placeholders": { "number": { "type": "String" } }
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
   },
   "noPreview": "No preview",
   "tryAgain": "Try again",
@@ -35,11 +39,19 @@
   "keepThem": "Keep them",
   "deleteLinks": "{count, plural, =1{Delete 1 link} other{Delete {count} links}}",
   "@deleteLinks": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "comingSoon": "This part arrives in milestone {milestone}.",
   "@comingSoon": {
-    "placeholders": { "milestone": { "type": "String" } }
+    "placeholders": {
+      "milestone": {
+        "type": "String"
+      }
+    }
   },
   "widgetGallery": "Widget gallery",
   "widgetGalleryHint": "Every core widget, in light and dark",
@@ -66,5 +78,31 @@
   "tapActionLabel": "When I tap a link",
   "tapQuickLook": "Quick look",
   "tapOpen": "Open site",
-  "tapCopy": "Copy link"
+  "tapCopy": "Copy link",
+  "addLinkTitle": "Add a link",
+  "linkLabel": "Link",
+  "linkFieldHint": "Paste or type a link",
+  "previewLabel": "Preview",
+  "collectionLabel": "Collection",
+  "previewFound": "Found the title, summary and image",
+  "previewLoading": "Getting the preview…",
+  "previewFailed": "Couldn’t get a preview. Your link is saved, and you can add a title yourself.",
+  "previewOffline": "You’re offline. We saved the link and will get the preview when you’re back online.",
+  "invalidLink": "That doesn’t look like a link. It should start with http:// or https://",
+  "alreadySaved": "You already saved this one",
+  "emptyTitle": "Save it now. Find it later.",
+  "emptyBody": "Share a link from any app, or paste one here. Your links stay on this phone.",
+  "emptyCollection": "No links in this collection yet.",
+  "linkSubtitle": "{domain} · {collection}",
+  "@linkSubtitle": {
+    "placeholders": {
+      "domain": {
+        "type": "String"
+      },
+      "collection": {
+        "type": "String"
+      }
+    }
+  },
+  "couldNotOpen": "Couldn’t open this link."
 }

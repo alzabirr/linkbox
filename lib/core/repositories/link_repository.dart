@@ -1,0 +1,134 @@
+import 'package:drift/drift.dart';
+
+import '../db/database.dart';
+import '../models/link_item.dart';
+import '../services/metadata_parser.dart';
+import '../services/metadata_service.dart';
+import '../utils/url_normalizer.dart';
+import '../widgets/scene_art.dart';
+
+/// Thrown when the link is already saved.
+class DuplicateLinkException implements Exception {
+  const DuplicateLinkException(this.existing);
+  final LinkItem existing;
+}
+
+class LinkRepository {
+  LinkRepository(this._db, this._metadata, this._queue);
+
+  final AppDatabase _db;
+  final MetadataService _metadata;
+  final FetchQueue _queue;
+
+  /// Newest first; soft-deleted links are hidden. [collectionId] filters.
+  Stream<List<LinkItem>> watchLinks({int? collectionId}) {
+    final q = _db.select(_db.links)
+      ..where((l) => l.deletedAt.isNull())
+      ..orderBy([(l) => OrderingTerm.desc(l.createdAt), (l) => OrderingTerm.desc(l.id)]);
+    if (collectionId != null) {
+      q.where((l) => l.collectionId.equals(collectionId));
+    }
+    return q.watch().map((rows) => rows.map(_toItem).toList());
+  }
+
+  Future<LinkItem?> findByUrl(String url) async {
+    final row = await (_db.select(_db.links)
+          ..where((l) =>
+              l.normalizedUrl.equals(UrlUtils.normalize(url)) &
+              l.deletedAt.isNull()))
+        .getSingleOrNull();
+    return row == null ? null : _toItem(row);
+  }
+
+  /// Saves a link at once. With [meta] (preview already shown in the Add
+  /// sheet) it is stored as-is; otherwise the preview is fetched afterwards.
+  Future<int> add(String url, {int? collectionId, LinkMetadata? meta}) async {
+    final clean = url.trim();
+    final existing = await findByUrl(clean);
+    if (existing != null) throw DuplicateLinkException(existing);
+
+    final now = DateTime.now().toUtc();
+    final id = await _db.into(_db.links).insert(LinksCompanion.insert(
+          url: clean,
+          normalizedUrl: UrlUtils.normalize(clean),
+          domain: UrlUtils.domainOf(clean),
+          title: Value(meta?.title),
+          description: Value(meta?.description),
+          imageUrl: Value(meta?.imageUrl),
+          siteName: Value(meta?.siteName),
+          kind: Value((meta?.kind ?? MetadataParser.kindFor(clean)).name),
+          collectionId: Value(collectionId),
+          fetchStatus: Value(
+              meta == null ? FetchStatus.pending.name : FetchStatus.ok.name),
+          createdAt: now,
+          updatedAt: now,
+        ));
+    if (meta == null) _queueFetch(id, clean);
+    return id;
+  }
+
+  /// "Try again" on a failed card.
+  Future<void> retry(int id) async {
+    final row = await (_db.select(_db.links)..where((l) => l.id.equals(id)))
+        .getSingleOrNull();
+    if (row == null) return;
+    await _setStatus(id, FetchStatus.pending);
+    _queueFetch(id, row.url);
+  }
+
+  /// Fetch previews that never finished (e.g. saved while offline).
+  Future<void> resumePending() async {
+    final rows = await (_db.select(_db.links)
+          ..where((l) =>
+              l.fetchStatus.equals(FetchStatus.pending.name) &
+              l.deletedAt.isNull()))
+        .get();
+    for (final r in rows) {
+      _queueFetch(r.id, r.url);
+    }
+  }
+
+  void _queueFetch(int id, String url) {
+    _queue.add(id, () async {
+      try {
+        final meta = await _metadata.fetch(url);
+        await (_db.update(_db.links)..where((l) => l.id.equals(id))).write(
+          LinksCompanion(
+            title: Value(meta.title),
+            description: Value(meta.description),
+            imageUrl: Value(meta.imageUrl),
+            siteName: Value(meta.siteName),
+            kind: Value(meta.kind.name),
+            fetchStatus: Value(FetchStatus.ok.name),
+            updatedAt: Value(DateTime.now().toUtc()),
+          ),
+        );
+      } on MetadataException catch (e) {
+        // Offline: stay "pending" and try again on the next start.
+        if (!e.offline) await _setStatus(id, FetchStatus.failed);
+      }
+    });
+  }
+
+  Future<void> _setStatus(int id, FetchStatus s) =>
+      (_db.update(_db.links)..where((l) => l.id.equals(id))).write(
+          LinksCompanion(
+              fetchStatus: Value(s.name),
+              updatedAt: Value(DateTime.now().toUtc())));
+
+  static LinkItem _toItem(Link r) => LinkItem(
+        id: r.id,
+        url: r.url,
+        domain: r.domain,
+        kind: LinkKind.values.asNameMap()[r.kind] ?? LinkKind.other,
+        fetchStatus:
+            FetchStatus.values.asNameMap()[r.fetchStatus] ?? FetchStatus.pending,
+        createdAt: r.createdAt,
+        title: r.title,
+        description: r.description,
+        imageUrl: r.imageUrl,
+        customImagePath: r.customImagePath,
+        siteName: r.siteName,
+        collectionId: r.collectionId,
+      );
+}

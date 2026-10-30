@@ -445,6 +445,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copy link'**
   String get tapCopy;
+
+  /// No description provided for @addLinkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a link'**
+  String get addLinkTitle;
+
+  /// No description provided for @linkLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Link'**
+  String get linkLabel;
+
+  /// No description provided for @linkFieldHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste or type a link'**
+  String get linkFieldHint;
+
+  /// No description provided for @previewLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get previewLabel;
+
+  /// No description provided for @collectionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Collection'**
+  String get collectionLabel;
+
+  /// No description provided for @previewFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Found the title, summary and image'**
+  String get previewFound;
+
+  /// No description provided for @previewLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Getting the preview…'**
+  String get previewLoading;
+
+  /// No description provided for @previewFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn’t get a preview. Your link is saved, and you can add a title yourself.'**
+  String get previewFailed;
+
+  /// No description provided for @previewOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'You’re offline. We saved the link and will get the preview when you’re back online.'**
+  String get previewOffline;
+
+  /// No description provided for @invalidLink.
+  ///
+  /// In en, this message translates to:
+  /// **'That doesn’t look like a link. It should start with http:// or https://'**
+  String get invalidLink;
+
+  /// No description provided for @alreadySaved.
+  ///
+  /// In en, this message translates to:
+  /// **'You already saved this one'**
+  String get alreadySaved;
+
+  /// No description provided for @emptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save it now. Find it later.'**
+  String get emptyTitle;
+
+  /// No description provided for @emptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Share a link from any app, or paste one here. Your links stay on this phone.'**
+  String get emptyBody;
+
+  /// No description provided for @emptyCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'No links in this collection yet.'**
+  String get emptyCollection;
+
+  /// No description provided for @linkSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{domain} · {collection}'**
+  String linkSubtitle(String domain, String collection);
+
+  /// No description provided for @couldNotOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn’t open this link.'**
+  String get couldNotOpen;
 }
 
 class _AppLocalizationsDelegate

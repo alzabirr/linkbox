@@ -195,4 +195,58 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get tapCopy => 'লিংক কপি';
+
+  @override
+  String get addLinkTitle => 'একটি লিংক যোগ করুন';
+
+  @override
+  String get linkLabel => 'লিংক';
+
+  @override
+  String get linkFieldHint => 'লিংক পেস্ট করুন বা লিখুন';
+
+  @override
+  String get previewLabel => 'প্রিভিউ';
+
+  @override
+  String get collectionLabel => 'কালেকশন';
+
+  @override
+  String get previewFound => 'শিরোনাম, সারাংশ আর ছবি পাওয়া গেছে';
+
+  @override
+  String get previewLoading => 'প্রিভিউ আনা হচ্ছে…';
+
+  @override
+  String get previewFailed =>
+      'প্রিভিউ পাওয়া যায়নি। লিংকটি সেভ হয়েছে, আপনি নিজে শিরোনাম দিতে পারেন।';
+
+  @override
+  String get previewOffline =>
+      'আপনি অফলাইনে আছেন। লিংকটি সেভ হয়েছে, অনলাইনে এলে প্রিভিউ আনা হবে।';
+
+  @override
+  String get invalidLink =>
+      'এটা লিংকের মতো দেখাচ্ছে না। লিংক http:// বা https:// দিয়ে শুরু হয়।';
+
+  @override
+  String get alreadySaved => 'এই লিংকটি আগেই সেভ করেছেন';
+
+  @override
+  String get emptyTitle => 'এখন সেভ করুন। পরে খুঁজে নিন।';
+
+  @override
+  String get emptyBody =>
+      'যেকোনো অ্যাপ থেকে লিংক শেয়ার করুন, বা এখানে পেস্ট করুন। আপনার লিংক এই ফোনেই থাকে।';
+
+  @override
+  String get emptyCollection => 'এই কালেকশনে এখনো কোনো লিংক নেই।';
+
+  @override
+  String linkSubtitle(String domain, String collection) {
+    return '$domain · $collection';
+  }
+
+  @override
+  String get couldNotOpen => 'লিংকটি খোলা গেল না।';
 }

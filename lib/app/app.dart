@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../features/links/links_providers.dart';
 import '../features/settings/theme_settings.dart';
 import '../l10n/app_localizations.dart';
 import 'router.dart';
@@ -11,6 +12,8 @@ class LinkboxApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Finish previews left pending last time (e.g. saved offline).
+    ref.watch(startupProvider);
     final theme = ref.watch(themeSettingsProvider);
     return MaterialApp.router(
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,

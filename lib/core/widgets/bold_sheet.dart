@@ -7,6 +7,7 @@ import 'icon_box.dart';
 
 /// Opens [child] as a bottom sheet: paper background, top radius 28,
 /// 2.5 px top outline, 50 % ink scrim, 280 ms emphasized slide.
+/// A [tall] sheet starts 84 px below the top of the screen (06).
 Future<T?> showBoldSheet<T>(
   BuildContext context, {
   required WidgetBuilder builder,
@@ -16,17 +17,23 @@ Future<T?> showBoldSheet<T>(
   return showModalBottomSheet<T>(
     context: context,
     isScrollControlled: true,
-    useSafeArea: true,
+    // Cover the whole screen, bottom bar included.
+    useRootNavigator: true,
     sheetAnimationStyle: AnimationStyle(
       duration: reduce ? AppMotion.reduced : AppMotion.sheet,
       reverseDuration: reduce ? AppMotion.reduced : AppMotion.sheet,
       curve: AppMotion.emphasized,
     ),
     builder: (context) => tall
-        ? FractionallySizedBox(heightFactor: 1, child: builder(context))
+        ? SizedBox(
+            height: MediaQuery.sizeOf(context).height - _tallSheetTop,
+            child: builder(context),
+          )
         : builder(context),
   );
 }
+
+const _tallSheetTop = 84.0;
 
 /// Sheet body with the 44 × 5 grabber, a title and an optional close box.
 class BoldSheet extends StatelessWidget {
@@ -48,9 +55,11 @@ class BoldSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
+    final keyboard = MediaQuery.viewInsetsOf(context).bottom;
+    final navBar = MediaQuery.viewPaddingOf(context).bottom;
     return Padding(
       padding: padding.copyWith(
-          bottom: padding.bottom + MediaQuery.viewInsetsOf(context).bottom),
+          bottom: padding.bottom + (keyboard > navBar ? keyboard : navBar)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,

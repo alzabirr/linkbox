@@ -1,21 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../app/theme/tokens.dart';
+import '../../app/theme/typography.dart';
+import '../../core/models/collection_item.dart';
+import '../../core/models/link_item.dart';
+import '../../core/providers.dart';
+import '../../core/services/link_opener.dart';
 import '../../core/widgets/app_icon.dart';
 import '../../core/widgets/bold_button.dart';
 import '../../core/widgets/bold_chip.dart';
 import '../../core/widgets/bold_search_field.dart';
-import '../../core/widgets/coming_soon.dart';
 import '../../core/widgets/icon_box.dart';
+import '../../core/widgets/link_card.dart';
+import '../../core/widgets/link_tile.dart';
+import '../../core/widgets/mascot.dart';
 import '../../core/widgets/page_header.dart';
+import '../../core/widgets/scene_art.dart';
 import '../../l10n/app_localizations.dart';
+import 'add_link_sheet.dart';
+import 'links_providers.dart';
 
-/// Links tab (01). M0 shows only the frame; links arrive in M1.
-class HomePage extends StatelessWidget {
+/// Links tab: grid (01) or list (02).
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
+    final view = ref.watch(homeViewModeProvider);
+    final links = ref.watch(homeLinksProvider);
+    final collections = ref.watch(collectionsProvider).value ?? const [];
+    final filter = ref.watch(homeCollectionFilterProvider);
+    final total = ref.watch(linkCountProvider).value;
+    final isGrid = view == ViewMode.grid;
+    final duration =
+        AppMotion.reduce(context) ? AppMotion.reduced : AppMotion.swap;
+
+    Widget body;
+    if (total == 0) {
+      body = const _EmptyState();
+    } else {
+      final items = links.value ?? const <LinkItem>[];
+      body = items.isEmpty && links.hasValue
+          ? _NoLinksHere(text: l.emptyCollection)
+          : isGrid
+              ? _LinkGrid(links: items, collections: collections)
+              : _LinkList(links: items, collections: collections);
+    }
+
     return SafeArea(
       bottom: false,
       child: Stack(
@@ -27,35 +60,42 @@ class HomePage extends StatelessWidget {
                 title: l.homeTitle,
                 actions: [
                   IconBox(
-                      icon: AppIcons.sort,
-                      tooltip: l.sortTooltip,
-                      onPressed: () {}),
+                    icon: AppIcons.sort,
+                    tooltip: l.sortTooltip,
+                    onPressed: () {}, // Sort sheet arrives in M3.
+                  ),
                   IconBox(
-                    icon: AppIcons.list,
-                    tooltip: l.switchToList,
+                    icon: isGrid ? AppIcons.list : AppIcons.grid,
+                    iconSize: isGrid ? 22 : 20,
+                    tooltip: isGrid ? l.switchToList : l.switchToGrid,
                     kind: IconBoxKind.sun,
-                    onPressed: () {},
+                    onPressed: ref.read(homeViewModeProvider.notifier).toggle,
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                child: BoldSearchField(
-                  hint: l.searchHint,
-                  clearLabel: l.clearSearch,
-                  readOnly: true,
+              // The list view (02) has no search bar.
+              if (isGrid)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                  child: BoldSearchField(
+                    hint: l.searchHint,
+                    clearLabel: l.clearSearch,
+                    readOnly: true, // Search arrives in M3.
+                  ),
+                ),
+              _CollectionChips(
+                collections: collections,
+                selected: filter,
+                allLabel: l.chipAll,
+                onSelect:
+                    ref.read(homeCollectionFilterProvider.notifier).select,
+              ),
+              Expanded(
+                child: AnimatedSwitcher(
+                  duration: duration,
+                  child: KeyedSubtree(key: ValueKey(view), child: body),
                 ),
               ),
-              Padding(
-                // 14 / 4 in the mockup, minus the chip's 3 px touch padding.
-                padding: const EdgeInsets.fromLTRB(16, 11, 16, 1),
-                child: Row(
-                  children: [
-                    BoldChip(label: l.chipAll, selected: true, onTap: () {}),
-                  ],
-                ),
-              ),
-              const Expanded(child: ComingSoon(milestone: 'M1')),
             ],
           ),
           Positioned(
@@ -65,11 +105,220 @@ class HomePage extends StatelessWidget {
               label: l.addLink,
               icon: AppIcons.plus,
               size: BoldButtonSize.fab,
-              onPressed: () {},
+              onPressed: () => showAddLinkSheet(context, collectionId: filter),
             ),
           ),
         ],
       ),
     );
   }
+}
+
+class _CollectionChips extends StatelessWidget {
+  const _CollectionChips({
+    required this.collections,
+    required this.selected,
+    required this.allLabel,
+    required this.onSelect,
+  });
+
+  final List<CollectionItem> collections;
+  final int? selected;
+  final String allLabel;
+  final ValueChanged<int?> onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      // 38 chip + 3 px touch padding each side; mockup padding 14 / 4.
+      height: 44 + 11 + 1,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.fromLTRB(16, 11, 16, 1),
+        children: [
+          BoldChip(
+            label: allLabel,
+            selected: selected == null,
+            onTap: () => onSelect(null),
+          ),
+          for (final c in collections) ...[
+            const SizedBox(width: 8),
+            BoldChip(
+              label: c.name,
+              color: c.color,
+              selected: selected == c.id,
+              onTap: () => onSelect(c.id),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+/// Shared helpers for both views.
+mixin _LinkViewHelpers {
+  List<CollectionItem> get collections;
+
+  String? collectionName(LinkItem link) {
+    for (final c in collections) {
+      if (c.id == link.collectionId) return c.name;
+    }
+    return null;
+  }
+
+  String? kindLabel(AppLocalizations l, LinkKind kind) => switch (kind) {
+        LinkKind.video => l.kindVideo,
+        LinkKind.article => l.kindArticle,
+        LinkKind.post => l.kindPost,
+        LinkKind.other => null,
+      };
+
+  /// Until Quick look (M3), tapping a link opens it.
+  Future<void> open(BuildContext context, LinkItem link) async {
+    final ok = await openLink(link.url);
+    if (!ok && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context).couldNotOpen)));
+    }
+  }
+}
+
+// Leaves room under the last row for the Add link button.
+const _bottomPadding = 18.0 + AppSizes.fabHeight + 24;
+
+class _LinkGrid extends ConsumerWidget with _LinkViewHelpers {
+  const _LinkGrid({required this.links, required this.collections});
+
+  final List<LinkItem> links;
+  @override
+  final List<CollectionItem> collections;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    final rows = (links.length / 2).ceil();
+
+    Widget card(LinkItem link) => LinkCard(
+          key: ValueKey(link.id),
+          seed: link.url,
+          title: link.displayTitle,
+          domain: link.domain,
+          number: l.linkNumber(link.id.toString().padLeft(3, '0')),
+          collectionTag: collectionName(link),
+          kindLabel: kindLabel(l, link.kind),
+          kind: link.kind,
+          imageUrl: link.imageUrl,
+          state: switch (link.fetchStatus) {
+            FetchStatus.ok => LinkCardState.normal,
+            FetchStatus.pending => LinkCardState.loading,
+            FetchStatus.failed => LinkCardState.failed,
+          },
+          noPreviewLabel: l.noPreview,
+          retryLabel: l.tryAgain,
+          loadingLabel: l.gettingPreview,
+          onTap: () => open(context, link),
+          onRetry: () => ref.read(linkRepositoryProvider).retry(link.id),
+        );
+
+    return ListView.separated(
+      padding: const EdgeInsets.fromLTRB(16, 14, 18, _bottomPadding),
+      itemCount: rows,
+      separatorBuilder: (_, _) => const SizedBox(height: AppSizes.gridGap),
+      itemBuilder: (context, row) {
+        final a = links[row * 2];
+        final b = row * 2 + 1 < links.length ? links[row * 2 + 1] : null;
+        // Cards in a row share the same height, like the CSS grid.
+        return IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(child: card(a)),
+              const SizedBox(width: AppSizes.gridGap),
+              Expanded(child: b == null ? const SizedBox() : card(b)),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _LinkList extends ConsumerWidget with _LinkViewHelpers {
+  const _LinkList({required this.links, required this.collections});
+
+  final List<LinkItem> links;
+  @override
+  final List<CollectionItem> collections;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    return ListView.separated(
+      padding: const EdgeInsets.fromLTRB(16, 14, 18, _bottomPadding),
+      itemCount: links.length,
+      separatorBuilder: (_, _) => const SizedBox(height: AppSizes.listGap),
+      itemBuilder: (context, i) {
+        final link = links[i];
+        final name = collectionName(link);
+        return LinkTile(
+          key: ValueKey(link.id),
+          seed: link.url,
+          title: link.displayTitle,
+          subtitle:
+              name == null ? link.domain : l.linkSubtitle(link.domain, name),
+          kind: link.kind,
+          imageUrl: link.imageUrl,
+          moreLabel: l.moreOptions,
+          onTap: () => open(context, link),
+          onMore: () {}, // Link menu arrives in M3.
+        );
+      },
+    );
+  }
+}
+
+/// No links at all (simple version of 05; the full screen comes in M6).
+class _EmptyState extends StatelessWidget {
+  const _EmptyState();
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    final t = context.tokens;
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(30, 20, 30, _bottomPadding),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Mascot(MascotMood.happy, size: 110),
+            const SizedBox(height: 18),
+            Text(l.emptyTitle,
+                textAlign: TextAlign.center,
+                style: context.text.headlineMedium),
+            const SizedBox(height: 10),
+            Text(l.emptyBody,
+                textAlign: TextAlign.center,
+                style: AppText.body(15, height: 1.5, color: t.muted)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _NoLinksHere extends StatelessWidget {
+  const _NoLinksHere({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) => Center(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: _bottomPadding),
+          child: Text(text,
+              style: AppText.body(15, color: context.tokens.muted)),
+        ),
+      );
 }

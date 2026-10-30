@@ -324,4 +324,166 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get clipboardTitle => 'Save the link you copied?';
+
+  @override
+  String get sortTitle => 'Sort links';
+
+  @override
+  String get sortNewest => 'Newest first';
+
+  @override
+  String get sortOldest => 'Oldest first';
+
+  @override
+  String get sortAz => 'Name A–Z';
+
+  @override
+  String get sortZa => 'Name Z–A';
+
+  @override
+  String get allCollections => 'All collections';
+
+  @override
+  String get showLinksFrom => 'Show links from';
+
+  @override
+  String searchResultCount(int count, String query) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count links match “$query”',
+      one: '1 link matches “$query”',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noResultsTitle(String query) {
+    return 'No links match “$query”';
+  }
+
+  @override
+  String get noResultsBody =>
+      'Try a shorter word, or search part of the link itself.';
+
+  @override
+  String get searchLabel => 'Search links';
+
+  @override
+  String get open => 'Open';
+
+  @override
+  String get copy => 'Copy';
+
+  @override
+  String get share => 'Share';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get move => 'Move';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get linkCopied => 'Link copied';
+
+  @override
+  String get savedToday => 'Saved today';
+
+  @override
+  String get savedYesterday => 'Saved yesterday';
+
+  @override
+  String savedDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Saved $count days ago',
+      one: 'Saved 1 day ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String savedOnDate(String date) {
+    return 'Saved on $date';
+  }
+
+  @override
+  String get openInBrowser => 'Open in browser';
+
+  @override
+  String get copyLink => 'Copy link';
+
+  @override
+  String get moveToCollection => 'Move to collection';
+
+  @override
+  String deleteTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Delete $count links?',
+      one: 'Delete this link?',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String deleteBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'They’ll be removed from this phone. This can’t be undone unless you have a backup.',
+      one: 'It’ll be removed from this phone. This can’t be undone unless you have a backup.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String deletedLinks(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Deleted $count links',
+      one: 'Deleted 1 link',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get undo => 'Undo';
+
+  @override
+  String get editTitle => 'Edit link';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get changeImage => 'Change image';
+
+  @override
+  String get fetchAgain => 'Fetch again';
+
+  @override
+  String get titleLabel => 'Title';
+
+  @override
+  String get summaryLabel => 'Summary';
+
+  @override
+  String charCount(int count, int max) {
+    return '$count / $max';
+  }
+
+  @override
+  String get fetchFailed =>
+      'Couldn’t get a preview. You can still type a title yourself.';
+
+  @override
+  String get copied => 'Copied';
 }

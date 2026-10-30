@@ -24,8 +24,9 @@ class SegmentedPicker<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
-    final duration =
-        AppMotion.reduce(context) ? AppMotion.reduced : AppMotion.select;
+    final duration = AppMotion.reduce(context)
+        ? AppMotion.reduced
+        : AppMotion.select;
     final entries = options.entries.toList();
     return Semantics(
       label: label,
@@ -99,9 +100,11 @@ class _Segment extends StatelessWidget {
             label,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppText.body(13,
-                weight: selected ? FontWeight.w800 : FontWeight.w600,
-                color: selected ? AppColors.ink : t.text),
+            style: AppText.body(
+              13,
+              weight: selected ? FontWeight.w800 : FontWeight.w600,
+              color: selected ? AppColors.ink : t.text,
+            ),
           ),
         ),
       ),

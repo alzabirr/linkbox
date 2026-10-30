@@ -30,8 +30,13 @@ enum BoldButtonSize {
   medium(50, AppShape.rControlSm, 15, FontWeight.w800, AppShadows.offSm),
 
   /// 60 high, radius 20, 17 / 800.
-  large(AppSizes.buttonHeightLg, AppShape.rCard, 17, FontWeight.w800,
-      AppShadows.offMd),
+  large(
+    AppSizes.buttonHeightLg,
+    AppShape.rCard,
+    17,
+    FontWeight.w800,
+    AppShadows.offMd,
+  ),
 
   /// Share overlay buttons (22): 52 high, radius 16, 14 / 800.
   overlay(52, AppShape.rControlSm, 14, FontWeight.w800, AppShadows.offSm),
@@ -39,12 +44,30 @@ enum BoldButtonSize {
   /// Share overlay buttons (07): 54 high, radius 18, 15 / 800.
   overlayLarge(54, AppShape.rControl, 15, FontWeight.w800, AppShadows.offSm),
 
+  /// Header button (Edit link "Save"): 46 high, radius 14, 15 / 800.
+  header(AppSizes.iconBox, AppShape.rSmall, 15, FontWeight.w800,
+      AppShadows.offSm),
+
+  /// Dialog buttons (11): 56 high, radius 18, 16 / 800.
+  dialog(AppSizes.buttonHeight, AppShape.rControl, 16, FontWeight.w800,
+      AppShadows.offMd),
+
   /// "Add link" floating button: 58 high, radius 20, 16 / 700.
-  fab(AppSizes.fabHeight, AppShape.rCard, 16, FontWeight.w700,
-      AppShadows.offMd);
+  fab(
+    AppSizes.fabHeight,
+    AppShape.rCard,
+    16,
+    FontWeight.w700,
+    AppShadows.offMd,
+  );
 
   const BoldButtonSize(
-      this.height, this.radius, this.fontSize, this.weight, this.shadow);
+    this.height,
+    this.radius,
+    this.fontSize,
+    this.weight,
+    this.shadow,
+  );
   final double height;
   final double radius;
   final double fontSize;
@@ -94,10 +117,10 @@ class BoldButton extends StatelessWidget {
       BoldButtonKind.danger => (AppColors.danger, AppColors.ink),
       BoldButtonKind.dark => (t.selectedFill, t.onSelectedFill),
     };
-    final hasShadow = enabled &&
+    final hasShadow =
+        enabled &&
         (shadow ??
-            (kind == BoldButtonKind.primary ||
-                kind == BoldButtonKind.danger));
+            (kind == BoldButtonKind.primary || kind == BoldButtonKind.danger));
     final iconSize = switch (size) {
       BoldButtonSize.small => 16.0,
       BoldButtonSize.fab => 22.0,
@@ -109,18 +132,23 @@ class BoldButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (icon != null) ...[
-          AppIcon(icon!,
-              size: iconSize,
-              color: fg,
-              strokeWidth: size == BoldButtonSize.fab ? 3 : null),
-          const SizedBox(width: 8),
+          AppIcon(
+            icon!,
+            size: iconSize,
+            color: fg,
+            strokeWidth: size == BoldButtonSize.fab ? 3 : null,
+          ),
+          SizedBox(width: size == BoldButtonSize.fab ? 8 : 6),
         ],
         Flexible(
           child: Text(
             label,
             textAlign: TextAlign.center,
-            style: AppText.body(size.fontSize,
-                weight: weight ?? size.weight, color: fg),
+            style: AppText.body(
+              size.fontSize,
+              weight: weight ?? size.weight,
+              color: fg,
+            ),
           ),
         ),
         if (trailingIcon != null) ...[
@@ -144,12 +172,16 @@ class BoldButton extends StatelessWidget {
         padding: switch (size) {
           BoldButtonSize.small => const EdgeInsets.symmetric(horizontal: 14),
           BoldButtonSize.fab => const EdgeInsets.fromLTRB(16, 0, 22, 0),
+          BoldButtonSize.overlay ||
+          BoldButtonSize.overlayLarge =>
+            const EdgeInsets.symmetric(horizontal: 10),
           _ => const EdgeInsets.symmetric(horizontal: 20),
         },
         onTap: onPressed,
         child: ConstrainedBox(
           constraints: BoxConstraints(
-              minHeight: size.height - AppShape.stroke * 2),
+            minHeight: size.height - AppShape.stroke * 2,
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 6),
             child: Center(widthFactor: 1, child: content),

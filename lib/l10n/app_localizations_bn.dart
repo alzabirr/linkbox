@@ -325,4 +325,166 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get clipboardTitle => 'কপি করা লিংকটি সেভ করবেন?';
+
+  @override
+  String get sortTitle => 'লিংক সাজান';
+
+  @override
+  String get sortNewest => 'নতুনগুলো আগে';
+
+  @override
+  String get sortOldest => 'পুরনোগুলো আগে';
+
+  @override
+  String get sortAz => 'নাম A–Z';
+
+  @override
+  String get sortZa => 'নাম Z–A';
+
+  @override
+  String get allCollections => 'সব কালেকশন';
+
+  @override
+  String get showLinksFrom => 'যেখান থেকে লিংক দেখাবে';
+
+  @override
+  String searchResultCount(int count, String query) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '“$query”-এর সাথে $countটি লিংক মিলেছে',
+      one: '“$query”-এর সাথে ১টি লিংক মিলেছে',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String noResultsTitle(String query) {
+    return '“$query”-এর সাথে কোনো লিংক মেলেনি';
+  }
+
+  @override
+  String get noResultsBody =>
+      'ছোট কোনো শব্দ দিয়ে, বা লিংকের অংশ দিয়ে খুঁজে দেখুন।';
+
+  @override
+  String get searchLabel => 'লিংক খুঁজুন';
+
+  @override
+  String get open => 'খুলুন';
+
+  @override
+  String get copy => 'কপি';
+
+  @override
+  String get share => 'শেয়ার';
+
+  @override
+  String get edit => 'এডিট';
+
+  @override
+  String get move => 'সরান';
+
+  @override
+  String get delete => 'মুছুন';
+
+  @override
+  String get linkCopied => 'লিংক কপি হয়েছে';
+
+  @override
+  String get savedToday => 'আজ সেভ করা';
+
+  @override
+  String get savedYesterday => 'গতকাল সেভ করা';
+
+  @override
+  String savedDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count দিন আগে সেভ করা',
+      one: '১ দিন আগে সেভ করা',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String savedOnDate(String date) {
+    return '$date তারিখে সেভ করা';
+  }
+
+  @override
+  String get openInBrowser => 'ব্রাউজারে খুলুন';
+
+  @override
+  String get copyLink => 'লিংক কপি';
+
+  @override
+  String get moveToCollection => 'কালেকশনে সরান';
+
+  @override
+  String deleteTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countটি লিংক মুছবেন?',
+      one: 'এই লিংকটি মুছবেন?',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String deleteBody(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'এগুলো এই ফোন থেকে মুছে যাবে। ব্যাকআপ না থাকলে আর ফেরানো যাবে না।',
+      one: 'এটি এই ফোন থেকে মুছে যাবে। ব্যাকআপ না থাকলে আর ফেরানো যাবে না।',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String deletedLinks(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countটি লিংক মোছা হয়েছে',
+      one: '১টি লিংক মোছা হয়েছে',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get undo => 'ফেরান';
+
+  @override
+  String get editTitle => 'লিংক এডিট';
+
+  @override
+  String get save => 'সেভ';
+
+  @override
+  String get changeImage => 'ছবি বদলান';
+
+  @override
+  String get fetchAgain => 'আবার আনুন';
+
+  @override
+  String get titleLabel => 'শিরোনাম';
+
+  @override
+  String get summaryLabel => 'সারাংশ';
+
+  @override
+  String charCount(int count, int max) {
+    return '$count / $max';
+  }
+
+  @override
+  String get fetchFailed =>
+      'প্রিভিউ পাওয়া যায়নি। আপনি নিজে শিরোনাম লিখতে পারেন।';
+
+  @override
+  String get copied => 'কপি হয়েছে';
 }

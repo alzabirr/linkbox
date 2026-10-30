@@ -52,14 +52,19 @@ class SceneColors {
     return SceneColors(frame: frame, sky: sky, sun: sun, ground: ground);
   }
 
-  /// FNV-1a; unlike String.hashCode it is the same on every run.
+  /// FNV-1a plus a final mix, so links that differ only at the end (e.g.
+  /// two YouTube videos) still get different colors. Unlike
+  /// String.hashCode it is the same on every run.
   static int stableHash(String s) {
     var h = 0x811c9dc5;
     for (final c in s.codeUnits) {
       h ^= c;
-      h = (h * 0x01000193) & 0x7fffffff;
+      h = (h * 0x01000193) & 0xffffffff;
     }
-    return h;
+    h ^= h >> 16;
+    h = (h * 0x45d9f3b) & 0xffffffff;
+    h ^= h >> 16;
+    return h & 0x7fffffff;
   }
 }
 
@@ -97,8 +102,10 @@ class SceneArt extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.white,
                   shape: BoxShape.circle,
-                  border:
-                      Border.all(color: AppColors.ink, width: AppShape.stroke),
+                  border: Border.all(
+                    color: AppColors.ink,
+                    width: AppShape.stroke,
+                  ),
                 ),
                 child: Center(
                   child: AppIcon(
@@ -134,7 +141,9 @@ class _ScenePainter extends CustomPainter {
         : size.height / vh;
     canvas.save();
     canvas.translate(
-        (size.width - vw * scale) / 2, (size.height - vh * scale) / 2);
+      (size.width - vw * scale) / 2,
+      (size.height - vh * scale) / 2,
+    );
     canvas.scale(scale);
 
     final stroke = Paint()
@@ -152,15 +161,15 @@ class _ScenePainter extends CustomPainter {
     // Thumb: M-4 66 Q22 52 46 62 T96 58 V96 H-4Z
     final hill = square
         ? (Path()
-          ..moveTo(-4, 66)
-          ..quadraticBezierTo(22, 52, 46, 62)
-          ..quadraticBezierTo(70, 72, 96, 58)
-          ..lineTo(96, 96))
+            ..moveTo(-4, 66)
+            ..quadraticBezierTo(22, 52, 46, 62)
+            ..quadraticBezierTo(70, 72, 96, 58)
+            ..lineTo(96, 96))
         : (Path()
-          ..moveTo(-4, 70)
-          ..quadraticBezierTo(36, 52, 80, 66)
-          ..quadraticBezierTo(124, 80, 164, 60)
-          ..lineTo(164, 96));
+            ..moveTo(-4, 70)
+            ..quadraticBezierTo(36, 52, 80, 66)
+            ..quadraticBezierTo(124, 80, 164, 60)
+            ..lineTo(164, 96));
     hill
       ..lineTo(-4, 96)
       ..close();

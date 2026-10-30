@@ -97,7 +97,8 @@ class _BoldCardState extends State<BoldCard>
       if (widget.clip) {
         inner = ClipRRect(
           borderRadius: BorderRadius.circular(
-              (widget.radius - widget.stroke).clamp(0, double.infinity)),
+            (widget.radius - widget.stroke).clamp(0, double.infinity),
+          ),
           child: inner,
         );
       }
@@ -128,7 +129,10 @@ class _BoldCardState extends State<BoldCard>
               ),
               child: inner,
             );
-      return Transform.translate(offset: Offset(offset, offset), child: decorated);
+      return Transform.translate(
+        offset: Offset(offset, offset),
+        child: decorated,
+      );
     }
 
     if (!_interactive) return box(0);
@@ -147,8 +151,7 @@ class _BoldCardState extends State<BoldCard>
         onLongPress: widget.onLongPress,
         child: AnimatedBuilder(
           animation: _press,
-          builder: (context, _) =>
-              box(Curves.easeOut.transform(_press.value)),
+          builder: (context, _) => box(Curves.easeOut.transform(_press.value)),
         ),
       ),
     );
@@ -175,8 +178,9 @@ class DashedBorderPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final rect = (Offset.zero & size).deflate(stroke / 2);
     final path = Path()
-      ..addRRect(RRect.fromRectAndRadius(
-          rect, Radius.circular(radius - stroke / 2)));
+      ..addRRect(
+        RRect.fromRectAndRadius(rect, Radius.circular(radius - stroke / 2)),
+      );
     final paint = Paint()
       ..color = color
       ..style = PaintingStyle.stroke

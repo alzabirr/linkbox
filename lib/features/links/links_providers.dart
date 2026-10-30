@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/models/collection_item.dart';
 import '../../core/models/link_item.dart';
+import '../../core/models/link_sort.dart';
 import '../../core/providers.dart';
 
 part 'links_providers.g.dart';
@@ -38,11 +41,104 @@ class HomeCollectionFilter extends _$HomeCollectionFilter {
 Stream<List<CollectionItem>> collections(Ref ref) =>
     ref.watch(collectionRepositoryProvider).watchAll();
 
-/// Links shown on Home (respects the collection chip).
+/// Sort order, saved in settings (`sort`).
+@riverpod
+class LinkSortSetting extends _$LinkSortSetting {
+  static const _key = 'sort';
+
+  @override
+  LinkSort build() =>
+      LinkSort.values.asNameMap()[ref.watch(sharedPrefsProvider).getString(_key)] ??
+      LinkSort.newest;
+
+  void set(LinkSort sort) {
+    state = sort;
+    ref.read(sharedPrefsProvider).setString(_key, sort.name);
+  }
+}
+
+/// Links shown on Home (respects the collection chip and sort).
 @riverpod
 Stream<List<LinkItem>> homeLinks(Ref ref) {
   final filter = ref.watch(homeCollectionFilterProvider);
-  return ref.watch(linkRepositoryProvider).watchLinks(collectionId: filter);
+  final sort = ref.watch(linkSortSettingProvider);
+  return ref
+      .watch(linkRepositoryProvider)
+      .watchLinks(collectionId: filter, sort: sort);
+}
+
+/// Text typed on the search page (03).
+@riverpod
+class SearchQuery extends _$SearchQuery {
+  @override
+  String build() => '';
+
+  void set(String q) => state = q;
+}
+
+/// "All collections" pill on the search page; null = all.
+@riverpod
+class SearchCollection extends _$SearchCollection {
+  @override
+  int? build() => null;
+
+  void set(int? id) => state = id;
+}
+
+@riverpod
+Stream<List<LinkItem>> searchResults(Ref ref) => ref
+    .watch(linkRepositoryProvider)
+    .watchLinks(
+      collectionId: ref.watch(searchCollectionProvider),
+      sort: ref.watch(linkSortSettingProvider),
+      query: ref.watch(searchQueryProvider),
+    );
+
+/// One link, live; null once deleted.
+@riverpod
+Stream<LinkItem?> link(Ref ref, int id) =>
+    ref.watch(linkRepositoryProvider).watchLink(id);
+
+/// What the undo bar (29) shows.
+class PendingDelete {
+  const PendingDelete(this.ids, this.startedAt);
+  final List<int> ids;
+  final DateTime startedAt;
+}
+
+/// Soft delete + 5 s Undo, then the rows are removed for good.
+@Riverpod(keepAlive: true)
+class UndoDelete extends _$UndoDelete {
+  static const window = Duration(seconds: 5);
+  Timer? _timer;
+
+  @override
+  PendingDelete? build() {
+    ref.onDispose(() => _timer?.cancel());
+    return null;
+  }
+
+  Future<void> delete(List<int> ids) async {
+    final previous = state;
+    if (previous != null) await _purge(previous.ids);
+    await ref.read(linkRepositoryProvider).softDelete(ids);
+    state = PendingDelete(ids, DateTime.now());
+    _timer?.cancel();
+    _timer = Timer(window, () => _purge(ids));
+  }
+
+  Future<void> undo() async {
+    final pending = state;
+    if (pending == null) return;
+    _timer?.cancel();
+    state = null;
+    await ref.read(linkRepositoryProvider).undoDelete(pending.ids);
+  }
+
+  Future<void> _purge(List<int> ids) async {
+    if (state?.ids == ids) state = null;
+    await ref.read(linkRepositoryProvider).purgeDeleted(ids);
+  }
 }
 
 /// Total number of saved links (for the empty state).
@@ -52,10 +148,14 @@ Stream<int> linkCount(Ref ref) => ref
     .watchLinks()
     .map((links) => links.length);
 
-/// Runs once at start: finish previews that were left pending.
+/// Runs once at start: remove links deleted last time (Undo has expired)
+/// and finish previews that were left pending.
 @Riverpod(keepAlive: true)
-Future<void> startup(Ref ref) =>
-    ref.read(linkRepositoryProvider).resumePending();
+Future<void> startup(Ref ref) async {
+  final repo = ref.read(linkRepositoryProvider);
+  await repo.purgeDeleted();
+  await repo.resumePending();
+}
 
 /// Links per collection id (null key = no collection).
 @riverpod

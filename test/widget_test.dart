@@ -56,4 +56,12 @@ void main() {
     expect(a.sky, b.sky);
     expect(a.sky == a.ground, isFalse);
   });
+
+  test('similar links still get different card colors', () {
+    final frames = {
+      for (final id in ['a1', 'b2', 'c3', 'd4', 'e5', 'f6', 'g7', 'h8'])
+        SceneColors.of('https://youtube.com/shorts/$id').frame,
+    };
+    expect(frames.length, greaterThanOrEqualTo(3));
+  });
 }

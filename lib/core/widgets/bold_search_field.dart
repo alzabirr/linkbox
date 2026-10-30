@@ -65,8 +65,11 @@ class _BoldSearchFieldState extends State<BoldSearchField> {
     final t = context.tokens;
     final focused = _focus.hasFocus;
     final hasText = _controller.text.isNotEmpty;
-    final style = AppText.body(16,
-        weight: hasText ? FontWeight.w600 : FontWeight.w400, color: t.text);
+    final style = AppText.body(
+      16,
+      weight: hasText ? FontWeight.w600 : FontWeight.w400,
+      color: t.text,
+    );
 
     return AnimatedContainer(
       duration: AppMotion.press,
@@ -97,8 +100,11 @@ class _BoldSearchFieldState extends State<BoldSearchField> {
                 isCollapsed: true,
                 border: InputBorder.none,
                 hintText: widget.hint,
-                hintStyle: AppText.body(16,
-                    weight: FontWeight.w400, color: t.muted),
+                hintStyle: AppText.body(
+                  16,
+                  weight: FontWeight.w400,
+                  color: t.muted,
+                ),
               ),
             ),
           ),

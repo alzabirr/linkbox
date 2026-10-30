@@ -71,14 +71,17 @@ class BoldChip extends StatelessWidget {
         onTap: onTap,
         child: Padding(
           padding: EdgeInsets.symmetric(
-              vertical: ((AppSizes.minTouch - height) / 2).clamp(0, 10)),
+            vertical: ((AppSizes.minTouch - height) / 2).clamp(0, 10),
+          ),
           child: BoldCard(
             height: height,
             fill: fill,
             outline: outline,
             radius: height / 2,
             dashed: dashed,
-            padding: EdgeInsets.symmetric(horizontal: leading != null ? 14 : 16),
+            padding: EdgeInsets.symmetric(
+              horizontal: leading != null ? 14 : 16,
+            ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -89,11 +92,13 @@ class BoldChip extends StatelessWidget {
                 Text(
                   label,
                   maxLines: 1,
-                  style: AppText.body(14,
-                      weight: selected || dashed
-                          ? FontWeight.w700
-                          : FontWeight.w600,
-                      color: fg),
+                  style: AppText.body(
+                    14,
+                    weight: selected || dashed
+                        ? FontWeight.w700
+                        : FontWeight.w600,
+                    color: fg,
+                  ),
                 ),
               ],
             ),

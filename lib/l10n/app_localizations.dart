@@ -643,6 +643,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save the link you copied?'**
   String get clipboardTitle;
+
+  /// No description provided for @sortTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort links'**
+  String get sortTitle;
+
+  /// No description provided for @sortNewest.
+  ///
+  /// In en, this message translates to:
+  /// **'Newest first'**
+  String get sortNewest;
+
+  /// No description provided for @sortOldest.
+  ///
+  /// In en, this message translates to:
+  /// **'Oldest first'**
+  String get sortOldest;
+
+  /// No description provided for @sortAz.
+  ///
+  /// In en, this message translates to:
+  /// **'Name A–Z'**
+  String get sortAz;
+
+  /// No description provided for @sortZa.
+  ///
+  /// In en, this message translates to:
+  /// **'Name Z–A'**
+  String get sortZa;
+
+  /// No description provided for @allCollections.
+  ///
+  /// In en, this message translates to:
+  /// **'All collections'**
+  String get allCollections;
+
+  /// No description provided for @showLinksFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'Show links from'**
+  String get showLinksFrom;
+
+  /// No description provided for @searchResultCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 link matches “{query}”} other{{count} links match “{query}”}}'**
+  String searchResultCount(int count, String query);
+
+  /// No description provided for @noResultsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No links match “{query}”'**
+  String noResultsTitle(String query);
+
+  /// No description provided for @noResultsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a shorter word, or search part of the link itself.'**
+  String get noResultsBody;
+
+  /// No description provided for @searchLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Search links'**
+  String get searchLabel;
+
+  /// No description provided for @open.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get open;
+
+  /// No description provided for @copy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get copy;
+
+  /// No description provided for @share.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get share;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @move.
+  ///
+  /// In en, this message translates to:
+  /// **'Move'**
+  String get move;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @linkCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Link copied'**
+  String get linkCopied;
+
+  /// No description provided for @savedToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved today'**
+  String get savedToday;
+
+  /// No description provided for @savedYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved yesterday'**
+  String get savedYesterday;
+
+  /// No description provided for @savedDaysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Saved 1 day ago} other{Saved {count} days ago}}'**
+  String savedDaysAgo(int count);
+
+  /// No description provided for @savedOnDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved on {date}'**
+  String savedOnDate(String date);
+
+  /// No description provided for @openInBrowser.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in browser'**
+  String get openInBrowser;
+
+  /// No description provided for @copyLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy link'**
+  String get copyLink;
+
+  /// No description provided for @moveToCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to collection'**
+  String get moveToCollection;
+
+  /// No description provided for @deleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Delete this link?} other{Delete {count} links?}}'**
+  String deleteTitle(int count);
+
+  /// No description provided for @deleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{It’ll be removed from this phone. This can’t be undone unless you have a backup.} other{They’ll be removed from this phone. This can’t be undone unless you have a backup.}}'**
+  String deleteBody(int count);
+
+  /// No description provided for @deletedLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Deleted 1 link} other{Deleted {count} links}}'**
+  String deletedLinks(int count);
+
+  /// No description provided for @undo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undo;
+
+  /// No description provided for @editTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit link'**
+  String get editTitle;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @changeImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Change image'**
+  String get changeImage;
+
+  /// No description provided for @fetchAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Fetch again'**
+  String get fetchAgain;
+
+  /// No description provided for @titleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get titleLabel;
+
+  /// No description provided for @summaryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get summaryLabel;
+
+  /// No description provided for @charCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} / {max}'**
+  String charCount(int count, int max);
+
+  /// No description provided for @fetchFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn’t get a preview. You can still type a title yourself.'**
+  String get fetchFailed;
+
+  /// No description provided for @copied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied'**
+  String get copied;
 }
 
 class _AppLocalizationsDelegate

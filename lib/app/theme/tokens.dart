@@ -32,6 +32,7 @@ class AppColors {
   static const darkSurface = Color(0xFF141414);
   static const darkRaised = Color(0xFF1E1E1E);
   static const darkMuted = Color(0xFFC8C8C8);
+  static const inkTrack = Color(0xFF3A3A3A); // undo bar progress track
 
   /// Card frame / collection fills, picked by hash.
   static const cardFills = [pink, sky, sun, peach, mint, grape];

@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 
 import '../db/database.dart';
 import '../models/link_item.dart';
+import '../models/link_sort.dart';
 import '../services/metadata_parser.dart';
 import '../services/metadata_service.dart';
 import '../utils/url_normalizer.dart';
@@ -20,16 +21,83 @@ class LinkRepository {
   final MetadataService _metadata;
   final FetchQueue _queue;
 
-  /// Newest first; soft-deleted links are hidden. [collectionId] filters.
-  Stream<List<LinkItem>> watchLinks({int? collectionId}) {
-    final q = _db.select(_db.links)
-      ..where((l) => l.deletedAt.isNull())
-      ..orderBy([(l) => OrderingTerm.desc(l.createdAt), (l) => OrderingTerm.desc(l.id)]);
+  /// Soft-deleted links are hidden. [collectionId] filters; [query]
+  /// matches the title or the link (case-insensitive).
+  Stream<List<LinkItem>> watchLinks({
+    int? collectionId,
+    LinkSort sort = LinkSort.newest,
+    String query = '',
+  }) {
+    final q = _db.select(_db.links)..where((l) => l.deletedAt.isNull());
     if (collectionId != null) {
       q.where((l) => l.collectionId.equals(collectionId));
     }
+    final words = query.trim().toLowerCase();
+    if (words.isNotEmpty) {
+      final like = '%${words.replaceAll('%', r'\%').replaceAll('_', r'\_')}%';
+      q.where((l) =>
+          l.title.lower().like(like) |
+          l.url.lower().like(like) |
+          l.domain.like(like));
+    }
+    // Links without a title sort by their address.
+    final name = coalesce<String>([_db.links.title, _db.links.domain]).lower();
+    q.orderBy([
+      switch (sort) {
+        LinkSort.newest => (l) => OrderingTerm.desc(l.createdAt),
+        LinkSort.oldest => (l) => OrderingTerm.asc(l.createdAt),
+        LinkSort.az => (_) => OrderingTerm.asc(name),
+        LinkSort.za => (_) => OrderingTerm.desc(name),
+      },
+      (l) => sort == LinkSort.oldest
+          ? OrderingTerm.asc(l.id)
+          : OrderingTerm.desc(l.id),
+    ]);
     return q.watch().map((rows) => rows.map(_toItem).toList());
   }
+
+  /// One link, live (Quick look, Edit). Null once it is deleted.
+  Stream<LinkItem?> watchLink(int id) => (_db.select(_db.links)
+        ..where((l) => l.id.equals(id) & l.deletedAt.isNull()))
+      .watchSingleOrNull()
+      .map((r) => r == null ? null : _toItem(r));
+
+  /// Saves the Edit link page (08).
+  Future<void> updateDetails(
+    int id, {
+    required String? title,
+    required String? description,
+    required String? imageUrl,
+    required String? customImagePath,
+  }) =>
+      (_db.update(_db.links)..where((l) => l.id.equals(id))).write(
+        LinksCompanion(
+          title: Value(_blankToNull(title)),
+          description: Value(_blankToNull(description)),
+          imageUrl: Value(imageUrl),
+          customImagePath: Value(customImagePath),
+          fetchStatus: Value(FetchStatus.ok.name),
+          updatedAt: Value(DateTime.now().toUtc()),
+        ),
+      );
+
+  /// Hides links at once; [purgeDeleted] removes them for good.
+  Future<void> softDelete(List<int> ids) =>
+      (_db.update(_db.links)..where((l) => l.id.isIn(ids))).write(
+          LinksCompanion(deletedAt: Value(DateTime.now().toUtc())));
+
+  /// "Undo" on the undo bar (29).
+  Future<void> undoDelete(List<int> ids) =>
+      (_db.update(_db.links)..where((l) => l.id.isIn(ids)))
+          .write(const LinksCompanion(deletedAt: Value(null)));
+
+  /// Deletes soft-deleted rows ([ids], or all of them on app start).
+  Future<void> purgeDeleted([List<int>? ids]) =>
+      (_db.delete(_db.links)
+            ..where((l) => ids == null
+                ? l.deletedAt.isNotNull()
+                : l.deletedAt.isNotNull() & l.id.isIn(ids)))
+          .go();
 
   Future<LinkItem?> findByUrl(String url) async {
     final row = await (_db.select(_db.links)
@@ -122,6 +190,11 @@ class LinkRepository {
     for (final r in rows) {
       _queueFetch(r.id, r.url);
     }
+  }
+
+  static String? _blankToNull(String? s) {
+    final t = s?.trim();
+    return t == null || t.isEmpty ? null : t;
   }
 
   /// A shared subject that is just the link again is not a title.

@@ -166,12 +166,70 @@ final class CollectionsProvider
 
 String _$collectionsHash() => r'd43329a4e213c63f054b6a4abc4bccc67d31ab7a';
 
-/// Links shown on Home (respects the collection chip).
+/// Sort order, saved in settings (`sort`).
+
+@ProviderFor(LinkSortSetting)
+final linkSortSettingProvider = LinkSortSettingProvider._();
+
+/// Sort order, saved in settings (`sort`).
+final class LinkSortSettingProvider
+    extends $NotifierProvider<LinkSortSetting, LinkSort> {
+  /// Sort order, saved in settings (`sort`).
+  LinkSortSettingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'linkSortSettingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$linkSortSettingHash();
+
+  @$internal
+  @override
+  LinkSortSetting create() => LinkSortSetting();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(LinkSort value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<LinkSort>(value),
+    );
+  }
+}
+
+String _$linkSortSettingHash() => r'54002311801e303ae4558e4b7f7cfa3052093ed9';
+
+/// Sort order, saved in settings (`sort`).
+
+abstract class _$LinkSortSetting extends $Notifier<LinkSort> {
+  LinkSort build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<LinkSort, LinkSort>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<LinkSort, LinkSort>,
+              LinkSort,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+/// Links shown on Home (respects the collection chip and sort).
 
 @ProviderFor(homeLinks)
 final homeLinksProvider = HomeLinksProvider._();
 
-/// Links shown on Home (respects the collection chip).
+/// Links shown on Home (respects the collection chip and sort).
 
 final class HomeLinksProvider
     extends
@@ -181,7 +239,7 @@ final class HomeLinksProvider
           Stream<List<LinkItem>>
         >
     with $FutureModifier<List<LinkItem>>, $StreamProvider<List<LinkItem>> {
-  /// Links shown on Home (respects the collection chip).
+  /// Links shown on Home (respects the collection chip and sort).
   HomeLinksProvider._()
     : super(
         from: null,
@@ -208,7 +266,295 @@ final class HomeLinksProvider
   }
 }
 
-String _$homeLinksHash() => r'643c02c247e16b307ca36606057b7d3a442a5317';
+String _$homeLinksHash() => r'121c18a4a4ac945f05ed9b8fc86df8da465f4202';
+
+/// Text typed on the search page (03).
+
+@ProviderFor(SearchQuery)
+final searchQueryProvider = SearchQueryProvider._();
+
+/// Text typed on the search page (03).
+final class SearchQueryProvider extends $NotifierProvider<SearchQuery, String> {
+  /// Text typed on the search page (03).
+  SearchQueryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'searchQueryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$searchQueryHash();
+
+  @$internal
+  @override
+  SearchQuery create() => SearchQuery();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(String value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<String>(value),
+    );
+  }
+}
+
+String _$searchQueryHash() => r'75b81792dd41a5682b782c6d689b882be21e5f73';
+
+/// Text typed on the search page (03).
+
+abstract class _$SearchQuery extends $Notifier<String> {
+  String build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<String, String>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<String, String>,
+              String,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+/// "All collections" pill on the search page; null = all.
+
+@ProviderFor(SearchCollection)
+final searchCollectionProvider = SearchCollectionProvider._();
+
+/// "All collections" pill on the search page; null = all.
+final class SearchCollectionProvider
+    extends $NotifierProvider<SearchCollection, int?> {
+  /// "All collections" pill on the search page; null = all.
+  SearchCollectionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'searchCollectionProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$searchCollectionHash();
+
+  @$internal
+  @override
+  SearchCollection create() => SearchCollection();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(int? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<int?>(value),
+    );
+  }
+}
+
+String _$searchCollectionHash() => r'3e15536c82037dbd665f843df413245cadbe04a5';
+
+/// "All collections" pill on the search page; null = all.
+
+abstract class _$SearchCollection extends $Notifier<int?> {
+  int? build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<int?, int?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<int?, int?>,
+              int?,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(searchResults)
+final searchResultsProvider = SearchResultsProvider._();
+
+final class SearchResultsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<LinkItem>>,
+          List<LinkItem>,
+          Stream<List<LinkItem>>
+        >
+    with $FutureModifier<List<LinkItem>>, $StreamProvider<List<LinkItem>> {
+  SearchResultsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'searchResultsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$searchResultsHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<List<LinkItem>> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<List<LinkItem>> create(Ref ref) {
+    return searchResults(ref);
+  }
+}
+
+String _$searchResultsHash() => r'5a7fb74a436c17ae0a7032a21d3d91ffb76aa232';
+
+/// One link, live; null once deleted.
+
+@ProviderFor(link)
+final linkProvider = LinkFamily._();
+
+/// One link, live; null once deleted.
+
+final class LinkProvider
+    extends
+        $FunctionalProvider<AsyncValue<LinkItem?>, LinkItem?, Stream<LinkItem?>>
+    with $FutureModifier<LinkItem?>, $StreamProvider<LinkItem?> {
+  /// One link, live; null once deleted.
+  LinkProvider._({required LinkFamily super.from, required int super.argument})
+    : super(
+        retry: null,
+        name: r'linkProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$linkHash();
+
+  @override
+  String toString() {
+    return r'linkProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $StreamProviderElement<LinkItem?> $createElement($ProviderPointer pointer) =>
+      $StreamProviderElement(pointer);
+
+  @override
+  Stream<LinkItem?> create(Ref ref) {
+    final argument = this.argument as int;
+    return link(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is LinkProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$linkHash() => r'e5150517d495596cd5684af0e0d3ccf551289b57';
+
+/// One link, live; null once deleted.
+
+final class LinkFamily extends $Family
+    with $FunctionalFamilyOverride<Stream<LinkItem?>, int> {
+  LinkFamily._()
+    : super(
+        retry: null,
+        name: r'linkProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// One link, live; null once deleted.
+
+  LinkProvider call(int id) => LinkProvider._(argument: id, from: this);
+
+  @override
+  String toString() => r'linkProvider';
+}
+
+/// Soft delete + 5 s Undo, then the rows are removed for good.
+
+@ProviderFor(UndoDelete)
+final undoDeleteProvider = UndoDeleteProvider._();
+
+/// Soft delete + 5 s Undo, then the rows are removed for good.
+final class UndoDeleteProvider
+    extends $NotifierProvider<UndoDelete, PendingDelete?> {
+  /// Soft delete + 5 s Undo, then the rows are removed for good.
+  UndoDeleteProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'undoDeleteProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$undoDeleteHash();
+
+  @$internal
+  @override
+  UndoDelete create() => UndoDelete();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(PendingDelete? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<PendingDelete?>(value),
+    );
+  }
+}
+
+String _$undoDeleteHash() => r'e9b84592beeab849e92c3e1d1df96754187e8847';
+
+/// Soft delete + 5 s Undo, then the rows are removed for good.
+
+abstract class _$UndoDelete extends $Notifier<PendingDelete?> {
+  PendingDelete? build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<PendingDelete?, PendingDelete?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<PendingDelete?, PendingDelete?>,
+              PendingDelete?,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
 
 /// Total number of saved links (for the empty state).
 
@@ -248,17 +594,20 @@ final class LinkCountProvider
 
 String _$linkCountHash() => r'5575a143e0732cc8168e1273ff3521f3c74e83c9';
 
-/// Runs once at start: finish previews that were left pending.
+/// Runs once at start: remove links deleted last time (Undo has expired)
+/// and finish previews that were left pending.
 
 @ProviderFor(startup)
 final startupProvider = StartupProvider._();
 
-/// Runs once at start: finish previews that were left pending.
+/// Runs once at start: remove links deleted last time (Undo has expired)
+/// and finish previews that were left pending.
 
 final class StartupProvider
     extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
     with $FutureModifier<void>, $FutureProvider<void> {
-  /// Runs once at start: finish previews that were left pending.
+  /// Runs once at start: remove links deleted last time (Undo has expired)
+  /// and finish previews that were left pending.
   StartupProvider._()
     : super(
         from: null,
@@ -284,7 +633,7 @@ final class StartupProvider
   }
 }
 
-String _$startupHash() => r'da16e0a6baf365124e200d7e6a5fd4c7ba23ba96';
+String _$startupHash() => r'ec10cd2225490f64d71961c49419dd07c9cd5790';
 
 /// Links per collection id (null key = no collection).
 

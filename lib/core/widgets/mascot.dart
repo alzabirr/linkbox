@@ -59,10 +59,9 @@ class _BodyColorMapper extends ColorMapper {
     String elementName,
     String attributeName,
     Color color,
-  ) =>
-      elementName == 'path' && attributeName == 'fill' && color == from
-          ? to
-          : color;
+  ) => elementName == 'path' && attributeName == 'fill' && color == from
+      ? to
+      : color;
 
   @override
   bool operator ==(Object other) =>

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/theme/tokens.dart';
@@ -6,6 +5,7 @@ import '../../app/theme/typography.dart';
 import 'app_icon.dart';
 import 'bold_button.dart';
 import 'bold_card.dart';
+import 'link_picture.dart';
 import 'scene_art.dart';
 
 enum LinkCardState { normal, loading, failed }
@@ -24,6 +24,7 @@ class LinkCard extends StatelessWidget {
     this.kindLabel,
     this.kind = LinkKind.article,
     this.imageUrl,
+    this.imageFile,
     this.state = LinkCardState.normal,
     this.selecting = false,
     this.selected = false,
@@ -50,6 +51,9 @@ class LinkCard extends StatelessWidget {
   final String? kindLabel;
   final LinkKind kind;
   final String? imageUrl;
+
+  /// The user's own picture (Edit link); wins over [imageUrl].
+  final String? imageFile;
   final LinkCardState state;
 
   /// Multi-select mode is on.
@@ -72,8 +76,9 @@ class LinkCard extends StatelessWidget {
     final plain = state != LinkCardState.normal;
     final fill = plain ? t.surface : colors.frame;
     final ink = plain ? t.text : AppColors.ink;
-    final duration =
-        AppMotion.reduce(context) ? AppMotion.reduced : AppMotion.select;
+    final duration = AppMotion.reduce(context)
+        ? AppMotion.reduced
+        : AppMotion.select;
 
     final card = BoldCard(
       fill: fill,
@@ -97,10 +102,12 @@ class LinkCard extends StatelessWidget {
             const SizedBox(height: 7),
             switch (state) {
               LinkCardState.normal => _Picture(
-                  height: _pictureHeight,
-                  seed: seed,
-                  kind: kind,
-                  imageUrl: imageUrl),
+                height: _pictureHeight,
+                seed: seed,
+                kind: kind,
+                imageUrl: imageUrl,
+                imageFile: imageFile,
+              ),
               LinkCardState.failed => _NoPreview(label: noPreviewLabel),
               LinkCardState.loading => const _Striped(),
             },
@@ -142,8 +149,12 @@ class LinkCard extends StatelessWidget {
                 title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: AppText.body(14,
-                    weight: FontWeight.w700, height: 1.3, color: ink),
+                style: AppText.body(
+                  14,
+                  weight: FontWeight.w700,
+                  height: 1.3,
+                  color: ink,
+                ),
               ),
             ),
           ),
@@ -153,11 +164,16 @@ class LinkCard extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(domain,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppText.body(11,
-                          weight: FontWeight.w600, color: ink)),
+                  child: Text(
+                    domain,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppText.body(
+                      11,
+                      weight: FontWeight.w600,
+                      color: ink,
+                    ),
+                  ),
                 ),
                 Text(number, style: AppText.cardTag(color: ink)),
               ],
@@ -172,8 +188,12 @@ class LinkCard extends StatelessWidget {
               title,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: AppText.body(13,
-                  weight: FontWeight.w700, height: 1.3, color: ink),
+              style: AppText.body(
+                13,
+                weight: FontWeight.w700,
+                height: 1.3,
+                color: ink,
+              ),
             ),
           ),
           const SizedBox(height: 7),
@@ -189,16 +209,16 @@ class LinkCard extends StatelessWidget {
         ];
       case LinkCardState.loading:
         Widget bar(double f) => FractionallySizedBox(
-              alignment: Alignment.centerLeft,
-              widthFactor: f,
-              child: Container(
-                height: 12,
-                decoration: BoxDecoration(
-                  color: t.sandDeep,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-              ),
-            );
+          alignment: Alignment.centerLeft,
+          widthFactor: f,
+          child: Container(
+            height: 12,
+            decoration: BoxDecoration(
+              color: t.sandDeep,
+              borderRadius: BorderRadius.circular(6),
+            ),
+          ),
+        );
         return [
           bar(0.9),
           const SizedBox(height: 7),
@@ -206,9 +226,10 @@ class LinkCard extends StatelessWidget {
           const SizedBox(height: 7),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 2),
-            child: Text(loadingLabel,
-                style: AppText.body(12,
-                    weight: FontWeight.w600, color: t.muted)),
+            child: Text(
+              loadingLabel,
+              style: AppText.body(12, weight: FontWeight.w600, color: t.muted),
+            ),
           ),
         ];
     }
@@ -245,9 +266,14 @@ class _TagRow extends StatelessWidget {
                 stroke: AppShape.strokeThin,
                 radius: AppShape.rBadge,
               ),
-              child: Text(kindLabel!,
-                  style: AppText.body(11,
-                      weight: FontWeight.w700, color: AppColors.ink)),
+              child: Text(
+                kindLabel!,
+                style: AppText.body(
+                  11,
+                  weight: FontWeight.w700,
+                  color: AppColors.ink,
+                ),
+              ),
             ),
         ],
       ),
@@ -262,12 +288,14 @@ class _Picture extends StatelessWidget {
     required this.seed,
     required this.kind,
     this.imageUrl,
+    this.imageFile,
   });
 
   final double height;
   final String seed;
   final LinkKind kind;
   final String? imageUrl;
+  final String? imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -281,18 +309,12 @@ class _Picture extends StatelessWidget {
         radius: AppShape.rSmall,
       ),
       child: ClipRRect(
-        borderRadius:
-            BorderRadius.circular(AppShape.rSmall - AppShape.stroke),
-        child: imageUrl == null
-            ? scene
-            : CachedNetworkImage(
-                imageUrl: imageUrl!,
-                fit: BoxFit.cover,
-                fadeInDuration: AppMotion.select,
-                fadeOutDuration: Duration.zero,
-                placeholder: (_, _) => const ColoredBox(color: AppColors.sand),
-                errorWidget: (_, _, _) => scene,
-              ),
+        borderRadius: BorderRadius.circular(AppShape.rSmall - AppShape.stroke),
+        child: LinkPicture(
+          fallback: scene,
+          imageUrl: imageUrl,
+          filePath: imageFile,
+        ),
       ),
     );
   }
@@ -316,9 +338,10 @@ class _NoPreview extends StatelessWidget {
         children: [
           AppIcon(AppIcons.linkOff, size: 18, color: t.text),
           const SizedBox(width: 6),
-          Text(label,
-              style:
-                  AppText.body(12, weight: FontWeight.w700, color: t.text)),
+          Text(
+            label,
+            style: AppText.body(12, weight: FontWeight.w700, color: t.text),
+          ),
         ],
       ),
     );
@@ -360,8 +383,11 @@ class _StripePainter extends CustomPainter {
     // Stripes run bottom-left → top-right, 20 px period across them.
     const period = 20 * 1.4142;
     for (var x = -size.height; x < size.width + size.height; x += period) {
-      canvas.drawLine(Offset(x, size.height + 10),
-          Offset(x + size.height + 20, -10), paint);
+      canvas.drawLine(
+        Offset(x, size.height + 10),
+        Offset(x + size.height + 20, -10),
+        paint,
+      );
     }
   }
 
@@ -394,8 +420,12 @@ class _CheckBadge extends StatelessWidget {
           scale: on ? 1 : 0.6,
           curve: Curves.easeOutBack,
           child: const Center(
-            child: AppIcon(AppIcons.check,
-                size: 15, color: AppColors.white, strokeWidth: 3.6),
+            child: AppIcon(
+              AppIcons.check,
+              size: 15,
+              color: AppColors.white,
+              strokeWidth: 3.6,
+            ),
           ),
         ),
       ),

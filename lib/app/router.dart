@@ -6,7 +6,10 @@ import '../core/widgets/main_nav_bar.dart';
 import '../features/collections/collections_page.dart';
 import '../features/dev/widget_gallery_page.dart';
 import '../features/links/clipboard_prompt.dart';
+import '../features/links/edit_link_page.dart';
 import '../features/links/home_page.dart';
+import '../features/links/search_page.dart';
+import '../features/links/undo_bar.dart';
 import '../features/settings/settings_page.dart';
 import '../l10n/app_localizations.dart';
 
@@ -17,6 +20,9 @@ class Routes {
   static const collections = '/collections';
   static const settings = '/settings';
   static const gallery = '/gallery';
+  static const search = '/search';
+
+  static String editLink(int id) => '/link/$id/edit';
 }
 
 final appRouter = GoRouter(
@@ -45,11 +51,25 @@ final appRouter = GoRouter(
         ]),
       ],
     ),
-    // linkbox://open/link/<id> (share overlay "Open saved link").
-    // Opens Home for now; Quick look (04) arrives in M3.
+    // linkbox://open/link/<id> (share overlay "Open saved link"):
+    // Home opens that link's Quick look.
     GoRoute(
       path: '/link/:id',
-      redirect: (context, state) => Routes.links,
+      redirect: (context, state) =>
+          state.uri.path.endsWith('/edit')
+              ? null
+              : '${Routes.links}?open=${state.pathParameters['id']}',
+      routes: [
+        GoRoute(
+          path: 'edit',
+          builder: (context, state) => EditLinkPage(
+              linkId: int.parse(state.pathParameters['id']!)),
+        ),
+      ],
+    ),
+    GoRoute(
+      path: Routes.search,
+      builder: (context, state) => const SearchPage(),
     ),
     GoRoute(
       path: Routes.gallery,
@@ -68,7 +88,14 @@ class _TabShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     return Scaffold(
-      body: ClipboardPromptHost(child: shell),
+      body: ClipboardPromptHost(
+        child: Stack(
+          children: [
+            shell,
+            const Positioned(left: 14, right: 16, bottom: 14, child: UndoBar()),
+          ],
+        ),
+      ),
       bottomNavigationBar: MainNavBar(
         currentIndex: shell.currentIndex,
         onTap: (i) => shell.goBranch(i, initialLocation: i == shell.currentIndex),

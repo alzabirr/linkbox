@@ -34,7 +34,8 @@ class MainNavBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: t.isDark ? t.background : t.surface,
         border: Border(
-            top: BorderSide(color: t.outline, width: AppShape.stroke)),
+          top: BorderSide(color: t.outline, width: AppShape.stroke),
+        ),
       ),
       child: Row(
         children: [
@@ -66,8 +67,9 @@ class _NavButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
-    final duration =
-        AppMotion.reduce(context) ? AppMotion.reduced : AppMotion.select;
+    final duration = AppMotion.reduce(context)
+        ? AppMotion.reduced
+        : AppMotion.select;
     return Semantics(
       button: true,
       selected: active,
@@ -88,9 +90,7 @@ class _NavButton extends StatelessWidget {
                 color: active ? AppColors.sun : Colors.transparent,
                 borderRadius: BorderRadius.circular(AppSizes.navPillH / 2),
                 border: Border.all(
-                  color: active && !t.isDark
-                      ? t.outline
-                      : Colors.transparent,
+                  color: active && !t.isDark ? t.outline : Colors.transparent,
                   width: AppShape.strokeThin,
                 ),
               ),
@@ -107,9 +107,11 @@ class _NavButton extends StatelessWidget {
             Text(
               item.label,
               maxLines: 1,
-              style: AppText.body(12,
-                  weight: active ? FontWeight.w700 : FontWeight.w600,
-                  color: active ? t.text : t.muted),
+              style: AppText.body(
+                12,
+                weight: active ? FontWeight.w700 : FontWeight.w600,
+                color: active ? t.text : t.muted,
+              ),
             ),
           ],
         ),

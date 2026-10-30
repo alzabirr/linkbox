@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/theme/tokens.dart';
 import '../../app/theme/typography.dart';
 import 'app_icon.dart';
 import 'bold_card.dart';
+import 'link_picture.dart';
 import 'scene_art.dart';
 
 /// List row: 52 px thumb, 1-line title, "domain · collection", ⋮ button.
@@ -18,6 +18,7 @@ class LinkTile extends StatelessWidget {
     required this.moreLabel,
     this.kind = LinkKind.article,
     this.imageUrl,
+    this.imageFile,
     this.highlight,
     this.onTap,
     this.onLongPress,
@@ -34,6 +35,7 @@ class LinkTile extends StatelessWidget {
   final String moreLabel;
   final LinkKind kind;
   final String? imageUrl;
+  final String? imageFile;
   final String? highlight;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
@@ -43,8 +45,7 @@ class LinkTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final frame = SceneColors.of(seed).frame;
-    final titleStyle =
-        AppText.body(15, weight: FontWeight.w700, color: t.text);
+    final titleStyle = AppText.body(15, weight: FontWeight.w700, color: t.text);
 
     final thumb = Container(
       width: AppSizes.listThumb,
@@ -55,19 +56,22 @@ class LinkTile extends StatelessWidget {
         outline: AppColors.ink,
         radius: AppShape.rThumb,
       ),
-      child: imageUrl == null
+      child: imageUrl == null && imageFile == null
           ? Center(
               child: AppIcon(
-                  kind == LinkKind.video ? AppIcons.play : AppIcons.lines,
-                  size: 20,
-                  color: AppColors.ink))
+                kind == LinkKind.video ? AppIcons.play : AppIcons.lines,
+                size: 20,
+                color: AppColors.ink,
+              ),
+            )
           : ClipRRect(
-              borderRadius:
-                  BorderRadius.circular(AppShape.rThumb - AppShape.stroke),
-              child: CachedNetworkImage(
-                imageUrl: imageUrl!,
-                fit: BoxFit.cover,
-                errorWidget: (_, _, _) => const SizedBox.shrink(),
+              borderRadius: BorderRadius.circular(
+                AppShape.rThumb - AppShape.stroke,
+              ),
+              child: LinkPicture(
+                imageUrl: imageUrl,
+                filePath: imageFile,
+                fallback: const SizedBox.shrink(),
               ),
             ),
     );
@@ -75,7 +79,7 @@ class LinkTile extends StatelessWidget {
     return BoldCard(
       radius: AppShape.rControl,
       shadow: AppShadows.offSm,
-      padding: const EdgeInsets.fromLTRB(8, 8, 4, 8),
+      padding: EdgeInsets.fromLTRB(8, 8, onMore == null ? 10 : 4, 8),
       onTap: onTap,
       onLongPress: onLongPress,
       semanticLabel: '$title, $subtitle',
@@ -105,25 +109,27 @@ class LinkTile extends StatelessWidget {
               ),
             ),
           ),
-          Tooltip(
-            message: moreLabel,
-            child: Semantics(
-              button: true,
-              label: moreLabel,
-              onTap: onMore,
-              excludeSemantics: true,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
+          if (onMore != null)
+            Tooltip(
+              message: moreLabel,
+              child: Semantics(
+                button: true,
+                label: moreLabel,
                 onTap: onMore,
-                child: SizedBox(
-                  width: AppSizes.minTouch,
-                  height: AppSizes.minTouch,
-                  child: Center(
-                      child: AppIcon(AppIcons.more, size: 20, color: t.text)),
+                excludeSemantics: true,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: onMore,
+                  child: SizedBox(
+                    width: AppSizes.minTouch,
+                    height: AppSizes.minTouch,
+                    child: Center(
+                      child: AppIcon(AppIcons.more, size: 20, color: t.text),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -132,6 +138,10 @@ class LinkTile extends StatelessWidget {
   static TextSpan _highlighted(String text, String? query, TextStyle style) {
     final q = query?.trim().toLowerCase() ?? '';
     if (q.isEmpty) return TextSpan(text: text, style: style);
+    // A match far into a long title would hide behind the "…": start the
+    // row a little before it instead.
+    final at = text.toLowerCase().indexOf(q);
+    if (at > 24) text = '…${text.substring(at - 12)}';
     final lower = text.toLowerCase();
     final mark = AppText.weight(style, FontWeight.w800).copyWith(
       color: AppColors.ink,

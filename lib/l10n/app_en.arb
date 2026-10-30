@@ -169,5 +169,105 @@
       }
     }
   },
-  "clipboardTitle": "Save the link you copied?"
+  "clipboardTitle": "Save the link you copied?",
+  "sortTitle": "Sort links",
+  "sortNewest": "Newest first",
+  "sortOldest": "Oldest first",
+  "sortAz": "Name A–Z",
+  "sortZa": "Name Z–A",
+  "allCollections": "All collections",
+  "showLinksFrom": "Show links from",
+  "searchResultCount": "{count, plural, =1{1 link matches “{query}”} other{{count} links match “{query}”}}",
+  "@searchResultCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "noResultsTitle": "No links match “{query}”",
+  "@noResultsTitle": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "noResultsBody": "Try a shorter word, or search part of the link itself.",
+  "searchLabel": "Search links",
+  "open": "Open",
+  "copy": "Copy",
+  "share": "Share",
+  "edit": "Edit",
+  "move": "Move",
+  "delete": "Delete",
+  "linkCopied": "Link copied",
+  "savedToday": "Saved today",
+  "savedYesterday": "Saved yesterday",
+  "savedDaysAgo": "{count, plural, =1{Saved 1 day ago} other{Saved {count} days ago}}",
+  "@savedDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "savedOnDate": "Saved on {date}",
+  "@savedOnDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "openInBrowser": "Open in browser",
+  "copyLink": "Copy link",
+  "moveToCollection": "Move to collection",
+  "deleteTitle": "{count, plural, =1{Delete this link?} other{Delete {count} links?}}",
+  "@deleteTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "deleteBody": "{count, plural, =1{It’ll be removed from this phone. This can’t be undone unless you have a backup.} other{They’ll be removed from this phone. This can’t be undone unless you have a backup.}}",
+  "deletedLinks": "{count, plural, =1{Deleted 1 link} other{Deleted {count} links}}",
+  "@deletedLinks": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "undo": "Undo",
+  "editTitle": "Edit link",
+  "save": "Save",
+  "changeImage": "Change image",
+  "fetchAgain": "Fetch again",
+  "titleLabel": "Title",
+  "summaryLabel": "Summary",
+  "charCount": "{count} / {max}",
+  "@charCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "fetchFailed": "Couldn’t get a preview. You can still type a title yourself.",
+  "@deleteBody": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "copied": "Copied"
 }

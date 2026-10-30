@@ -61,7 +61,7 @@ final class AddLinkControllerProvider
   }
 }
 
-String _$addLinkControllerHash() => r'2420b5d8dca0e0ef0ca80244327f06f69c2e1363';
+String _$addLinkControllerHash() => r'41a72174182b1c4b2270fc6fa894f9045ffb57df';
 
 /// State of the Add link sheet (06): validation, live preview, collection.
 

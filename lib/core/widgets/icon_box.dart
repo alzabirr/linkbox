@@ -41,8 +41,8 @@ class IconBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final isSun = kind == IconBoxKind.sun;
-    final bg = fill ??
-        (isSun ? AppColors.sun : (t.isDark ? t.background : t.surface));
+    final bg =
+        fill ?? (isSun ? AppColors.sun : (t.isDark ? t.background : t.surface));
     final fg = (isSun || fill != null) ? AppColors.ink : t.text;
     return Tooltip(
       message: tooltip,
@@ -58,7 +58,9 @@ class IconBox extends StatelessWidget {
           radius: radius,
           shadow: isSun ? AppShadows.offSm : 0,
           onTap: onPressed,
-          child: Center(child: AppIcon(icon, size: iconSize, color: fg)),
+          child: Center(
+            child: AppIcon(icon, size: iconSize, color: fg),
+          ),
         ),
       ),
     );

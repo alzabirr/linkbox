@@ -20,8 +20,9 @@ class BoldSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
-    final duration =
-        AppMotion.reduce(context) ? AppMotion.reduced : AppMotion.select;
+    final duration = AppMotion.reduce(context)
+        ? AppMotion.reduced
+        : AppMotion.select;
     const inset = 3.0;
     return Semantics(
       toggled: value,
@@ -47,8 +48,7 @@ class BoldSwitch extends StatelessWidget {
               child: AnimatedAlign(
                 duration: duration,
                 curve: Curves.easeOut,
-                alignment:
-                    value ? Alignment.centerRight : Alignment.centerLeft,
+                alignment: value ? Alignment.centerRight : Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: inset),
                   child: Container(

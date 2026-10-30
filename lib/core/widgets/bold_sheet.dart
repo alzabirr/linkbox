@@ -59,7 +59,8 @@ class BoldSheet extends StatelessWidget {
     final navBar = MediaQuery.viewPaddingOf(context).bottom;
     return Padding(
       padding: padding.copyWith(
-          bottom: padding.bottom + (keyboard > navBar ? keyboard : navBar)),
+        bottom: padding.bottom + (keyboard > navBar ? keyboard : navBar),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -79,9 +80,11 @@ class BoldSheet extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: Text(title!,
-                      style: context.text.headlineMedium,
-                      semanticsLabel: title),
+                  child: Text(
+                    title!,
+                    style: context.text.headlineMedium,
+                    semanticsLabel: title,
+                  ),
                 ),
                 if (closeLabel != null)
                   IconBox(

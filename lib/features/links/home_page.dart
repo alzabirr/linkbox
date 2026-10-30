@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../app/theme/tokens.dart';
 import '../../app/theme/typography.dart';
 import '../../core/models/collection_item.dart';
 import '../../core/models/link_item.dart';
 import '../../core/providers.dart';
-import '../../core/services/link_opener.dart';
 import '../../core/widgets/app_icon.dart';
 import '../../core/widgets/bold_button.dart';
 import '../../core/widgets/bold_chip.dart';
@@ -18,7 +18,11 @@ import '../../core/widgets/mascot.dart';
 import '../../core/widgets/page_header.dart';
 import '../../core/widgets/scene_art.dart';
 import '../../l10n/app_localizations.dart';
+import '../../app/router.dart';
 import 'add_link_sheet.dart';
+import 'link_menu_sheet.dart';
+import 'quick_look_sheet.dart';
+import 'sort_sheet.dart';
 import 'links_providers.dart';
 
 /// Links tab: grid (01) or list (02).
@@ -36,6 +40,17 @@ class HomePage extends ConsumerWidget {
     final isGrid = view == ViewMode.grid;
     final duration =
         AppMotion.reduce(context) ? AppMotion.reduced : AppMotion.swap;
+
+    // Opened from the share overlay: /links?open=<id> → Quick look.
+    final open = int.tryParse(
+        GoRouterState.of(context).uri.queryParameters['open'] ?? '');
+    if (open != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!context.mounted) return;
+        context.go(Routes.links);
+        showQuickLook(context, open);
+      });
+    }
 
     Widget body;
     if (total == 0) {
@@ -62,7 +77,7 @@ class HomePage extends ConsumerWidget {
                   IconBox(
                     icon: AppIcons.sort,
                     tooltip: l.sortTooltip,
-                    onPressed: () {}, // Sort sheet arrives in M3.
+                    onPressed: () => showSortSheet(context, ref),
                   ),
                   IconBox(
                     icon: isGrid ? AppIcons.list : AppIcons.grid,
@@ -80,7 +95,8 @@ class HomePage extends ConsumerWidget {
                   child: BoldSearchField(
                     hint: l.searchHint,
                     clearLabel: l.clearSearch,
-                    readOnly: true, // Search arrives in M3.
+                    readOnly: true,
+                    onTap: () => context.push(Routes.search),
                   ),
                 ),
               _CollectionChips(
@@ -174,14 +190,9 @@ mixin _LinkViewHelpers {
         LinkKind.other => null,
       };
 
-  /// Until Quick look (M3), tapping a link opens it.
-  Future<void> open(BuildContext context, LinkItem link) async {
-    final ok = await openLink(link.url);
-    if (!ok && context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).couldNotOpen)));
-    }
-  }
+  /// Tap action (Settings in M6; Quick look by default).
+  void open(BuildContext context, LinkItem link) =>
+      showQuickLook(context, link.id);
 }
 
 // Leaves room under the last row for the Add link button.
@@ -209,6 +220,7 @@ class _LinkGrid extends ConsumerWidget with _LinkViewHelpers {
           kindLabel: kindLabel(l, link.kind),
           kind: link.kind,
           imageUrl: link.imageUrl,
+          imageFile: link.customImagePath,
           state: switch (link.fetchStatus) {
             FetchStatus.ok => LinkCardState.normal,
             FetchStatus.pending => LinkCardState.loading,
@@ -269,9 +281,10 @@ class _LinkList extends ConsumerWidget with _LinkViewHelpers {
               name == null ? link.domain : l.linkSubtitle(link.domain, name),
           kind: link.kind,
           imageUrl: link.imageUrl,
+          imageFile: link.customImagePath,
           moreLabel: l.moreOptions,
           onTap: () => open(context, link),
-          onMore: () {}, // Link menu arrives in M3.
+          onMore: () => showLinkMenu(context, link),
         );
       },
     );

@@ -22,6 +22,7 @@ import '../../app/router.dart';
 import 'add_link_sheet.dart';
 import 'link_menu_sheet.dart';
 import 'quick_look_sheet.dart';
+import 'selection_bars.dart';
 import 'sort_sheet.dart';
 import 'links_providers.dart';
 
@@ -38,12 +39,16 @@ class HomePage extends ConsumerWidget {
     final filter = ref.watch(homeCollectionFilterProvider);
     final total = ref.watch(linkCountProvider).value;
     final isGrid = view == ViewMode.grid;
-    final duration =
-        AppMotion.reduce(context) ? AppMotion.reduced : AppMotion.swap;
+    final selecting = ref.watch(selectionProvider).isNotEmpty;
+    final items = links.value ?? const <LinkItem>[];
+    final duration = AppMotion.reduce(context)
+        ? AppMotion.reduced
+        : AppMotion.swap;
 
     // Opened from the share overlay: /links?open=<id> → Quick look.
     final open = int.tryParse(
-        GoRouterState.of(context).uri.queryParameters['open'] ?? '');
+      GoRouterState.of(context).uri.queryParameters['open'] ?? '',
+    );
     if (open != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!context.mounted) return;
@@ -56,75 +61,97 @@ class HomePage extends ConsumerWidget {
     if (total == 0) {
       body = const _EmptyState();
     } else {
-      final items = links.value ?? const <LinkItem>[];
       body = items.isEmpty && links.hasValue
           ? _NoLinksHere(text: l.emptyCollection)
           : isGrid
-              ? _LinkGrid(links: items, collections: collections)
-              : _LinkList(links: items, collections: collections);
+          ? _LinkGrid(links: items, collections: collections)
+          : _LinkList(links: items, collections: collections);
     }
 
-    return SafeArea(
-      bottom: false,
-      child: Stack(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              PageHeader(
-                title: l.homeTitle,
-                actions: [
-                  IconBox(
-                    icon: AppIcons.sort,
-                    tooltip: l.sortTooltip,
-                    onPressed: () => showSortSheet(context, ref),
+    return PopScope(
+      canPop: !selecting,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) ref.read(selectionProvider.notifier).clear();
+      },
+      child: SafeArea(
+        bottom: false,
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (selecting) ...[
+                  SelectionTopBar(visible: items),
+                  const SizedBox(height: 4),
+                ] else ...[
+                  PageHeader(
+                    title: l.homeTitle,
+                    actions: [
+                      IconBox(
+                        icon: AppIcons.sort,
+                        tooltip: l.sortTooltip,
+                        onPressed: () => showSortSheet(context, ref),
+                      ),
+                      IconBox(
+                        icon: isGrid ? AppIcons.list : AppIcons.grid,
+                        iconSize: isGrid ? 22 : 20,
+                        tooltip: isGrid ? l.switchToList : l.switchToGrid,
+                        kind: IconBoxKind.sun,
+                        onPressed: ref
+                            .read(homeViewModeProvider.notifier)
+                            .toggle,
+                      ),
+                    ],
                   ),
-                  IconBox(
-                    icon: isGrid ? AppIcons.list : AppIcons.grid,
-                    iconSize: isGrid ? 22 : 20,
-                    tooltip: isGrid ? l.switchToList : l.switchToGrid,
-                    kind: IconBoxKind.sun,
-                    onPressed: ref.read(homeViewModeProvider.notifier).toggle,
+                  // The list view (02) has no search bar.
+                  if (isGrid)
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                      child: BoldSearchField(
+                        hint: l.searchHint,
+                        clearLabel: l.clearSearch,
+                        readOnly: true,
+                        onTap: () => context.push(Routes.search),
+                      ),
+                    ),
+                  _CollectionChips(
+                    collections: collections,
+                    selected: filter,
+                    allLabel: l.chipAll,
+                    onSelect: ref
+                        .read(homeCollectionFilterProvider.notifier)
+                        .select,
                   ),
                 ],
-              ),
-              // The list view (02) has no search bar.
-              if (isGrid)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                  child: BoldSearchField(
-                    hint: l.searchHint,
-                    clearLabel: l.clearSearch,
-                    readOnly: true,
-                    onTap: () => context.push(Routes.search),
+                Expanded(
+                  child: AnimatedSwitcher(
+                    duration: duration,
+                    child: KeyedSubtree(key: ValueKey(view), child: body),
                   ),
                 ),
-              _CollectionChips(
-                collections: collections,
-                selected: filter,
-                allLabel: l.chipAll,
-                onSelect:
-                    ref.read(homeCollectionFilterProvider.notifier).select,
-              ),
-              Expanded(
-                child: AnimatedSwitcher(
-                  duration: duration,
-                  child: KeyedSubtree(key: ValueKey(view), child: body),
+              ],
+            ),
+            if (selecting)
+              Positioned(
+                left: 16,
+                right: 16,
+                bottom: 14,
+                child: SelectionToolbar(visible: items),
+              )
+            else
+              Positioned(
+                right: 18,
+                bottom: 18,
+                child: BoldButton(
+                  label: l.addLink,
+                  icon: AppIcons.plus,
+                  size: BoldButtonSize.fab,
+                  onPressed: () =>
+                      showAddLinkSheet(context, collectionId: filter),
                 ),
               ),
-            ],
-          ),
-          Positioned(
-            right: 18,
-            bottom: 18,
-            child: BoldButton(
-              label: l.addLink,
-              icon: AppIcons.plus,
-              size: BoldButtonSize.fab,
-              onPressed: () => showAddLinkSheet(context, collectionId: filter),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -184,11 +211,11 @@ mixin _LinkViewHelpers {
   }
 
   String? kindLabel(AppLocalizations l, LinkKind kind) => switch (kind) {
-        LinkKind.video => l.kindVideo,
-        LinkKind.article => l.kindArticle,
-        LinkKind.post => l.kindPost,
-        LinkKind.other => null,
-      };
+    LinkKind.video => l.kindVideo,
+    LinkKind.article => l.kindArticle,
+    LinkKind.post => l.kindPost,
+    LinkKind.other => null,
+  };
 
   /// Tap action (Settings in M6; Quick look by default).
   void open(BuildContext context, LinkItem link) =>
@@ -209,29 +236,35 @@ class _LinkGrid extends ConsumerWidget with _LinkViewHelpers {
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
     final rows = (links.length / 2).ceil();
+    final selected = ref.watch(selectionProvider);
+    final selecting = selected.isNotEmpty;
+    final sel = ref.read(selectionProvider.notifier);
 
     Widget card(LinkItem link) => LinkCard(
-          key: ValueKey(link.id),
-          seed: link.url,
-          title: link.displayTitle,
-          domain: link.domain,
-          number: l.linkNumber(link.id.toString().padLeft(3, '0')),
-          collectionTag: collectionName(link),
-          kindLabel: kindLabel(l, link.kind),
-          kind: link.kind,
-          imageUrl: link.imageUrl,
-          imageFile: link.customImagePath,
-          state: switch (link.fetchStatus) {
-            FetchStatus.ok => LinkCardState.normal,
-            FetchStatus.pending => LinkCardState.loading,
-            FetchStatus.failed => LinkCardState.failed,
-          },
-          noPreviewLabel: l.noPreview,
-          retryLabel: l.tryAgain,
-          loadingLabel: l.gettingPreview,
-          onTap: () => open(context, link),
-          onRetry: () => ref.read(linkRepositoryProvider).retry(link.id),
-        );
+      key: ValueKey(link.id),
+      seed: link.url,
+      title: link.displayTitle,
+      domain: link.domain,
+      number: l.linkNumber(link.id.toString().padLeft(3, '0')),
+      collectionTag: collectionName(link),
+      kindLabel: kindLabel(l, link.kind),
+      kind: link.kind,
+      imageUrl: link.imageUrl,
+      imageFile: link.customImagePath,
+      state: switch (link.fetchStatus) {
+        FetchStatus.ok => LinkCardState.normal,
+        FetchStatus.pending => LinkCardState.loading,
+        FetchStatus.failed => LinkCardState.failed,
+      },
+      noPreviewLabel: l.noPreview,
+      retryLabel: l.tryAgain,
+      loadingLabel: l.gettingPreview,
+      selecting: selecting,
+      selected: selected.contains(link.id),
+      onTap: selecting ? () => sel.toggle(link.id) : () => open(context, link),
+      onLongPress: selecting ? null : () => sel.start(link.id),
+      onRetry: () => ref.read(linkRepositoryProvider).retry(link.id),
+    );
 
     return ListView.separated(
       padding: const EdgeInsets.fromLTRB(16, 14, 18, _bottomPadding),
@@ -266,6 +299,9 @@ class _LinkList extends ConsumerWidget with _LinkViewHelpers {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
+    final selected = ref.watch(selectionProvider);
+    final selecting = selected.isNotEmpty;
+    final sel = ref.read(selectionProvider.notifier);
     return ListView.separated(
       padding: const EdgeInsets.fromLTRB(16, 14, 18, _bottomPadding),
       itemCount: links.length,
@@ -277,13 +313,19 @@ class _LinkList extends ConsumerWidget with _LinkViewHelpers {
           key: ValueKey(link.id),
           seed: link.url,
           title: link.displayTitle,
-          subtitle:
-              name == null ? link.domain : l.linkSubtitle(link.domain, name),
+          subtitle: name == null
+              ? link.domain
+              : l.linkSubtitle(link.domain, name),
           kind: link.kind,
           imageUrl: link.imageUrl,
           imageFile: link.customImagePath,
           moreLabel: l.moreOptions,
-          onTap: () => open(context, link),
+          selecting: selecting,
+          selected: selected.contains(link.id),
+          onTap: selecting
+              ? () => sel.toggle(link.id)
+              : () => open(context, link),
+          onLongPress: selecting ? null : () => sel.start(link.id),
           onMore: () => showLinkMenu(context, link),
         );
       },
@@ -307,13 +349,17 @@ class _EmptyState extends StatelessWidget {
           children: [
             const Mascot(MascotMood.happy, size: 110),
             const SizedBox(height: 18),
-            Text(l.emptyTitle,
-                textAlign: TextAlign.center,
-                style: context.text.headlineMedium),
+            Text(
+              l.emptyTitle,
+              textAlign: TextAlign.center,
+              style: context.text.headlineMedium,
+            ),
             const SizedBox(height: 10),
-            Text(l.emptyBody,
-                textAlign: TextAlign.center,
-                style: AppText.body(15, height: 1.5, color: t.muted)),
+            Text(
+              l.emptyBody,
+              textAlign: TextAlign.center,
+              style: AppText.body(15, height: 1.5, color: t.muted),
+            ),
           ],
         ),
       ),
@@ -328,10 +374,9 @@ class _NoLinksHere extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Center(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: _bottomPadding),
-          child: Text(text,
-              style: AppText.body(15, color: context.tokens.muted)),
-        ),
-      );
+    child: Padding(
+      padding: const EdgeInsets.only(bottom: _bottomPadding),
+      child: Text(text, style: AppText.body(15, color: context.tokens.muted)),
+    ),
+  );
 }

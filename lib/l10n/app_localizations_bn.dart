@@ -487,4 +487,271 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get copied => 'কপি হয়েছে';
+
+  @override
+  String get newShort => 'নতুন';
+
+  @override
+  String get newCollectionTitle => 'নতুন কালেকশন';
+
+  @override
+  String get editCollectionTitle => 'কালেকশন এডিট';
+
+  @override
+  String get createCollection => 'কালেকশন তৈরি করুন';
+
+  @override
+  String get saveChanges => 'পরিবর্তন সেভ করুন';
+
+  @override
+  String get nameLabel => 'নাম';
+
+  @override
+  String get namePlaceholder => 'ভ্রমণ, রান্না, পরে পড়ব…';
+
+  @override
+  String get colorLabel => 'রং';
+
+  @override
+  String get iconLabel => 'আইকন';
+
+  @override
+  String previewMeta(String links) {
+    return '$links · প্রিভিউ';
+  }
+
+  @override
+  String get duplicateCollectionName => 'এই নামে আপনার আগেই একটি কালেকশন আছে';
+
+  @override
+  String get createACollection => 'একটি কালেকশন তৈরি করুন';
+
+  @override
+  String get newCollection => 'নতুন কালেকশন';
+
+  @override
+  String get allLinks => 'সব লিংক';
+
+  @override
+  String updatedWhen(String when) {
+    return 'আপডেট: $when';
+  }
+
+  @override
+  String get whenToday => 'আজ';
+
+  @override
+  String get whenYesterday => 'গতকাল';
+
+  @override
+  String whenDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count দিন আগে',
+      one: '১ দিন আগে',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get whenLastWeek => 'গত সপ্তাহে';
+
+  @override
+  String whenWeeksAgo(int count) {
+    return '$count সপ্তাহ আগে';
+  }
+
+  @override
+  String get whenNever => 'কখনো না';
+
+  @override
+  String collectionMeta(String links, String when) {
+    return '$links · আপডেট: $when';
+  }
+
+  @override
+  String addToCollection(String name) {
+    return '$name-এ যোগ করুন';
+  }
+
+  @override
+  String searchIn(String name) {
+    return '$name-এ খুঁজুন';
+  }
+
+  @override
+  String get collectionOptions => 'কালেকশন অপশন';
+
+  @override
+  String get optRename => 'নাম বদলান';
+
+  @override
+  String get optRenameSub => 'কালেকশনের নাম বদলান';
+
+  @override
+  String get optColor => 'রং ও আইকন';
+
+  @override
+  String get optColorSub => 'সহজে চেনার জন্য';
+
+  @override
+  String get optPin => 'উপরে পিন করুন';
+
+  @override
+  String get optUnpin => 'পিন সরান';
+
+  @override
+  String get optPinSub => 'কালেকশন আর হোমে সবার আগে দেখাবে';
+
+  @override
+  String get optShare => 'সব লিংক শেয়ার করুন';
+
+  @override
+  String optShareSub(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countটি লিংক তালিকা করে পাঠান',
+      one: 'লিংকটি পাঠান',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get optDelete => 'কালেকশন মুছুন';
+
+  @override
+  String get optDeleteSub =>
+      'লিংকগুলো “কোনো কালেকশন নয়”-এ যাবে, কিছুই হারাবে না';
+
+  @override
+  String deleteCollectionTitle(String name) {
+    return '“$name” মুছবেন?';
+  }
+
+  @override
+  String get keepIt => 'রেখে দিন';
+
+  @override
+  String get colorPink => 'গোলাপি';
+
+  @override
+  String get colorBlue => 'নীল';
+
+  @override
+  String get colorYellow => 'হলুদ';
+
+  @override
+  String get colorGreen => 'সবুজ';
+
+  @override
+  String get colorPurple => 'বেগুনি';
+
+  @override
+  String get colorPeach => 'পিচ';
+
+  @override
+  String get iconPlane => 'প্লেন';
+
+  @override
+  String get iconStar => 'তারা';
+
+  @override
+  String get iconCode => 'কোড';
+
+  @override
+  String get iconBook => 'বই';
+
+  @override
+  String get iconHome => 'বাড়ি';
+
+  @override
+  String get iconMusic => 'গান';
+
+  @override
+  String selectedCount(int count) {
+    return '$countটি বাছাই করা';
+  }
+
+  @override
+  String get selectAll => 'সব বাছুন';
+
+  @override
+  String get cancelSelection => 'বাছাই বাতিল';
+
+  @override
+  String get selectMore => 'আরও বাছুন';
+
+  @override
+  String get iconHeart => 'হৃদয়';
+
+  @override
+  String get iconVideo => 'ভিডিও';
+
+  @override
+  String get iconCamera => 'ক্যামেরা';
+
+  @override
+  String get iconGame => 'গেম';
+
+  @override
+  String get iconFood => 'খাবার';
+
+  @override
+  String get iconCoffee => 'কফি';
+
+  @override
+  String get iconBag => 'কেনাকাটা';
+
+  @override
+  String get iconGift => 'উপহার';
+
+  @override
+  String get iconWork => 'কাজ';
+
+  @override
+  String get iconSchool => 'পড়াশোনা';
+
+  @override
+  String get iconIdea => 'আইডিয়া';
+
+  @override
+  String get iconNews => 'খবর';
+
+  @override
+  String get iconFitness => 'ফিটনেস';
+
+  @override
+  String get iconLeaf => 'প্রকৃতি';
+
+  @override
+  String get iconPlace => 'জায়গা';
+
+  @override
+  String get iconGlobe => 'বিশ্ব';
+
+  @override
+  String get iconCar => 'গাড়ি';
+
+  @override
+  String get iconPeople => 'মানুষ';
+
+  @override
+  String get colorOrange => 'কমলা';
+
+  @override
+  String get colorLime => 'লেবু সবুজ';
+
+  @override
+  String get colorTeal => 'টিল';
+
+  @override
+  String get colorCoral => 'প্রবাল';
+
+  @override
+  String get colorLilac => 'হালকা বেগুনি';
+
+  @override
+  String get colorSand => 'বালু';
 }

@@ -13,6 +13,7 @@ import '../../core/widgets/bold_card.dart';
 import '../../core/widgets/bold_chip.dart';
 import '../../core/widgets/bold_sheet.dart';
 import '../../core/widgets/scene_art.dart';
+import '../collections/collection_sheet.dart';
 import '../../l10n/app_localizations.dart';
 import 'add_link_controller.dart';
 import 'links_providers.dart';
@@ -120,7 +121,14 @@ class _AddLinkSheetState extends ConsumerState<AddLinkSheet> {
                     collections: collections,
                     selected: state.collectionId,
                     noneLabel: l.chipNone,
+                    newLabel: l.chipNew,
                     onSelect: ref.read(_provider.notifier).selectCollection,
+                    onNew: () async {
+                      final id = await showCollectionSheet(context);
+                      if (id != null) {
+                        ref.read(_provider.notifier).selectCollection(id);
+                      }
+                    },
                   ),
                   const SizedBox(height: 18),
                 ],
@@ -374,13 +382,17 @@ class _CollectionPicker extends StatelessWidget {
     required this.collections,
     required this.selected,
     required this.noneLabel,
+    required this.newLabel,
     required this.onSelect,
+    required this.onNew,
   });
 
   final List<CollectionItem> collections;
   final int? selected;
   final String noneLabel;
+  final String newLabel;
   final ValueChanged<int?> onSelect;
+  final VoidCallback onNew;
 
   @override
   Widget build(BuildContext context) {
@@ -404,6 +416,13 @@ class _CollectionPicker extends StatelessWidget {
             showCheck: true,
             onTap: () => onSelect(c.id),
           ),
+        BoldChip(
+          label: newLabel,
+          height: 40,
+          dashed: true,
+          icon: AppIcons.plus,
+          onTap: onNew,
+        ),
       ],
     );
   }

@@ -486,4 +486,271 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get copied => 'Copied';
+
+  @override
+  String get newShort => 'New';
+
+  @override
+  String get newCollectionTitle => 'New collection';
+
+  @override
+  String get editCollectionTitle => 'Edit collection';
+
+  @override
+  String get createCollection => 'Create collection';
+
+  @override
+  String get saveChanges => 'Save changes';
+
+  @override
+  String get nameLabel => 'Name';
+
+  @override
+  String get namePlaceholder => 'Travel, Recipes, Read later…';
+
+  @override
+  String get colorLabel => 'Color';
+
+  @override
+  String get iconLabel => 'Icon';
+
+  @override
+  String previewMeta(String links) {
+    return '$links · preview';
+  }
+
+  @override
+  String get duplicateCollectionName =>
+      'You already have a collection with this name';
+
+  @override
+  String get createACollection => 'Create a collection';
+
+  @override
+  String get newCollection => 'New collection';
+
+  @override
+  String get allLinks => 'All links';
+
+  @override
+  String updatedWhen(String when) {
+    return 'Updated $when';
+  }
+
+  @override
+  String get whenToday => 'today';
+
+  @override
+  String get whenYesterday => 'yesterday';
+
+  @override
+  String whenDaysAgo(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days ago',
+      one: '1 day ago',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get whenLastWeek => 'last week';
+
+  @override
+  String whenWeeksAgo(int count) {
+    return '$count weeks ago';
+  }
+
+  @override
+  String get whenNever => 'never';
+
+  @override
+  String collectionMeta(String links, String when) {
+    return '$links · updated $when';
+  }
+
+  @override
+  String addToCollection(String name) {
+    return 'Add to $name';
+  }
+
+  @override
+  String searchIn(String name) {
+    return 'Search in $name';
+  }
+
+  @override
+  String get collectionOptions => 'Collection options';
+
+  @override
+  String get optRename => 'Rename';
+
+  @override
+  String get optRenameSub => 'Change the collection’s name';
+
+  @override
+  String get optColor => 'Color & icon';
+
+  @override
+  String get optColorSub => 'Make it easy to spot';
+
+  @override
+  String get optPin => 'Pin to top';
+
+  @override
+  String get optUnpin => 'Unpin';
+
+  @override
+  String get optPinSub => 'Show first in Collections and on Home';
+
+  @override
+  String get optShare => 'Share all links';
+
+  @override
+  String optShareSub(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Send the $count links as a list',
+      one: 'Send the link',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get optDelete => 'Delete collection';
+
+  @override
+  String get optDeleteSub => 'Links move to “No collection”, nothing is lost';
+
+  @override
+  String deleteCollectionTitle(String name) {
+    return 'Delete “$name”?';
+  }
+
+  @override
+  String get keepIt => 'Keep it';
+
+  @override
+  String get colorPink => 'Pink';
+
+  @override
+  String get colorBlue => 'Blue';
+
+  @override
+  String get colorYellow => 'Yellow';
+
+  @override
+  String get colorGreen => 'Green';
+
+  @override
+  String get colorPurple => 'Purple';
+
+  @override
+  String get colorPeach => 'Peach';
+
+  @override
+  String get iconPlane => 'Plane';
+
+  @override
+  String get iconStar => 'Star';
+
+  @override
+  String get iconCode => 'Code';
+
+  @override
+  String get iconBook => 'Book';
+
+  @override
+  String get iconHome => 'Home';
+
+  @override
+  String get iconMusic => 'Music';
+
+  @override
+  String selectedCount(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String get selectAll => 'Select all';
+
+  @override
+  String get cancelSelection => 'Cancel selection';
+
+  @override
+  String get selectMore => 'Select more';
+
+  @override
+  String get iconHeart => 'Heart';
+
+  @override
+  String get iconVideo => 'Video';
+
+  @override
+  String get iconCamera => 'Camera';
+
+  @override
+  String get iconGame => 'Games';
+
+  @override
+  String get iconFood => 'Food';
+
+  @override
+  String get iconCoffee => 'Coffee';
+
+  @override
+  String get iconBag => 'Shopping';
+
+  @override
+  String get iconGift => 'Gift';
+
+  @override
+  String get iconWork => 'Work';
+
+  @override
+  String get iconSchool => 'Study';
+
+  @override
+  String get iconIdea => 'Ideas';
+
+  @override
+  String get iconNews => 'News';
+
+  @override
+  String get iconFitness => 'Fitness';
+
+  @override
+  String get iconLeaf => 'Nature';
+
+  @override
+  String get iconPlace => 'Places';
+
+  @override
+  String get iconGlobe => 'World';
+
+  @override
+  String get iconCar => 'Car';
+
+  @override
+  String get iconPeople => 'People';
+
+  @override
+  String get colorOrange => 'Orange';
+
+  @override
+  String get colorLime => 'Lime';
+
+  @override
+  String get colorTeal => 'Teal';
+
+  @override
+  String get colorCoral => 'Coral';
+
+  @override
+  String get colorLilac => 'Lilac';
+
+  @override
+  String get colorSand => 'Sand';
 }

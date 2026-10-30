@@ -12,6 +12,7 @@ Future<T?> showBoldSheet<T>(
   BuildContext context, {
   required WidgetBuilder builder,
   bool tall = false,
+  double top = _tallSheetTop,
 }) {
   final reduce = AppMotion.reduce(context);
   return showModalBottomSheet<T>(
@@ -26,7 +27,7 @@ Future<T?> showBoldSheet<T>(
     ),
     builder: (context) => tall
         ? SizedBox(
-            height: MediaQuery.sizeOf(context).height - _tallSheetTop,
+            height: MediaQuery.sizeOf(context).height - top,
             child: builder(context),
           )
         : builder(context),

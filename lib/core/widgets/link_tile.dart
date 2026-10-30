@@ -23,6 +23,8 @@ class LinkTile extends StatelessWidget {
     this.onTap,
     this.onLongPress,
     this.onMore,
+    this.selecting = false,
+    this.selected = false,
   });
 
   final String seed;
@@ -40,6 +42,10 @@ class LinkTile extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
   final VoidCallback? onMore;
+
+  /// Multi-select (10): check circle instead of ⋮, heavier border.
+  final bool selecting;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
@@ -76,12 +82,17 @@ class LinkTile extends StatelessWidget {
             ),
     );
 
-    return BoldCard(
+    final card = BoldCard(
       radius: AppShape.rControl,
-      shadow: AppShadows.offSm,
-      padding: EdgeInsets.fromLTRB(8, 8, onMore == null ? 10 : 4, 8),
+      stroke: selected ? AppShape.strokeHeavy : AppShape.stroke,
+      shadow: selecting
+          ? (selected ? AppShadows.offLg : 0)
+          : AppShadows.offSm,
+      padding: EdgeInsets.fromLTRB(
+          8, 8, onMore == null || selecting ? 10 : 4, 8),
       onTap: onTap,
       onLongPress: onLongPress,
+      selected: selecting ? selected : null,
       semanticLabel: '$title, $subtitle',
       child: Row(
         children: [
@@ -109,7 +120,22 @@ class LinkTile extends StatelessWidget {
               ),
             ),
           ),
-          if (onMore != null)
+          if (selecting)
+            Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                color: selected ? AppColors.ink : AppColors.white,
+                shape: BoxShape.circle,
+                border: Border.all(color: AppColors.ink, width: AppShape.stroke),
+              ),
+              child: selected
+                  ? const Center(
+                      child: AppIcon(AppIcons.check,
+                          size: 15, strokeWidth: 3.6, color: AppColors.white))
+                  : null,
+            )
+          else if (onMore != null)
             Tooltip(
               message: moreLabel,
               child: Semantics(
@@ -132,6 +158,12 @@ class LinkTile extends StatelessWidget {
             ),
         ],
       ),
+    );
+    if (!selecting) return card;
+    return AnimatedOpacity(
+      duration: AppMotion.select,
+      opacity: selected ? 1 : 0.7,
+      child: card,
     );
   }
 

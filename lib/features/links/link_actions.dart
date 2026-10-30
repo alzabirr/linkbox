@@ -62,3 +62,21 @@ String savedAgo(BuildContext context, DateTime createdUtc) {
   final locale = Localizations.localeOf(context).toString();
   return l.savedOnDate(DateFormat('d MMM', locale).format(local));
 }
+
+/// "today", "yesterday", "3 days ago", "last week", "3 weeks ago", or a date.
+String relativeDay(BuildContext context, DateTime? utc) {
+  final l = AppLocalizations.of(context);
+  if (utc == null) return l.whenNever;
+  final local = utc.toLocal();
+  final now = DateTime.now();
+  final days = DateTime(now.year, now.month, now.day)
+      .difference(DateTime(local.year, local.month, local.day))
+      .inDays;
+  if (days <= 0) return l.whenToday;
+  if (days == 1) return l.whenYesterday;
+  if (days < 7) return l.whenDaysAgo(days);
+  if (days < 14) return l.whenLastWeek;
+  if (days < 35) return l.whenWeeksAgo(days ~/ 7);
+  final locale = Localizations.localeOf(context).toString();
+  return DateFormat('d MMM', locale).format(local);
+}

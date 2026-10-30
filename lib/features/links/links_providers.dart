@@ -6,6 +6,7 @@ import '../../core/models/collection_item.dart';
 import '../../core/models/link_item.dart';
 import '../../core/models/link_sort.dart';
 import '../../core/providers.dart';
+import '../../core/repositories/collection_repository.dart';
 
 part 'links_providers.g.dart';
 
@@ -161,3 +162,35 @@ Future<void> startup(Ref ref) async {
 @riverpod
 Stream<Map<int?, int>> collectionCounts(Ref ref) =>
     ref.watch(linkRepositoryProvider).watchCounts();
+
+/// Count and last change per collection.
+@riverpod
+Stream<Map<int, CollectionStats>> collectionStats(Ref ref) =>
+    ref.watch(collectionRepositoryProvider).watchStats();
+
+@riverpod
+Stream<CollectionItem?> collection(Ref ref, int id) =>
+    ref.watch(collectionRepositoryProvider).watchOne(id);
+
+/// Links in one collection (19), with the shared sort.
+@riverpod
+Stream<List<LinkItem>> collectionLinks(Ref ref, int id) => ref
+    .watch(linkRepositoryProvider)
+    .watchLinks(collectionId: id, sort: ref.watch(linkSortSettingProvider));
+
+/// Multi-select (10): ids of the selected links; empty = not selecting.
+@Riverpod(keepAlive: true)
+class Selection extends _$Selection {
+  @override
+  Set<int> build() => const {};
+
+  void start(int id) => state = {id};
+
+  void toggle(int id) => state = state.contains(id)
+      ? ({...state}..remove(id))
+      : {...state, id};
+
+  void selectAll(Iterable<int> ids) => state = {...ids};
+
+  void clear() => state = const {};
+}

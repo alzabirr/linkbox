@@ -37,8 +37,17 @@ class AppColors {
   /// Card frame / collection fills, picked by hash.
   static const cardFills = [pink, sky, sun, peach, mint, grape];
 
-  /// Collection colors (screen 20).
-  static const collectionColors = [pink, sky, sun, mint, grape, peach];
+  /// Collection colors (screen 20): the 6 from the mockup, then 6 more
+  /// from the accent palette. Ink text passes 4.5:1 on all of them.
+  static const collectionColors = [
+    pink, sky, sun, mint, grape, peach,
+    Color(0xFFFF8A3D), // orange
+    Color(0xFFC6EB5B), // lime
+    Color(0xFF5ED3C6), // teal
+    danger, // coral
+    Color(0xFFD7B8FF), // lilac
+    Color(0xFFE8C9A0), // sand
+  ];
 
   /// Accent choices (screen 25). Name keys live in the .arb files.
   static const accents = <Color>[
@@ -110,8 +119,9 @@ class AppShadows {
   static const offLg = 5.0;
   static const offXl = 6.0;
 
-  static List<BoxShadow> hard(double o, Color color) =>
-      [BoxShadow(color: color, offset: Offset(o, o), blurRadius: 0)];
+  static List<BoxShadow> hard(double o, Color color) => [
+    BoxShadow(color: color, offset: Offset(o, o), blurRadius: 0),
+  ];
 }
 
 class AppMotion {
@@ -189,59 +199,59 @@ class AppTokens extends ThemeExtension<AppTokens> {
       hasShadow && offset > 0 ? AppShadows.hard(offset, shadow) : null;
 
   static AppTokens light(Color accent) => AppTokens(
-        isDark: false,
-        background: AppColors.paper,
-        surface: AppColors.surface,
-        raised: AppColors.surface,
-        outline: AppColors.ink,
-        text: AppColors.ink,
-        muted: AppColors.muted,
-        shadow: AppColors.ink,
-        sand: AppColors.sand,
-        sandDeep: AppColors.sandDeep,
-        sandLine: AppColors.sandLine,
-        accent: accent,
-        selectedFill: AppColors.ink,
-        onSelectedFill: AppColors.white,
-        dangerText: AppColors.dangerText,
-      );
+    isDark: false,
+    background: AppColors.paper,
+    surface: AppColors.surface,
+    raised: AppColors.surface,
+    outline: AppColors.ink,
+    text: AppColors.ink,
+    muted: AppColors.muted,
+    shadow: AppColors.ink,
+    sand: AppColors.sand,
+    sandDeep: AppColors.sandDeep,
+    sandLine: AppColors.sandLine,
+    accent: accent,
+    selectedFill: AppColors.ink,
+    onSelectedFill: AppColors.white,
+    dangerText: AppColors.dangerText,
+  );
 
   static AppTokens dark(Color accent, {required bool amoled}) => AppTokens(
-        isDark: true,
-        background: amoled ? AppColors.black : AppColors.darkSurface,
-        surface: amoled ? AppColors.darkSurface : AppColors.darkRaised,
-        raised: AppColors.darkRaised,
-        outline: AppColors.white,
-        text: AppColors.white,
-        muted: AppColors.darkMuted,
-        shadow: const Color(0x00000000),
-        sand: AppColors.darkRaised,
-        sandDeep: const Color(0xFF3A3A3A),
-        sandLine: const Color(0xFF3A3A3A),
-        accent: accent,
-        selectedFill: AppColors.white,
-        onSelectedFill: AppColors.black,
-        dangerText: AppColors.dangerTextDark,
-      );
+    isDark: true,
+    background: amoled ? AppColors.black : AppColors.darkSurface,
+    surface: amoled ? AppColors.darkSurface : AppColors.darkRaised,
+    raised: AppColors.darkRaised,
+    outline: AppColors.white,
+    text: AppColors.white,
+    muted: AppColors.darkMuted,
+    shadow: const Color(0x00000000),
+    sand: AppColors.darkRaised,
+    sandDeep: const Color(0xFF3A3A3A),
+    sandLine: const Color(0xFF3A3A3A),
+    accent: accent,
+    selectedFill: AppColors.white,
+    onSelectedFill: AppColors.black,
+    dangerText: AppColors.dangerTextDark,
+  );
 
   @override
   AppTokens copyWith({Color? accent}) => AppTokens(
-        isDark: isDark,
-        background: background,
-        surface: surface,
-        raised: raised,
-        outline: outline,
-        text: text,
-        muted: muted,
-        shadow: shadow,
-        sand: sand,
-        sandDeep: sandDeep,
-        sandLine: sandLine,
-        accent: accent ?? this.accent,
-        selectedFill: selectedFill,
-        onSelectedFill: onSelectedFill,
-        dangerText: dangerText,
-      );
+    isDark: isDark,
+    background: background,
+    surface: surface,
+    raised: raised,
+    outline: outline,
+    text: text,
+    muted: muted,
+    shadow: shadow,
+    sand: sand,
+    sandDeep: sandDeep,
+    sandLine: sandLine,
+    accent: accent ?? this.accent,
+    selectedFill: selectedFill,
+    onSelectedFill: onSelectedFill,
+    dangerText: dangerText,
+  );
 
   @override
   AppTokens lerp(AppTokens? other, double t) {
@@ -278,10 +288,9 @@ BoxDecoration boldBox({
   double radius = AppShape.rCard,
   double stroke = AppShape.stroke,
   List<BoxShadow>? shadow,
-}) =>
-    BoxDecoration(
-      color: fill,
-      borderRadius: BorderRadius.circular(radius),
-      border: Border.all(color: outline, width: stroke),
-      boxShadow: shadow,
-    );
+}) => BoxDecoration(
+  color: fill,
+  borderRadius: BorderRadius.circular(radius),
+  border: Border.all(color: outline, width: stroke),
+  boxShadow: shadow,
+);

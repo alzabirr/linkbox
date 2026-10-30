@@ -678,3 +678,265 @@ final class CollectionCountsProvider
 }
 
 String _$collectionCountsHash() => r'8483d0bc49d79cec2f1a3d19dc94c79d6ca046fc';
+
+/// Count and last change per collection.
+
+@ProviderFor(collectionStats)
+final collectionStatsProvider = CollectionStatsProvider._();
+
+/// Count and last change per collection.
+
+final class CollectionStatsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<Map<int, CollectionStats>>,
+          Map<int, CollectionStats>,
+          Stream<Map<int, CollectionStats>>
+        >
+    with
+        $FutureModifier<Map<int, CollectionStats>>,
+        $StreamProvider<Map<int, CollectionStats>> {
+  /// Count and last change per collection.
+  CollectionStatsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'collectionStatsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$collectionStatsHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<Map<int, CollectionStats>> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<Map<int, CollectionStats>> create(Ref ref) {
+    return collectionStats(ref);
+  }
+}
+
+String _$collectionStatsHash() => r'f2a36cc57476e514315b2d6cea4be4c2c30866cd';
+
+@ProviderFor(collection)
+final collectionProvider = CollectionFamily._();
+
+final class CollectionProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<CollectionItem?>,
+          CollectionItem?,
+          Stream<CollectionItem?>
+        >
+    with $FutureModifier<CollectionItem?>, $StreamProvider<CollectionItem?> {
+  CollectionProvider._({
+    required CollectionFamily super.from,
+    required int super.argument,
+  }) : super(
+         retry: null,
+         name: r'collectionProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$collectionHash();
+
+  @override
+  String toString() {
+    return r'collectionProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $StreamProviderElement<CollectionItem?> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<CollectionItem?> create(Ref ref) {
+    final argument = this.argument as int;
+    return collection(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is CollectionProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$collectionHash() => r'cdf5a1b59b57e320735a543c5950ce042117d432';
+
+final class CollectionFamily extends $Family
+    with $FunctionalFamilyOverride<Stream<CollectionItem?>, int> {
+  CollectionFamily._()
+    : super(
+        retry: null,
+        name: r'collectionProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  CollectionProvider call(int id) =>
+      CollectionProvider._(argument: id, from: this);
+
+  @override
+  String toString() => r'collectionProvider';
+}
+
+/// Links in one collection (19), with the shared sort.
+
+@ProviderFor(collectionLinks)
+final collectionLinksProvider = CollectionLinksFamily._();
+
+/// Links in one collection (19), with the shared sort.
+
+final class CollectionLinksProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<LinkItem>>,
+          List<LinkItem>,
+          Stream<List<LinkItem>>
+        >
+    with $FutureModifier<List<LinkItem>>, $StreamProvider<List<LinkItem>> {
+  /// Links in one collection (19), with the shared sort.
+  CollectionLinksProvider._({
+    required CollectionLinksFamily super.from,
+    required int super.argument,
+  }) : super(
+         retry: null,
+         name: r'collectionLinksProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$collectionLinksHash();
+
+  @override
+  String toString() {
+    return r'collectionLinksProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $StreamProviderElement<List<LinkItem>> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<List<LinkItem>> create(Ref ref) {
+    final argument = this.argument as int;
+    return collectionLinks(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is CollectionLinksProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$collectionLinksHash() => r'65e87299a9a86316001f5c391c3a73cf1b5d3641';
+
+/// Links in one collection (19), with the shared sort.
+
+final class CollectionLinksFamily extends $Family
+    with $FunctionalFamilyOverride<Stream<List<LinkItem>>, int> {
+  CollectionLinksFamily._()
+    : super(
+        retry: null,
+        name: r'collectionLinksProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// Links in one collection (19), with the shared sort.
+
+  CollectionLinksProvider call(int id) =>
+      CollectionLinksProvider._(argument: id, from: this);
+
+  @override
+  String toString() => r'collectionLinksProvider';
+}
+
+/// Multi-select (10): ids of the selected links; empty = not selecting.
+
+@ProviderFor(Selection)
+final selectionProvider = SelectionProvider._();
+
+/// Multi-select (10): ids of the selected links; empty = not selecting.
+final class SelectionProvider extends $NotifierProvider<Selection, Set<int>> {
+  /// Multi-select (10): ids of the selected links; empty = not selecting.
+  SelectionProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'selectionProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$selectionHash();
+
+  @$internal
+  @override
+  Selection create() => Selection();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Set<int> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Set<int>>(value),
+    );
+  }
+}
+
+String _$selectionHash() => r'ab76a802bb86a6123264abede5498bb099611005';
+
+/// Multi-select (10): ids of the selected links; empty = not selecting.
+
+abstract class _$Selection extends $Notifier<Set<int>> {
+  Set<int> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<Set<int>, Set<int>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<Set<int>, Set<int>>,
+              Set<int>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}

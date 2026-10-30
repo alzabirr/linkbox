@@ -24,6 +24,7 @@ class IconBox extends StatelessWidget {
     this.radius = AppShape.rSmall,
     this.iconSize = 22,
     this.fill,
+    this.outline,
   });
 
   final AppIconData icon;
@@ -36,6 +37,9 @@ class IconBox extends StatelessWidget {
 
   /// Custom fill (e.g. pink clear button in search).
   final Color? fill;
+
+  /// Custom outline (ink on colored headers, also in dark mode).
+  final Color? outline;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +59,7 @@ class IconBox extends StatelessWidget {
           width: size,
           height: size,
           fill: bg,
+          outline: outline,
           radius: radius,
           shadow: isSun ? AppShadows.offSm : 0,
           onTap: onPressed,

@@ -10,6 +10,7 @@ import '../../core/widgets/bold_card.dart';
 import '../../core/widgets/bold_sheet.dart';
 import '../../l10n/app_localizations.dart';
 import '../links/links_providers.dart';
+import 'collection_sheet.dart';
 
 /// Opens "Move to collection" (09). Returns true when the links moved.
 Future<bool> showMoveSheet(
@@ -106,6 +107,28 @@ class _MoveSheetState extends ConsumerState<MoveSheet> {
               itemCount: rows.length,
               separatorBuilder: (_, _) => const SizedBox(height: 10),
               itemBuilder: (_, i) => rows[i],
+            ),
+          ),
+          const SizedBox(height: 10),
+          BoldCard(
+            height: 54,
+            fill: Colors.transparent,
+            radius: AppShape.rControl,
+            dashed: true,
+            semanticLabel: l.newCollection,
+            onTap: () async {
+              final id = await showCollectionSheet(context);
+              if (id != null) setState(() => _selected = id);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppIcon(AppIcons.plus, size: 18, color: t.text),
+                const SizedBox(width: 8),
+                Text(l.newCollection,
+                    style: AppText.body(15,
+                        weight: FontWeight.w700, color: t.text)),
+              ],
             ),
           ),
           const SizedBox(height: 16),

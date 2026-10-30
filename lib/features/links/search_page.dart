@@ -17,7 +17,10 @@ import 'sort_sheet.dart';
 
 /// Search with sort / collection pills and highlighted matches (03, 23).
 class SearchPage extends ConsumerStatefulWidget {
-  const SearchPage({super.key});
+  const SearchPage({super.key, this.collectionId});
+
+  /// Start filtered to this collection (search icon on 19).
+  final int? collectionId;
 
   @override
   ConsumerState<SearchPage> createState() => _SearchPageState();
@@ -26,6 +29,17 @@ class SearchPage extends ConsumerStatefulWidget {
 class _SearchPageState extends ConsumerState<SearchPage> {
   final _field = TextEditingController();
   final _focus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.collectionId != null) {
+      // After the first frame: providers can't change during build.
+      WidgetsBinding.instance.addPostFrameCallback((_) => ref
+          .read(searchCollectionProvider.notifier)
+          .set(widget.collectionId));
+    }
+  }
 
   @override
   void dispose() {

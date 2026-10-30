@@ -159,6 +159,11 @@ class _LinkMenu extends ConsumerWidget {
                   linkIds: [link.id], currentCollectionId: link.collectionId);
             }),
             const SizedBox(height: 8),
+            row(AppIcons.selectMore, AppColors.white, l.selectMore, () {
+              nav.pop();
+              ref.read(selectionProvider.notifier).start(link.id);
+            }),
+            const SizedBox(height: 8),
             row(AppIcons.trash, AppColors.danger, l.delete, () {
               nav.pop();
               LinkActions.delete(page, undo, [link.id]);

@@ -871,6 +871,474 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copied'**
   String get copied;
+
+  /// No description provided for @newShort.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get newShort;
+
+  /// No description provided for @newCollectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New collection'**
+  String get newCollectionTitle;
+
+  /// No description provided for @editCollectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit collection'**
+  String get editCollectionTitle;
+
+  /// No description provided for @createCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'Create collection'**
+  String get createCollection;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get saveChanges;
+
+  /// No description provided for @nameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get nameLabel;
+
+  /// No description provided for @namePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Travel, Recipes, Read later…'**
+  String get namePlaceholder;
+
+  /// No description provided for @colorLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get colorLabel;
+
+  /// No description provided for @iconLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Icon'**
+  String get iconLabel;
+
+  /// No description provided for @previewMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'{links} · preview'**
+  String previewMeta(String links);
+
+  /// No description provided for @duplicateCollectionName.
+  ///
+  /// In en, this message translates to:
+  /// **'You already have a collection with this name'**
+  String get duplicateCollectionName;
+
+  /// No description provided for @createACollection.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a collection'**
+  String get createACollection;
+
+  /// No description provided for @newCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'New collection'**
+  String get newCollection;
+
+  /// No description provided for @allLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'All links'**
+  String get allLinks;
+
+  /// No description provided for @updatedWhen.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated {when}'**
+  String updatedWhen(String when);
+
+  /// No description provided for @whenToday.
+  ///
+  /// In en, this message translates to:
+  /// **'today'**
+  String get whenToday;
+
+  /// No description provided for @whenYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'yesterday'**
+  String get whenYesterday;
+
+  /// No description provided for @whenDaysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 day ago} other{{count} days ago}}'**
+  String whenDaysAgo(int count);
+
+  /// No description provided for @whenLastWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'last week'**
+  String get whenLastWeek;
+
+  /// No description provided for @whenWeeksAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} weeks ago'**
+  String whenWeeksAgo(int count);
+
+  /// No description provided for @whenNever.
+  ///
+  /// In en, this message translates to:
+  /// **'never'**
+  String get whenNever;
+
+  /// No description provided for @collectionMeta.
+  ///
+  /// In en, this message translates to:
+  /// **'{links} · updated {when}'**
+  String collectionMeta(String links, String when);
+
+  /// No description provided for @addToCollection.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to {name}'**
+  String addToCollection(String name);
+
+  /// No description provided for @searchIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Search in {name}'**
+  String searchIn(String name);
+
+  /// No description provided for @collectionOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Collection options'**
+  String get collectionOptions;
+
+  /// No description provided for @optRename.
+  ///
+  /// In en, this message translates to:
+  /// **'Rename'**
+  String get optRename;
+
+  /// No description provided for @optRenameSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Change the collection’s name'**
+  String get optRenameSub;
+
+  /// No description provided for @optColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Color & icon'**
+  String get optColor;
+
+  /// No description provided for @optColorSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Make it easy to spot'**
+  String get optColorSub;
+
+  /// No description provided for @optPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Pin to top'**
+  String get optPin;
+
+  /// No description provided for @optUnpin.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpin'**
+  String get optUnpin;
+
+  /// No description provided for @optPinSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Show first in Collections and on Home'**
+  String get optPinSub;
+
+  /// No description provided for @optShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share all links'**
+  String get optShare;
+
+  /// No description provided for @optShareSub.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Send the link} other{Send the {count} links as a list}}'**
+  String optShareSub(int count);
+
+  /// No description provided for @optDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete collection'**
+  String get optDelete;
+
+  /// No description provided for @optDeleteSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Links move to “No collection”, nothing is lost'**
+  String get optDeleteSub;
+
+  /// No description provided for @deleteCollectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete “{name}”?'**
+  String deleteCollectionTitle(String name);
+
+  /// No description provided for @keepIt.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep it'**
+  String get keepIt;
+
+  /// No description provided for @colorPink.
+  ///
+  /// In en, this message translates to:
+  /// **'Pink'**
+  String get colorPink;
+
+  /// No description provided for @colorBlue.
+  ///
+  /// In en, this message translates to:
+  /// **'Blue'**
+  String get colorBlue;
+
+  /// No description provided for @colorYellow.
+  ///
+  /// In en, this message translates to:
+  /// **'Yellow'**
+  String get colorYellow;
+
+  /// No description provided for @colorGreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Green'**
+  String get colorGreen;
+
+  /// No description provided for @colorPurple.
+  ///
+  /// In en, this message translates to:
+  /// **'Purple'**
+  String get colorPurple;
+
+  /// No description provided for @colorPeach.
+  ///
+  /// In en, this message translates to:
+  /// **'Peach'**
+  String get colorPeach;
+
+  /// No description provided for @iconPlane.
+  ///
+  /// In en, this message translates to:
+  /// **'Plane'**
+  String get iconPlane;
+
+  /// No description provided for @iconStar.
+  ///
+  /// In en, this message translates to:
+  /// **'Star'**
+  String get iconStar;
+
+  /// No description provided for @iconCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get iconCode;
+
+  /// No description provided for @iconBook.
+  ///
+  /// In en, this message translates to:
+  /// **'Book'**
+  String get iconBook;
+
+  /// No description provided for @iconHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get iconHome;
+
+  /// No description provided for @iconMusic.
+  ///
+  /// In en, this message translates to:
+  /// **'Music'**
+  String get iconMusic;
+
+  /// No description provided for @selectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String selectedCount(int count);
+
+  /// No description provided for @selectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get selectAll;
+
+  /// No description provided for @cancelSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel selection'**
+  String get cancelSelection;
+
+  /// No description provided for @selectMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Select more'**
+  String get selectMore;
+
+  /// No description provided for @iconHeart.
+  ///
+  /// In en, this message translates to:
+  /// **'Heart'**
+  String get iconHeart;
+
+  /// No description provided for @iconVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get iconVideo;
+
+  /// No description provided for @iconCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get iconCamera;
+
+  /// No description provided for @iconGame.
+  ///
+  /// In en, this message translates to:
+  /// **'Games'**
+  String get iconGame;
+
+  /// No description provided for @iconFood.
+  ///
+  /// In en, this message translates to:
+  /// **'Food'**
+  String get iconFood;
+
+  /// No description provided for @iconCoffee.
+  ///
+  /// In en, this message translates to:
+  /// **'Coffee'**
+  String get iconCoffee;
+
+  /// No description provided for @iconBag.
+  ///
+  /// In en, this message translates to:
+  /// **'Shopping'**
+  String get iconBag;
+
+  /// No description provided for @iconGift.
+  ///
+  /// In en, this message translates to:
+  /// **'Gift'**
+  String get iconGift;
+
+  /// No description provided for @iconWork.
+  ///
+  /// In en, this message translates to:
+  /// **'Work'**
+  String get iconWork;
+
+  /// No description provided for @iconSchool.
+  ///
+  /// In en, this message translates to:
+  /// **'Study'**
+  String get iconSchool;
+
+  /// No description provided for @iconIdea.
+  ///
+  /// In en, this message translates to:
+  /// **'Ideas'**
+  String get iconIdea;
+
+  /// No description provided for @iconNews.
+  ///
+  /// In en, this message translates to:
+  /// **'News'**
+  String get iconNews;
+
+  /// No description provided for @iconFitness.
+  ///
+  /// In en, this message translates to:
+  /// **'Fitness'**
+  String get iconFitness;
+
+  /// No description provided for @iconLeaf.
+  ///
+  /// In en, this message translates to:
+  /// **'Nature'**
+  String get iconLeaf;
+
+  /// No description provided for @iconPlace.
+  ///
+  /// In en, this message translates to:
+  /// **'Places'**
+  String get iconPlace;
+
+  /// No description provided for @iconGlobe.
+  ///
+  /// In en, this message translates to:
+  /// **'World'**
+  String get iconGlobe;
+
+  /// No description provided for @iconCar.
+  ///
+  /// In en, this message translates to:
+  /// **'Car'**
+  String get iconCar;
+
+  /// No description provided for @iconPeople.
+  ///
+  /// In en, this message translates to:
+  /// **'People'**
+  String get iconPeople;
+
+  /// No description provided for @colorOrange.
+  ///
+  /// In en, this message translates to:
+  /// **'Orange'**
+  String get colorOrange;
+
+  /// No description provided for @colorLime.
+  ///
+  /// In en, this message translates to:
+  /// **'Lime'**
+  String get colorLime;
+
+  /// No description provided for @colorTeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Teal'**
+  String get colorTeal;
+
+  /// No description provided for @colorCoral.
+  ///
+  /// In en, this message translates to:
+  /// **'Coral'**
+  String get colorCoral;
+
+  /// No description provided for @colorLilac.
+  ///
+  /// In en, this message translates to:
+  /// **'Lilac'**
+  String get colorLilac;
+
+  /// No description provided for @colorSand.
+  ///
+  /// In en, this message translates to:
+  /// **'Sand'**
+  String get colorSand;
 }
 
 class _AppLocalizationsDelegate

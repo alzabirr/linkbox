@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/widgets/app_icon.dart';
 import '../core/widgets/main_nav_bar.dart';
+import '../features/collections/collection_detail_page.dart';
 import '../features/collections/collections_page.dart';
 import '../features/dev/widget_gallery_page.dart';
 import '../features/links/clipboard_prompt.dart';
 import '../features/links/edit_link_page.dart';
 import '../features/links/home_page.dart';
+import '../features/links/links_providers.dart';
 import '../features/links/search_page.dart';
 import '../features/links/undo_bar.dart';
 import '../features/settings/settings_page.dart';
@@ -23,6 +26,7 @@ class Routes {
   static const search = '/search';
 
   static String editLink(int id) => '/link/$id/edit';
+  static String collection(int id) => '/collections/$id';
 }
 
 final appRouter = GoRouter(
@@ -31,45 +35,61 @@ final appRouter = GoRouter(
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) => _TabShell(shell: shell),
       branches: [
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: Routes.links,
-            builder: (context, state) => const HomePage(),
-          ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: Routes.collections,
-            builder: (context, state) => const CollectionsPage(),
-          ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: Routes.settings,
-            builder: (context, state) => const SettingsPage(),
-          ),
-        ]),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.links,
+              builder: (context, state) => const HomePage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.collections,
+              builder: (context, state) => const CollectionsPage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Routes.settings,
+              builder: (context, state) => const SettingsPage(),
+            ),
+          ],
+        ),
       ],
     ),
     // linkbox://open/link/<id> (share overlay "Open saved link"):
     // Home opens that link's Quick look.
     GoRoute(
       path: '/link/:id',
-      redirect: (context, state) =>
-          state.uri.path.endsWith('/edit')
-              ? null
-              : '${Routes.links}?open=${state.pathParameters['id']}',
+      redirect: (context, state) => state.uri.path.endsWith('/edit')
+          ? null
+          : '${Routes.links}?open=${state.pathParameters['id']}',
       routes: [
         GoRoute(
           path: 'edit',
-          builder: (context, state) => EditLinkPage(
-              linkId: int.parse(state.pathParameters['id']!)),
+          builder: (context, state) =>
+              EditLinkPage(linkId: int.parse(state.pathParameters['id']!)),
         ),
       ],
     ),
     GoRoute(
       path: Routes.search,
-      builder: (context, state) => const SearchPage(),
+      builder: (context, state) => SearchPage(
+        collectionId: int.tryParse(
+          state.uri.queryParameters['collection'] ?? '',
+        ),
+      ),
+    ),
+    // Full-screen page (no bottom bar), like the mockup (19).
+    GoRoute(
+      path: '/collections/:id',
+      builder: (context, state) => CollectionDetailPage(
+        collectionId: int.parse(state.pathParameters['id']!),
+      ),
     ),
     GoRoute(
       path: Routes.gallery,
@@ -98,7 +118,13 @@ class _TabShell extends StatelessWidget {
       ),
       bottomNavigationBar: MainNavBar(
         currentIndex: shell.currentIndex,
-        onTap: (i) => shell.goBranch(i, initialLocation: i == shell.currentIndex),
+        onTap: (i) {
+          // Leaving a tab ends multi-select.
+          ProviderScope.containerOf(context)
+              .read(selectionProvider.notifier)
+              .clear();
+          shell.goBranch(i, initialLocation: i == shell.currentIndex);
+        },
         items: [
           NavItem(icon: AppIcons.link, label: l.navLinks),
           NavItem(icon: AppIcons.folder, label: l.navCollections),

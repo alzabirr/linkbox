@@ -8,7 +8,25 @@ import '../../core/widgets/mascot.dart';
 import '../../l10n/app_localizations.dart';
 
 /// "Delete 3 links?" (11). Returns true when the user confirms.
-Future<bool> showDeleteDialog(BuildContext context, {required int count}) async {
+Future<bool> showDeleteDialog(BuildContext context, {required int count}) {
+  final l = AppLocalizations.of(context);
+  return showConfirmDialog(
+    context,
+    title: l.deleteTitle(count),
+    body: l.deleteBody(count),
+    confirm: l.deleteLinks(count),
+    cancel: l.keepThem,
+  );
+}
+
+/// The sad-mascot dialog with a danger button and a white cancel button.
+Future<bool> showConfirmDialog(
+  BuildContext context, {
+  required String title,
+  required String body,
+  required String confirm,
+  required String cancel,
+}) async {
   final ok = await showGeneralDialog<bool>(
     context: context,
     barrierDismissible: true,
@@ -24,19 +42,27 @@ Future<bool> showDeleteDialog(BuildContext context, {required int count}) async 
         child: child,
       ),
     ),
-    pageBuilder: (context, _, _) => _DeleteDialog(count: count),
+    pageBuilder: (context, _, _) => _DeleteDialog(
+        title: title, body: body, confirm: confirm, cancel: cancel),
   );
   return ok ?? false;
 }
 
 class _DeleteDialog extends StatelessWidget {
-  const _DeleteDialog({required this.count});
+  const _DeleteDialog({
+    required this.title,
+    required this.body,
+    required this.confirm,
+    required this.cancel,
+  });
 
-  final int count;
+  final String title;
+  final String body;
+  final String confirm;
+  final String cancel;
 
   @override
   Widget build(BuildContext context) {
-    final l = AppLocalizations.of(context);
     final t = context.tokens;
     return SafeArea(
       child: Center(
@@ -48,7 +74,7 @@ class _DeleteDialog extends StatelessWidget {
               scopesRoute: true,
               namesRoute: true,
               explicitChildNodes: true,
-              label: l.deleteTitle(count),
+              label: title,
               child: BoldCard(
                 fill: t.background,
                 radius: AppShape.rSheet,
@@ -60,16 +86,16 @@ class _DeleteDialog extends StatelessWidget {
                   children: [
                     const Center(child: Mascot(MascotMood.sad, size: 84)),
                     const SizedBox(height: 12),
-                    Text(l.deleteTitle(count),
+                    Text(title,
                         textAlign: TextAlign.center,
                         style: AppText.display(28, color: t.text)),
                     const SizedBox(height: 12),
-                    Text(l.deleteBody(count),
+                    Text(body,
                         textAlign: TextAlign.center,
                         style: AppText.body(15, height: 1.5, color: t.text)),
                     const SizedBox(height: 20),
                     BoldButton(
-                      label: l.deleteLinks(count),
+                      label: confirm,
                       kind: BoldButtonKind.danger,
                       size: BoldButtonSize.dialog,
                       expand: true,
@@ -77,7 +103,7 @@ class _DeleteDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     BoldButton(
-                      label: l.keepThem,
+                      label: cancel,
                       kind: BoldButtonKind.secondary,
                       size: BoldButtonSize.dialog,
                       weight: FontWeight.w700,

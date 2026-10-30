@@ -269,5 +269,156 @@
       }
     }
   },
-  "copied": "Copied"
+  "copied": "Copied",
+  "newShort": "New",
+  "newCollectionTitle": "New collection",
+  "editCollectionTitle": "Edit collection",
+  "createCollection": "Create collection",
+  "saveChanges": "Save changes",
+  "nameLabel": "Name",
+  "namePlaceholder": "Travel, Recipes, Read later…",
+  "colorLabel": "Color",
+  "iconLabel": "Icon",
+  "previewMeta": "{links} · preview",
+  "@previewMeta": {
+    "placeholders": {
+      "links": {
+        "type": "String"
+      }
+    }
+  },
+  "duplicateCollectionName": "You already have a collection with this name",
+  "createACollection": "Create a collection",
+  "newCollection": "New collection",
+  "allLinks": "All links",
+  "updatedWhen": "Updated {when}",
+  "@updatedWhen": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "whenToday": "today",
+  "whenYesterday": "yesterday",
+  "whenDaysAgo": "{count, plural, =1{1 day ago} other{{count} days ago}}",
+  "@whenDaysAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "whenLastWeek": "last week",
+  "whenWeeksAgo": "{count} weeks ago",
+  "@whenWeeksAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "whenNever": "never",
+  "collectionMeta": "{links} · updated {when}",
+  "@collectionMeta": {
+    "placeholders": {
+      "links": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "addToCollection": "Add to {name}",
+  "@addToCollection": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "searchIn": "Search in {name}",
+  "@searchIn": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "collectionOptions": "Collection options",
+  "optRename": "Rename",
+  "optRenameSub": "Change the collection’s name",
+  "optColor": "Color & icon",
+  "optColorSub": "Make it easy to spot",
+  "optPin": "Pin to top",
+  "optUnpin": "Unpin",
+  "optPinSub": "Show first in Collections and on Home",
+  "optShare": "Share all links",
+  "optShareSub": "{count, plural, =1{Send the link} other{Send the {count} links as a list}}",
+  "@optShareSub": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "optDelete": "Delete collection",
+  "optDeleteSub": "Links move to “No collection”, nothing is lost",
+  "deleteCollectionTitle": "Delete “{name}”?",
+  "@deleteCollectionTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "keepIt": "Keep it",
+  "colorPink": "Pink",
+  "colorBlue": "Blue",
+  "colorYellow": "Yellow",
+  "colorGreen": "Green",
+  "colorPurple": "Purple",
+  "colorPeach": "Peach",
+  "iconPlane": "Plane",
+  "iconStar": "Star",
+  "iconCode": "Code",
+  "iconBook": "Book",
+  "iconHome": "Home",
+  "iconMusic": "Music",
+  "selectedCount": "{count} selected",
+  "@selectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "selectAll": "Select all",
+  "cancelSelection": "Cancel selection",
+  "selectMore": "Select more",
+  "iconHeart": "Heart",
+  "iconVideo": "Video",
+  "iconCamera": "Camera",
+  "iconGame": "Games",
+  "iconFood": "Food",
+  "iconCoffee": "Coffee",
+  "iconBag": "Shopping",
+  "iconGift": "Gift",
+  "iconWork": "Work",
+  "iconSchool": "Study",
+  "iconIdea": "Ideas",
+  "iconNews": "News",
+  "iconFitness": "Fitness",
+  "iconLeaf": "Nature",
+  "iconPlace": "Places",
+  "iconGlobe": "World",
+  "iconCar": "Car",
+  "iconPeople": "People",
+  "colorOrange": "Orange",
+  "colorLime": "Lime",
+  "colorTeal": "Teal",
+  "colorCoral": "Coral",
+  "colorLilac": "Lilac",
+  "colorSand": "Sand"
 }

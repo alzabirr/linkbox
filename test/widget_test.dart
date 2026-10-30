@@ -17,10 +17,10 @@ void main() {
     await tester.pumpAndSettle();
 
     // Empty state + 3 tabs.
-    expect(find.text('Save it now. Find it later.'), findsOneWidget);
+    expect(find.textContaining('Save it now.'), findsOneWidget);
     expect(find.text('Collections'), findsOneWidget);
 
-    await tester.tap(find.text('Add link'));
+    await tester.tap(find.text('Add first link'));
     await tester.pumpAndSettle();
     expect(find.text('Add a link'), findsOneWidget);
 

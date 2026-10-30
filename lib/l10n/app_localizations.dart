@@ -515,7 +515,7 @@ abstract class AppLocalizations {
   /// No description provided for @emptyTitle.
   ///
   /// In en, this message translates to:
-  /// **'Save it now. Find it later.'**
+  /// **'Save it now.\nFind it later.'**
   String get emptyTitle;
 
   /// No description provided for @emptyBody.
@@ -1561,6 +1561,294 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Chosen file'**
   String get chosenFile;
+
+  /// No description provided for @lookAndFeel.
+  ///
+  /// In en, this message translates to:
+  /// **'Look & feel'**
+  String get lookAndFeel;
+
+  /// No description provided for @matchWallpaper.
+  ///
+  /// In en, this message translates to:
+  /// **'Match my wallpaper'**
+  String get matchWallpaper;
+
+  /// No description provided for @matchWallpaperHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Android dynamic colors'**
+  String get matchWallpaperHint;
+
+  /// No description provided for @moreColors.
+  ///
+  /// In en, this message translates to:
+  /// **'More colors'**
+  String get moreColors;
+
+  /// No description provided for @aboutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get aboutTitle;
+
+  /// No description provided for @aboutRowHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Version, privacy and feedback'**
+  String get aboutRowHint;
+
+  /// No description provided for @themeColorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme color'**
+  String get themeColorTitle;
+
+  /// No description provided for @pickAColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a color'**
+  String get pickAColor;
+
+  /// No description provided for @hexLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Or type a hex code'**
+  String get hexLabel;
+
+  /// No description provided for @hexInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Use 6 digits, like #FF8A3D'**
+  String get hexInvalid;
+
+  /// No description provided for @useThisColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this color'**
+  String get useThisColor;
+
+  /// No description provided for @colorSun.
+  ///
+  /// In en, this message translates to:
+  /// **'Sun'**
+  String get colorSun;
+
+  /// No description provided for @colorMint.
+  ///
+  /// In en, this message translates to:
+  /// **'Mint'**
+  String get colorMint;
+
+  /// No description provided for @colorSky.
+  ///
+  /// In en, this message translates to:
+  /// **'Sky'**
+  String get colorSky;
+
+  /// No description provided for @colorGrape.
+  ///
+  /// In en, this message translates to:
+  /// **'Grape'**
+  String get colorGrape;
+
+  /// No description provided for @version.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version}'**
+  String version(String version);
+
+  /// No description provided for @madeBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Made by {name}'**
+  String madeBy(String name);
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @privacySub.
+  ///
+  /// In en, this message translates to:
+  /// **'What we collect: nothing'**
+  String get privacySub;
+
+  /// No description provided for @privacyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Linkbox has no account, no ads and no tracking. Your links, collections and settings are stored only on this phone. The app uses the internet for one thing: to fetch the title, summary and picture of the links you save. Backups are files on your phone that only you can move or share.'**
+  String get privacyBody;
+
+  /// No description provided for @sendFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Send feedback'**
+  String get sendFeedback;
+
+  /// No description provided for @feedbackSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Email the developer'**
+  String get feedbackSub;
+
+  /// No description provided for @rateApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate on Google Play'**
+  String get rateApp;
+
+  /// No description provided for @rateSub.
+  ///
+  /// In en, this message translates to:
+  /// **'It really helps'**
+  String get rateSub;
+
+  /// No description provided for @licenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Open-source licenses'**
+  String get licenses;
+
+  /// No description provided for @licensesSub.
+  ///
+  /// In en, this message translates to:
+  /// **'Packages this app uses'**
+  String get licensesSub;
+
+  /// No description provided for @replayIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay the intro'**
+  String get replayIntro;
+
+  /// No description provided for @replaySub.
+  ///
+  /// In en, this message translates to:
+  /// **'See the welcome screens again'**
+  String get replaySub;
+
+  /// No description provided for @aboutFooter.
+  ///
+  /// In en, this message translates to:
+  /// **'No account · No ads · Your links stay on this phone'**
+  String get aboutFooter;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// No description provided for @letsGo.
+  ///
+  /// In en, this message translates to:
+  /// **'Let’s go'**
+  String get letsGo;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @startSaving.
+  ///
+  /// In en, this message translates to:
+  /// **'Start saving'**
+  String get startSaving;
+
+  /// No description provided for @ob1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Every link in one happy place'**
+  String get ob1Title;
+
+  /// No description provided for @ob1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Videos, posts, recipes, plans. Keep them all here, with a picture and summary, so you can actually find them again.'**
+  String get ob1Body;
+
+  /// No description provided for @ob2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Save from any app in one tap'**
+  String get ob2Title;
+
+  /// No description provided for @ob2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'In YouTube, Chrome or Reddit, tap {share}, then pick {app}. Copied a link? We’ll offer to save it.'**
+  String ob2Body(String share, String app);
+
+  /// No description provided for @shareWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareWord;
+
+  /// No description provided for @ob3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your links stay on your phone'**
+  String get ob3Title;
+
+  /// No description provided for @ob3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'We only use the internet to fetch link previews. Back up any time to your Downloads folder.'**
+  String get ob3Body;
+
+  /// No description provided for @stepOf.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {step} of {total}'**
+  String stepOf(int step, int total);
+
+  /// No description provided for @shareTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Share to…'**
+  String get shareTo;
+
+  /// No description provided for @shareMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get shareMessages;
+
+  /// No description provided for @shareMail.
+  ///
+  /// In en, this message translates to:
+  /// **'Mail'**
+  String get shareMail;
+
+  /// No description provided for @shareMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get shareMore;
+
+  /// No description provided for @importShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get importShort;
+
+  /// No description provided for @addFirstLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Add first link'**
+  String get addFirstLink;
+
+  /// No description provided for @emptyFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'No account · No ads · Works offline'**
+  String get emptyFootnote;
 }
 
 class _AppLocalizationsDelegate

@@ -233,7 +233,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get alreadySaved => 'এই লিংকটি আগেই সেভ করেছেন';
 
   @override
-  String get emptyTitle => 'এখন সেভ করুন। পরে খুঁজে নিন।';
+  String get emptyTitle => 'এখন সেভ করুন।\nপরে খুঁজে নিন।';
 
   @override
   String get emptyBody =>
@@ -910,4 +910,160 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get chosenFile => 'বাছাই করা ফাইল';
+
+  @override
+  String get lookAndFeel => 'চেহারা ও অনুভূতি';
+
+  @override
+  String get matchWallpaper => 'ওয়ালপেপারের সাথে মিলান';
+
+  @override
+  String get matchWallpaperHint => 'Android-এর ডায়নামিক রং ব্যবহার করুন';
+
+  @override
+  String get moreColors => 'আরও রং';
+
+  @override
+  String get aboutTitle => 'পরিচিতি';
+
+  @override
+  String get aboutRowHint => 'ভার্সন, প্রাইভেসি আর মতামত';
+
+  @override
+  String get themeColorTitle => 'থিমের রং';
+
+  @override
+  String get pickAColor => 'একটি রং বাছুন';
+
+  @override
+  String get hexLabel => 'অথবা হেক্স কোড লিখুন';
+
+  @override
+  String get hexInvalid => '৬টি অক্ষর দিন, যেমন #FF8A3D';
+
+  @override
+  String get useThisColor => 'এই রং ব্যবহার করুন';
+
+  @override
+  String get colorSun => 'সূর্য';
+
+  @override
+  String get colorMint => 'পুদিনা';
+
+  @override
+  String get colorSky => 'আকাশ';
+
+  @override
+  String get colorGrape => 'আঙুর';
+
+  @override
+  String version(String version) {
+    return 'ভার্সন $version';
+  }
+
+  @override
+  String madeBy(String name) {
+    return 'তৈরি করেছেন $name';
+  }
+
+  @override
+  String get privacyPolicy => 'প্রাইভেসি নীতি';
+
+  @override
+  String get privacySub => 'আমরা কী সংগ্রহ করি: কিছুই না';
+
+  @override
+  String get privacyBody =>
+      'Linkbox-এ কোনো অ্যাকাউন্ট, বিজ্ঞাপন বা ট্র্যাকিং নেই। আপনার লিংক, কালেকশন আর সেটিংস শুধু এই ফোনেই থাকে। অ্যাপটি শুধু একটি কাজে ইন্টারনেট ব্যবহার করে: আপনার সেভ করা লিংকের শিরোনাম, সারাংশ আর ছবি আনতে। ব্যাকআপ আপনার ফোনের ফাইল, শুধু আপনিই সেটি সরাতে বা শেয়ার করতে পারেন।';
+
+  @override
+  String get sendFeedback => 'মতামত পাঠান';
+
+  @override
+  String get feedbackSub => 'ডেভেলপারকে ইমেইল করুন';
+
+  @override
+  String get rateApp => 'Google Play-তে রেটিং দিন';
+
+  @override
+  String get rateSub => 'এটা সত্যিই সাহায্য করে';
+
+  @override
+  String get licenses => 'ওপেন-সোর্স লাইসেন্স';
+
+  @override
+  String get licensesSub => 'এই অ্যাপ যেসব প্যাকেজ ব্যবহার করে';
+
+  @override
+  String get replayIntro => 'পরিচিতি আবার দেখুন';
+
+  @override
+  String get replaySub => 'শুরুর স্ক্রিনগুলো আবার দেখুন';
+
+  @override
+  String get aboutFooter =>
+      'কোনো অ্যাকাউন্ট নেই · বিজ্ঞাপন নেই · লিংক এই ফোনেই থাকে';
+
+  @override
+  String get skip => 'বাদ দিন';
+
+  @override
+  String get letsGo => 'চলুন শুরু করি';
+
+  @override
+  String get next => 'পরের';
+
+  @override
+  String get startSaving => 'সেভ করা শুরু করুন';
+
+  @override
+  String get ob1Title => 'সব লিংক এক আনন্দের জায়গায়';
+
+  @override
+  String get ob1Body =>
+      'ভিডিও, পোস্ট, রেসিপি, পরিকল্পনা। ছবি আর সারাংশসহ সব এখানে রাখুন, যাতে পরে সত্যিই খুঁজে পান।';
+
+  @override
+  String get ob2Title => 'যেকোনো অ্যাপ থেকে এক ট্যাপে সেভ';
+
+  @override
+  String ob2Body(String share, String app) {
+    return 'YouTube, Chrome বা Reddit-এ $share ট্যাপ করুন, তারপর $app বাছুন। লিংক কপি করেছেন? আমরা সেভ করার কথা বলব।';
+  }
+
+  @override
+  String get shareWord => 'শেয়ার';
+
+  @override
+  String get ob3Title => 'আপনার লিংক আপনার ফোনেই থাকে';
+
+  @override
+  String get ob3Body =>
+      'আমরা শুধু লিংকের প্রিভিউ আনতে ইন্টারনেট ব্যবহার করি। যেকোনো সময় Downloads ফোল্ডারে ব্যাকআপ নিন।';
+
+  @override
+  String stepOf(int step, int total) {
+    return 'ধাপ $step / $total';
+  }
+
+  @override
+  String get shareTo => 'শেয়ার করুন…';
+
+  @override
+  String get shareMessages => 'মেসেজ';
+
+  @override
+  String get shareMail => 'মেইল';
+
+  @override
+  String get shareMore => 'আরও';
+
+  @override
+  String get importShort => 'ইমপোর্ট';
+
+  @override
+  String get addFirstLink => 'প্রথম লিংক যোগ করুন';
+
+  @override
+  String get emptyFootnote => 'অ্যাকাউন্ট নেই · বিজ্ঞাপন নেই · অফলাইনে চলে';
 }

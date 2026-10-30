@@ -233,7 +233,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get alreadySaved => 'You already saved this one';
 
   @override
-  String get emptyTitle => 'Save it now. Find it later.';
+  String get emptyTitle => 'Save it now.\nFind it later.';
 
   @override
   String get emptyBody =>
@@ -910,4 +910,160 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chosenFile => 'Chosen file';
+
+  @override
+  String get lookAndFeel => 'Look & feel';
+
+  @override
+  String get matchWallpaper => 'Match my wallpaper';
+
+  @override
+  String get matchWallpaperHint => 'Use Android dynamic colors';
+
+  @override
+  String get moreColors => 'More colors';
+
+  @override
+  String get aboutTitle => 'About';
+
+  @override
+  String get aboutRowHint => 'Version, privacy and feedback';
+
+  @override
+  String get themeColorTitle => 'Theme color';
+
+  @override
+  String get pickAColor => 'Pick a color';
+
+  @override
+  String get hexLabel => 'Or type a hex code';
+
+  @override
+  String get hexInvalid => 'Use 6 digits, like #FF8A3D';
+
+  @override
+  String get useThisColor => 'Use this color';
+
+  @override
+  String get colorSun => 'Sun';
+
+  @override
+  String get colorMint => 'Mint';
+
+  @override
+  String get colorSky => 'Sky';
+
+  @override
+  String get colorGrape => 'Grape';
+
+  @override
+  String version(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String madeBy(String name) {
+    return 'Made by $name';
+  }
+
+  @override
+  String get privacyPolicy => 'Privacy policy';
+
+  @override
+  String get privacySub => 'What we collect: nothing';
+
+  @override
+  String get privacyBody =>
+      'Linkbox has no account, no ads and no tracking. Your links, collections and settings are stored only on this phone. The app uses the internet for one thing: to fetch the title, summary and picture of the links you save. Backups are files on your phone that only you can move or share.';
+
+  @override
+  String get sendFeedback => 'Send feedback';
+
+  @override
+  String get feedbackSub => 'Email the developer';
+
+  @override
+  String get rateApp => 'Rate on Google Play';
+
+  @override
+  String get rateSub => 'It really helps';
+
+  @override
+  String get licenses => 'Open-source licenses';
+
+  @override
+  String get licensesSub => 'Packages this app uses';
+
+  @override
+  String get replayIntro => 'Replay the intro';
+
+  @override
+  String get replaySub => 'See the welcome screens again';
+
+  @override
+  String get aboutFooter =>
+      'No account · No ads · Your links stay on this phone';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get letsGo => 'Let’s go';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get startSaving => 'Start saving';
+
+  @override
+  String get ob1Title => 'Every link in one happy place';
+
+  @override
+  String get ob1Body =>
+      'Videos, posts, recipes, plans. Keep them all here, with a picture and summary, so you can actually find them again.';
+
+  @override
+  String get ob2Title => 'Save from any app in one tap';
+
+  @override
+  String ob2Body(String share, String app) {
+    return 'In YouTube, Chrome or Reddit, tap $share, then pick $app. Copied a link? We’ll offer to save it.';
+  }
+
+  @override
+  String get shareWord => 'Share';
+
+  @override
+  String get ob3Title => 'Your links stay on your phone';
+
+  @override
+  String get ob3Body =>
+      'We only use the internet to fetch link previews. Back up any time to your Downloads folder.';
+
+  @override
+  String stepOf(int step, int total) {
+    return 'Step $step of $total';
+  }
+
+  @override
+  String get shareTo => 'Share to…';
+
+  @override
+  String get shareMessages => 'Messages';
+
+  @override
+  String get shareMail => 'Mail';
+
+  @override
+  String get shareMore => 'More';
+
+  @override
+  String get importShort => 'Import';
+
+  @override
+  String get addFirstLink => 'Add first link';
+
+  @override
+  String get emptyFootnote => 'No account · No ads · Works offline';
 }

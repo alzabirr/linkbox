@@ -14,8 +14,12 @@ import '../features/links/edit_link_page.dart';
 import '../features/links/home_page.dart';
 import '../features/links/links_providers.dart';
 import '../features/links/search_page.dart';
+import '../features/onboarding/onboarding_page.dart';
+import '../features/settings/theme_settings.dart';
 import '../features/links/undo_bar.dart';
+import '../features/settings/about_page.dart';
 import '../features/settings/settings_page.dart';
+import '../features/settings/theme_color_page.dart';
 import '../l10n/app_localizations.dart';
 
 class Routes {
@@ -28,6 +32,9 @@ class Routes {
   static const search = '/search';
   static const data = '/settings/data';
   static const restore = '/settings/data/restore';
+  static const themeColor = '/settings/theme';
+  static const about = '/settings/about';
+  static const welcome = '/welcome';
 
   static String editLink(int id) => '/link/$id/edit';
   static String collection(int id) => '/collections/$id';
@@ -35,6 +42,15 @@ class Routes {
 
 final appRouter = GoRouter(
   initialLocation: Routes.links,
+  // First launch: show the intro (16–18) until it is finished.
+  redirect: (context, state) {
+    final done = ProviderScope.containerOf(
+      context,
+      listen: false,
+    ).read(onboardingDoneProvider);
+    if (!done && state.uri.path != Routes.welcome) return Routes.welcome;
+    return null;
+  },
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) => _TabShell(shell: shell),
@@ -80,6 +96,15 @@ final appRouter = GoRouter(
         ),
       ],
     ),
+    GoRoute(
+      path: Routes.welcome,
+      builder: (context, state) => const OnboardingPage(),
+    ),
+    GoRoute(
+      path: Routes.themeColor,
+      builder: (context, state) => const ThemeColorPage(),
+    ),
+    GoRoute(path: Routes.about, builder: (context, state) => const AboutPage()),
     GoRoute(
       path: Routes.data,
       builder: (context, state) => const DataPage(),

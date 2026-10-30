@@ -16,7 +16,6 @@ import '../links/add_link_sheet.dart';
 import '../links/link_actions.dart';
 import '../links/link_menu_sheet.dart';
 import '../links/links_providers.dart';
-import '../links/quick_look_sheet.dart';
 import '../links/selection_bars.dart';
 import '../links/sort_sheet.dart';
 import 'collection_options_sheet.dart';
@@ -211,7 +210,7 @@ class CollectionDetailPage extends ConsumerWidget {
                               selected: selection.contains(link.id),
                               onTap: selecting
                                   ? () => sel.toggle(link.id)
-                                  : () => showQuickLook(context, link.id),
+                                  : () => LinkActions.tap(context, ref, link),
                               onLongPress: selecting
                                   ? null
                                   : () => sel.start(link.id),

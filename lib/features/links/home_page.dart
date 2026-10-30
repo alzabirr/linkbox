@@ -20,6 +20,7 @@ import '../../core/widgets/scene_art.dart';
 import '../../l10n/app_localizations.dart';
 import '../../app/router.dart';
 import 'add_link_sheet.dart';
+import 'link_actions.dart';
 import 'link_menu_sheet.dart';
 import 'quick_look_sheet.dart';
 import 'selection_bars.dart';
@@ -66,6 +67,10 @@ class HomePage extends ConsumerWidget {
           : isGrid
           ? _LinkGrid(links: items, collections: collections)
           : _LinkList(links: items, collections: collections);
+    }
+
+    if (total == 0) {
+      return const SafeArea(bottom: false, child: _EmptyState());
     }
 
     return PopScope(
@@ -217,9 +222,9 @@ mixin _LinkViewHelpers {
     LinkKind.other => null,
   };
 
-  /// Tap action (Settings in M6; Quick look by default).
-  void open(BuildContext context, LinkItem link) =>
-      showQuickLook(context, link.id);
+  /// Quick look, open or copy, as chosen in Settings.
+  void open(BuildContext context, WidgetRef ref, LinkItem link) =>
+      LinkActions.tap(context, ref, link);
 }
 
 // Leaves room under the last row for the Add link button.
@@ -261,7 +266,9 @@ class _LinkGrid extends ConsumerWidget with _LinkViewHelpers {
       loadingLabel: l.gettingPreview,
       selecting: selecting,
       selected: selected.contains(link.id),
-      onTap: selecting ? () => sel.toggle(link.id) : () => open(context, link),
+      onTap: selecting
+          ? () => sel.toggle(link.id)
+          : () => open(context, ref, link),
       onLongPress: selecting ? null : () => sel.start(link.id),
       onRetry: () => ref.read(linkRepositoryProvider).retry(link.id),
     );
@@ -324,7 +331,7 @@ class _LinkList extends ConsumerWidget with _LinkViewHelpers {
           selected: selected.contains(link.id),
           onTap: selecting
               ? () => sel.toggle(link.id)
-              : () => open(context, link),
+              : () => open(context, ref, link),
           onLongPress: selecting ? null : () => sel.start(link.id),
           onMore: () => showLinkMenu(context, link),
         );
@@ -334,6 +341,7 @@ class _LinkList extends ConsumerWidget with _LinkViewHelpers {
 }
 
 /// No links at all (simple version of 05; the full screen comes in M6).
+/// First launch / no links yet (05).
 class _EmptyState extends StatelessWidget {
   const _EmptyState();
 
@@ -341,27 +349,93 @@ class _EmptyState extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final t = context.tokens;
-    return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(30, 20, 30, _bottomPadding),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Mascot(MascotMood.happy, size: 110),
-            const SizedBox(height: 18),
-            Text(
+    Widget card(double angle, Color c) => Transform.rotate(
+          angle: angle * 3.14159 / 180,
+          child: Container(
+            width: 92,
+            height: 120,
+            decoration: boldBox(fill: c, outline: t.outline, radius: 16),
+          ),
+        );
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(24, 28, 24, 24),
+      child: Column(
+        children: [
+          ExcludeSemantics(
+            child: SizedBox(
+              width: 300,
+              height: 280,
+              child: Stack(
+                children: [
+                  Positioned(left: 6, top: 40, child: card(-14, AppColors.sky)),
+                  Positioned(right: 6, top: 30, child: card(12, AppColors.pink)),
+                  Positioned(
+                    left: 32,
+                    top: 196,
+                    child: Container(
+                      width: 236,
+                      height: 14,
+                      decoration: BoxDecoration(
+                        color: t.sandDeep,
+                        borderRadius: const BorderRadius.all(
+                            Radius.elliptical(118, 7)),
+                      ),
+                    ),
+                  ),
+                  const Positioned(
+                      left: 55, top: 2, child: BlinkingMascot(size: 190)),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Semantics(
+            header: true,
+            child: Text(
               l.emptyTitle,
               textAlign: TextAlign.center,
-              style: context.text.headlineMedium,
+              style: AppText.display(40,
+                  height: 1.02, letterSpacing: -1, color: t.text),
             ),
-            const SizedBox(height: 10),
-            Text(
-              l.emptyBody,
+          ),
+          const SizedBox(height: 10),
+          Text(
+            l.emptyBody,
+            textAlign: TextAlign.center,
+            style: AppText.body(16, height: 1.5, color: t.muted),
+          ),
+          const SizedBox(height: 26),
+          Row(
+            children: [
+              Expanded(
+                flex: 10,
+                child: BoldButton(
+                  label: l.importShort,
+                  kind: BoldButtonKind.secondary,
+                  size: BoldButtonSize.cta,
+                  weight: FontWeight.w700,
+                  expand: true,
+                  onPressed: () => context.push(Routes.data),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                flex: 16,
+                child: BoldButton(
+                  label: l.addFirstLink,
+                  icon: AppIcons.plus,
+                  size: BoldButtonSize.cta,
+                  expand: true,
+                  onPressed: () => showAddLinkSheet(context),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 18),
+          Text(l.emptyFootnote,
               textAlign: TextAlign.center,
-              style: AppText.body(15, height: 1.5, color: t.muted),
-            ),
-          ],
-        ),
+              style: AppText.body(13, weight: FontWeight.w600, color: t.muted)),
+        ],
       ),
     );
   }

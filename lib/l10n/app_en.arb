@@ -90,7 +90,7 @@
   "previewOffline": "You’re offline. We saved the link and will get the preview when you’re back online.",
   "invalidLink": "That doesn’t look like a link. It should start with http:// or https://",
   "alreadySaved": "You already saved this one",
-  "emptyTitle": "Save it now. Find it later.",
+  "emptyTitle": "Save it now.\nFind it later.",
   "emptyBody": "Share a link from any app, or paste one here. Your links stay on this phone.",
   "emptyCollection": "No links in this collection yet.",
   "linkSubtitle": "{domain} · {collection}",
@@ -539,5 +539,87 @@
   },
   "replaceConfirmTitle": "Replace everything?",
   "replaceConfirmBody": "Your current links and collections are removed, then the backup is restored.",
-  "chosenFile": "Chosen file"
+  "chosenFile": "Chosen file",
+  "lookAndFeel": "Look & feel",
+  "matchWallpaper": "Match my wallpaper",
+  "matchWallpaperHint": "Use Android dynamic colors",
+  "moreColors": "More colors",
+  "aboutTitle": "About",
+  "aboutRowHint": "Version, privacy and feedback",
+  "themeColorTitle": "Theme color",
+  "pickAColor": "Pick a color",
+  "hexLabel": "Or type a hex code",
+  "hexInvalid": "Use 6 digits, like #FF8A3D",
+  "useThisColor": "Use this color",
+  "colorSun": "Sun",
+  "colorMint": "Mint",
+  "colorSky": "Sky",
+  "colorGrape": "Grape",
+  "version": "Version {version}",
+  "@version": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "madeBy": "Made by {name}",
+  "@madeBy": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "privacyPolicy": "Privacy policy",
+  "privacySub": "What we collect: nothing",
+  "privacyBody": "Linkbox has no account, no ads and no tracking. Your links, collections and settings are stored only on this phone. The app uses the internet for one thing: to fetch the title, summary and picture of the links you save. Backups are files on your phone that only you can move or share.",
+  "sendFeedback": "Send feedback",
+  "feedbackSub": "Email the developer",
+  "rateApp": "Rate on Google Play",
+  "rateSub": "It really helps",
+  "licenses": "Open-source licenses",
+  "licensesSub": "Packages this app uses",
+  "replayIntro": "Replay the intro",
+  "replaySub": "See the welcome screens again",
+  "aboutFooter": "No account · No ads · Your links stay on this phone",
+  "skip": "Skip",
+  "letsGo": "Let’s go",
+  "next": "Next",
+  "startSaving": "Start saving",
+  "ob1Title": "Every link in one happy place",
+  "ob1Body": "Videos, posts, recipes, plans. Keep them all here, with a picture and summary, so you can actually find them again.",
+  "ob2Title": "Save from any app in one tap",
+  "ob2Body": "In YouTube, Chrome or Reddit, tap {share}, then pick {app}. Copied a link? We’ll offer to save it.",
+  "@ob2Body": {
+    "placeholders": {
+      "share": {
+        "type": "String"
+      },
+      "app": {
+        "type": "String"
+      }
+    }
+  },
+  "shareWord": "Share",
+  "ob3Title": "Your links stay on your phone",
+  "ob3Body": "We only use the internet to fetch link previews. Back up any time to your Downloads folder.",
+  "stepOf": "Step {step} of {total}",
+  "@stepOf": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "shareTo": "Share to…",
+  "shareMessages": "Messages",
+  "shareMail": "Mail",
+  "shareMore": "More",
+  "importShort": "Import",
+  "addFirstLink": "Add first link",
+  "emptyFootnote": "No account · No ads · Works offline"
 }

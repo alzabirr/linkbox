@@ -11,8 +11,8 @@ import '../../core/widgets/icon_box.dart';
 import '../../core/widgets/link_tile.dart';
 import '../../core/widgets/mascot.dart';
 import '../../l10n/app_localizations.dart';
+import 'link_actions.dart';
 import 'links_providers.dart';
-import 'quick_look_sheet.dart';
 import 'sort_sheet.dart';
 
 /// Search with sort / collection pills and highlighted matches (03, 23).
@@ -117,7 +117,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
               imageFile: link.customImagePath,
               highlight: query,
               moreLabel: l.moreOptions,
-              onTap: () => showQuickLook(context, link.id),
+              onTap: () => LinkActions.tap(context, ref, link),
             ),
             const SizedBox(height: AppSizes.listGap),
           ],

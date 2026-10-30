@@ -11,8 +11,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<List<Override>> testOverrides({
   AppDatabase? db,
   http.Client? client,
+  bool onboardingDone = true,
 }) async {
-  SharedPreferences.setMockInitialValues({});
+  SharedPreferences.setMockInitialValues(
+      onboardingDone ? {'onboarding_done': true} : {});
   final prefs = await SharedPreferences.getInstance();
   return [
     sharedPrefsProvider.overrideWithValue(prefs),

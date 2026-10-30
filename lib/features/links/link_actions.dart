@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../core/models/link_item.dart';
 import '../../core/services/link_opener.dart';
 import '../../l10n/app_localizations.dart';
+import '../settings/theme_settings.dart';
 import 'delete_dialog.dart';
 import 'links_providers.dart';
+import 'quick_look_sheet.dart';
 
 /// Actions shared by Quick look (04) and the link menu (21).
 class LinkActions {
@@ -27,6 +30,19 @@ class LinkActions {
     await Clipboard.setData(ClipboardData(text: link.url));
     if (toast && context.mounted) {
       _toast(context, AppLocalizations.of(context).linkCopied);
+    }
+  }
+
+  /// Tapping a link: Quick look, open the site, or copy (Settings, 13).
+  static Future<void> tap(
+      BuildContext context, WidgetRef ref, LinkItem link) async {
+    switch (ref.read(tapActionSettingProvider)) {
+      case TapAction.quickLook:
+        await showQuickLook(context, link.id);
+      case TapAction.open:
+        await open(context, link);
+      case TapAction.copy:
+        await copy(context, link);
     }
   }
 

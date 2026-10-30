@@ -52,6 +52,10 @@ enum BoldButtonSize {
   dialog(AppSizes.buttonHeight, AppShape.rControl, 16, FontWeight.w800,
       AppShadows.offMd),
 
+  /// Call to action (05): 58 high, radius 18, 16 / 800.
+  cta(AppSizes.fabHeight, AppShape.rControl, 16, FontWeight.w800,
+      AppShadows.offMd),
+
   /// "Add link" floating button: 58 high, radius 20, 16 / 700.
   fab(
     AppSizes.fabHeight,

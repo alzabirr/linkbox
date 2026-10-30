@@ -77,6 +77,12 @@ class AppIcons {
       '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>');
   static const file = AppIconData(
       '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/>');
+  static const shield = AppIconData(
+      '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>');
+  static const mail =
+      AppIconData('<path d="M3 6h18v12H3zM3 7l9 6 9-6"/>');
+  static const lock = AppIconData(
+      '<rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4" fill="none"/><circle cx="12" cy="16" r="1.5" fill="#141414"/>');
   static const retry = AppIconData(
     '<path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/>',
     stroke: 2.8,

@@ -37,6 +37,7 @@ class MetadataService {
         final yt = await _youtube(uri);
         if (yt != null) return yt;
       }
+      if (_isFacebook(url)) return await _facebook(uri);
       final body = await _download(uri).timeout(timeout);
       final meta = MetadataParser.parse(body, uri);
       if (meta.isEmpty) throw const MetadataException();
@@ -54,13 +55,20 @@ class MetadataService {
     }
   }
 
+  /// Meta sites only show previews to link-preview apps, so we ask as one.
+  static const metaAgents = [
+    'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)',
+    'WhatsApp/2.24.8.76 A',
+    'Twitterbot/1.0',
+  ];
+
   /// Reads at most 512 KB of HTML.
-  Future<String> _download(Uri uri) async {
+  Future<String> _download(Uri uri, {String agent = _userAgent}) async {
     final request = http.Request('GET', uri)
       ..followRedirects = true
       ..maxRedirects = 5
       ..headers.addAll({
-        'User-Agent': _userAgent,
+        'User-Agent': agent,
         'Accept': 'text/html,application/xhtml+xml',
         'Accept-Language': 'en,bn;q=0.8',
       });
@@ -82,6 +90,60 @@ class MetadataService {
     return latin
         ? latin1.decode(bytes, allowInvalid: true)
         : utf8.decode(bytes, allowMalformed: true);
+  }
+
+  static bool _isFacebook(String url) {
+    bool on(String site) {
+      final d = UrlUtils.domainOf(url);
+      return d == site || d.endsWith('.$site');
+    }
+
+    return on('fb.watch') || on('facebook.com') || on('instagram.com');
+  }
+
+  /// Facebook / Instagram: try each preview-app name until one gives a real
+  /// title and image. If none does, keep a simple title from the link
+  /// instead of marking the link failed.
+  Future<LinkMetadata> _facebook(Uri uri) async {
+    final insta = uri.host.contains('instagram');
+    final p = uri.path.toLowerCase();
+    final isVideo = uri.host.contains('fb.watch') ||
+        RegExp(r'/(share/[vr]|reels?|watch|videos|tv)\b').hasMatch(p);
+    final site = insta ? 'Instagram' : 'Facebook';
+    final fallback = LinkMetadata(
+      title: '$site ${isVideo ? (insta ? 'reel' : 'video') : 'post'}',
+      siteName: site,
+      kind: isVideo ? LinkKind.video : LinkKind.post,
+    );
+    for (final agent in metaAgents) {
+      try {
+        final body = await _download(uri, agent: agent).timeout(timeout);
+        final meta = MetadataParser.parse(body, uri);
+        final t = meta.title?.toLowerCase() ?? '';
+        final useless = meta.imageUrl == null ||
+            t.isEmpty ||
+            t == site.toLowerCase() ||
+            t.contains('error') ||
+            t.contains('log in') ||
+            t.contains('login');
+        if (!useless) {
+          return LinkMetadata(
+            title: meta.title,
+            description: meta.description,
+            imageUrl: meta.imageUrl,
+            siteName: site,
+            kind: isVideo ? LinkKind.video : meta.kind,
+          );
+        }
+      } on SocketException {
+        rethrow;
+      } on http.ClientException catch (e) {
+        if (e.message.contains('Failed host lookup')) rethrow;
+      } catch (_) {
+        // Try the next name.
+      }
+    }
+    return fallback;
   }
 
   /// YouTube's oEmbed gives a reliable title and thumbnail.

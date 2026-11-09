@@ -9,7 +9,7 @@ part 'theme_settings.g.dart';
 @immutable
 class ThemeSettingsState {
   const ThemeSettingsState({
-    this.mode = ThemeMode.system,
+    this.mode = ThemeMode.light,
     this.amoled = false,
     this.dynamicColor = false,
     this.accent = AppColors.primary,
@@ -48,7 +48,7 @@ class ThemeSettings extends _$ThemeSettings {
     final hex = p.getString('accent');
     return ThemeSettingsState(
       mode: ThemeMode.values.asNameMap()[p.getString('theme_mode')] ??
-          ThemeMode.system,
+          ThemeMode.light,
       amoled: p.getBool('amoled') ?? false,
       dynamicColor: p.getBool('dynamic_color') ?? false,
       accent: hex == null ? AppColors.primary : parseHex(hex) ?? AppColors.primary,

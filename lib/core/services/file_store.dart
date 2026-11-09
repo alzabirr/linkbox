@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:media_store_plus/media_store_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
-/// A backup file in Download/Linkbox.
+/// A backup file in Download/Linkly.
 class BackupFileInfo {
   const BackupFileInfo({
     required this.uri,
@@ -28,13 +28,13 @@ class FileStoreException implements Exception {
   const FileStoreException();
 }
 
-/// Download/Linkbox files (MediaStore: no storage permission on Android 10+)
+/// Download/Linkly files (MediaStore: no storage permission on Android 10+)
 /// and the system file picker.
 class FileStore {
   FileStore();
 
   static const _channel = MethodChannel('linkbox/files');
-  static const folder = 'Linkbox';
+  static const folder = 'Linkly';
   static bool _ready = false;
 
   Future<void> _init() async {
@@ -44,7 +44,7 @@ class FileStore {
     _ready = true;
   }
 
-  /// Writes [content] to Download/Linkbox/[fileName]; returns the saved name.
+  /// Writes [content] to Download/Linkly/[fileName]; returns the saved name.
   Future<String> saveToDownloads(String fileName, String content) async {
     try {
       await _init();
@@ -62,7 +62,7 @@ class FileStore {
     } on FileStoreException {
       rethrow;
     } catch (e) {
-      debugPrint('Linkbox: saving $fileName failed: $e');
+      debugPrint('Linkly: saving $fileName failed: $e');
       throw const FileStoreException();
     }
   }

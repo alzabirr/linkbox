@@ -100,7 +100,7 @@ class BackupFormat {
     return const JsonEncoder.withIndent('  ').convert(map);
   }
 
-  /// Throws [FormatException] if this is not a Linkbox backup.
+  /// Throws [FormatException] if this is not a Linkly backup.
   static BackupData fromJson(String text) {
     final Object? root;
     try {
@@ -109,7 +109,7 @@ class BackupFormat {
       throw const FormatException('Not JSON');
     }
     if (root is! Map<String, dynamic> || root['app'] != 'linkbox') {
-      throw const FormatException('Not a Linkbox backup');
+      throw const FormatException('Not a Linkly backup');
     }
     final v = root['version'];
     if (v is! int || v > version) {

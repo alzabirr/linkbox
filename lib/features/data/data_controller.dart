@@ -50,22 +50,22 @@ class DataActions {
   static String _stamp() =>
       DateFormat('yyyy-MM-dd-HHmm').format(DateTime.now());
 
-  /// Writes linkbox-backup-YYYY-MM-DD-HHmm.json to Download/Linkbox.
+  /// Writes linkly-backup-YYYY-MM-DD-HHmm.json to Download/Linkly.
   /// Throws [FileStoreException].
   Future<String> backupNow() async {
     final json = BackupFormat.toJson(await _data.exportAll());
     final name =
-        await _files.saveToDownloads('linkbox-backup-${_stamp()}.json', json);
+        await _files.saveToDownloads('linkly-backup-${_stamp()}.json', json);
     ref.read(lastBackupProvider.notifier).set(DateTime.now());
     return name;
   }
 
   Future<String> exportHtml() async => _files.saveToDownloads(
-      'linkbox-export-${_stamp()}.html',
+      'linkly-export-${_stamp()}.html',
       BackupFormat.toBookmarkHtml(await _data.exportAll()));
 
   Future<String> exportJson() async => _files.saveToDownloads(
-      'linkbox-export-${_stamp()}.json',
+      'linkly-export-${_stamp()}.json',
       BackupFormat.toJson(await _data.exportAll()));
 
   /// Picks a browser export and adds its links. Null if cancelled.
@@ -76,7 +76,7 @@ class DataActions {
     return _data.import(BackupFormat.fromBookmarkHtml(text));
   }
 
-  /// Backups in Download/Linkbox, newest first; unreadable ones are skipped.
+  /// Backups in Download/Linkly, newest first; unreadable ones are skipped.
   Future<List<BackupChoice>> listBackups() async {
     final out = <BackupChoice>[];
     for (final f in await _files.listBackups()) {

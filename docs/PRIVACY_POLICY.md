@@ -1,8 +1,8 @@
-# Linkbox – Privacy policy
+# Linkly – Privacy policy
 
 _Last updated: [DATE]_
 
-Linkbox ("the app") is made by [YOUR NAME]. This policy explains what the app
+Linkly ("the app") is made by [YOUR NAME]. This policy explains what the app
 does with your information. Short version: **nothing leaves your phone.**
 
 ## What the app stores
@@ -29,12 +29,12 @@ offer to save it. Android shows a small notice when this happens. The copied
 text is not stored unless you tap **Save link**.
 
 ## Backups and exports
-**Back up now** and **Export** write files to the `Download/Linkbox` folder
+**Back up now** and **Export** write files to the `Download/Linkly` folder
 on your phone. Only you can move or share those files.
 
 ## Deleting your data
 Delete links or collections in the app, or uninstall the app to remove
-everything it stored. Backup files in `Download/Linkbox` stay until you
+everything it stored. Backup files in `Download/Linkly` stay until you
 delete them.
 
 ## Children

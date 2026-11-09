@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Only used to fetch link previews. -->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!-- Only Android 9 and older need this to save backups in Download/Linkbox. -->
+    <!-- Only Android 9 and older need this to save backups in Download/Linkly. -->
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28"/>
     <application
-        android:label="Linkbox"
+        android:label="Linkly"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -40,7 +40,7 @@
         <!-- Receives links from the Android share sheet. -->
         <activity
             android:name=".ShareActivity"
-            android:label="Linkbox"
+            android:label="Linkly"
             android:exported="true"
             android:theme="@style/ShareTheme"
             android:excludeFromRecents="true"

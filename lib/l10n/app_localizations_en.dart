@@ -10,7 +10,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Linkbox';
+  String get appTitle => 'Linkly';
 
   @override
   String get navLinks => 'Links';
@@ -769,7 +769,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lastBackupNever => 'No backup yet';
 
   @override
-  String get downloadFolder => 'Download/Linkbox';
+  String get downloadFolder => 'Download/Linkly';
 
   @override
   String get backupTitle => 'Backup';
@@ -822,11 +822,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Backup didn’t finish. Free up some space on your phone and try again.';
 
   @override
-  String get backupDone => 'Backup saved to Download/Linkbox';
+  String get backupDone => 'Backup saved to Download/Linkly';
 
   @override
   String exportDone(String name) {
-    return 'Saved to Download/Linkbox/$name';
+    return 'Saved to Download/Linkly/$name';
   }
 
   @override
@@ -894,7 +894,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get restoreError =>
-      'That isn’t a Linkbox backup. Pick a linkbox-backup file (.json).';
+      'That isn’t a Linkly backup. Pick a linkly-backup file (.json).';
 
   @override
   String restoreDone(int imported, int skipped) {
@@ -974,7 +974,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacyBody =>
-      'Linkbox has no account, no ads and no tracking. Your links, collections and settings are stored only on this phone. The app uses the internet for one thing: to fetch the title, summary and picture of the links you save. Backups are files on your phone that only you can move or share.';
+      'Linkly has no account, no ads and no tracking. Your links, collections and settings are stored only on this phone. The app uses the internet for one thing: to fetch the title, summary and picture of the links you save. Backups are files on your phone that only you can move or share.';
 
   @override
   String get sendFeedback => 'Send feedback';

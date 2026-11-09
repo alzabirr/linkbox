@@ -1,7 +1,7 @@
-# Linkbox
+# Linkly
 
 Offline-first Android app, built with Flutter, for saving links from any app
-and finding them again. No account, no ads, no cloud. "Linkbox" is a placeholder name.
+and finding them again. No account, no ads, no cloud. The app is called "Linkly" (code names still say linkbox).
 
 ## Where things are
 

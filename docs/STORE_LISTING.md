@@ -1,7 +1,7 @@
-# Google Play listing – Linkbox
+# Google Play listing – Linkly
 
 ## App name (max 30 characters)
-Linkbox – Save links offline
+Linkly – Save links offline
 
 ## Short description (max 80 characters)
 Save links from any app in two taps. Find them again. No account, all offline.
@@ -9,16 +9,16 @@ Save links from any app in two taps. Find them again. No account, all offline.
 ## Full description (max 4000 characters)
 Stop losing links in chats, notes and open tabs.
 
-Linkbox saves any link from any app in two taps. Share from YouTube, Chrome,
-Reddit, Instagram or anywhere else, pick Linkbox, done. Every link becomes a
+Linkly saves any link from any app in two taps. Share from YouTube, Chrome,
+Reddit, Instagram or anywhere else, pick Linkly, done. Every link becomes a
 bright card with its title, summary and picture, so you can actually find it
 again.
 
-★ Save from any app — share a link to Linkbox, or paste one in.
+★ Save from any app — share a link to Linkly, or paste one in.
 ★ Picture cards — titles, summaries and images are fetched for you.
 ★ Collections — Recipes, Design, Read later… pick a color and an icon.
 ★ Find it fast — search titles and links, sort A–Z or by date.
-★ Copied a link? Linkbox offers to save it when you open the app.
+★ Copied a link? Linkly offers to save it when you open the app.
 ★ Select many — move, share or delete several links at once, with Undo.
 ★ Import your browser bookmarks — Chrome, Firefox, Edge and Brave.
 ★ Back up and restore — files in your Downloads folder, no cloud needed.

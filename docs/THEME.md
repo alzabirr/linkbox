@@ -1,4 +1,4 @@
-# Linkbox – Theme and design tokens
+# Linkly – Theme and design tokens
 
 One rule sets the look: every surface gets a **2.5 px ink outline**, a **flat bright fill** and,
 when it is tappable and important, a **hard offset shadow with no blur**.

@@ -27,6 +27,8 @@ class LinkboxApp extends ConsumerWidget {
           darkTheme: AppTheme.dark(accent, amoled: theme.amoled),
           themeMode: theme.mode,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
+          // Always English, even when the phone is set to Bangla.
+          locale: const Locale('en'),
           supportedLocales: AppLocalizations.supportedLocales,
           routerConfig: appRouter,
           // Status bar icons: dark on light screens, light on dark ones.

@@ -1,4 +1,4 @@
-# Linkbox – Screens
+# Linkly – Screens
 
 30 screens. Each one has a mockup image `design/screens/NN-name.png` and its HTML
 `design/html/NN-name.html` (exact sizes). Styles come from `docs/THEME.md`.
@@ -123,7 +123,7 @@
 - Row card (sky, shadowMd) "Import, export & backup · Last backup: 2 days ago" → 14. About → 24.
 
 ### 14 · Import, export & backup
-- **Backup** card (mint, shadowMd, cheer mascot): text with **Download/Linkbox**, "Last backup: …", buttons **Back up now** (ink) · Restore (→ 28).
+- **Backup** card (mint, shadowMd, cheer mascot): text with **Download/Linkly**, "Last backup: …", buttons **Back up now** (ink) · Restore (→ 28).
 - **Import from a browser** card: help text, **Choose HTML file** (accent).
 - **Export** card: Export HTML · Export JSON.
 - Result toast (ink): "Imported 142 links. Skipped 6 you already had."
@@ -134,7 +134,7 @@
 ### 16–18 · Onboarding
 - Colored top area (16 sun, 17 pink, 18 mint) with illustration; cream bottom panel (top radius 32): step dots (active = long ink pill), headline (displayLarge), body, primary button.
 - 16: "Every link in one happy place" — Skip (→ 05), **Let's go**.
-- 17: share-menu illustration with Linkbox icon highlighted; "Save from any app in one tap" — Back, Skip, **Next**.
+- 17: share-menu illustration with Linkly icon highlighted; "Save from any app in one tap" — Back, Skip, **Next**.
 - 18: phone + lock + sleepy mascot; "Your links stay on your phone"; chips No account / No ads / No tracking / Works offline; **Start saving** → sets `onboarding_done` → 05.
 
 ### 19 · Collection detail
@@ -174,7 +174,7 @@
 - Sheet header: icon box + name + count. Rows: Rename · Color & icon (→ 20) · Pin to top · Share all links · **Delete collection** ("Links move to “No collection”, nothing is lost").
 
 ### 28 · Restore from backup
-- Text "Pick a backup from Download/Linkbox." Backup rows (date, "142 links · 5 collections · 48 KB"); selected = sun + shadowSm.
+- Text "Pick a backup from Download/Linkly." Backup rows (date, "142 links · 5 collections · 48 KB"); selected = sun + shadowSm.
 - "How should we restore?": radio cards **Add to my links** (default, mint) / Replace everything ("Your current 89 links are removed first.").
 - **Restore 142 links**.
 

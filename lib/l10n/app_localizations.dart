@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'Linkbox'**
+  /// **'Linkly'**
   String get appTitle;
 
   /// No description provided for @navLinks.
@@ -1367,7 +1367,7 @@ abstract class AppLocalizations {
   /// No description provided for @downloadFolder.
   ///
   /// In en, this message translates to:
-  /// **'Download/Linkbox'**
+  /// **'Download/Linkly'**
   String get downloadFolder;
 
   /// No description provided for @backupTitle.
@@ -1457,13 +1457,13 @@ abstract class AppLocalizations {
   /// No description provided for @backupDone.
   ///
   /// In en, this message translates to:
-  /// **'Backup saved to Download/Linkbox'**
+  /// **'Backup saved to Download/Linkly'**
   String get backupDone;
 
   /// No description provided for @exportDone.
   ///
   /// In en, this message translates to:
-  /// **'Saved to Download/Linkbox/{name}'**
+  /// **'Saved to Download/Linkly/{name}'**
   String exportDone(String name);
 
   /// No description provided for @restorePick.
@@ -1535,7 +1535,7 @@ abstract class AppLocalizations {
   /// No description provided for @restoreError.
   ///
   /// In en, this message translates to:
-  /// **'That isn’t a Linkbox backup. Pick a linkbox-backup file (.json).'**
+  /// **'That isn’t a Linkly backup. Pick a linkly-backup file (.json).'**
   String get restoreError;
 
   /// No description provided for @restoreDone.
@@ -1679,7 +1679,7 @@ abstract class AppLocalizations {
   /// No description provided for @privacyBody.
   ///
   /// In en, this message translates to:
-  /// **'Linkbox has no account, no ads and no tracking. Your links, collections and settings are stored only on this phone. The app uses the internet for one thing: to fetch the title, summary and picture of the links you save. Backups are files on your phone that only you can move or share.'**
+  /// **'Linkly has no account, no ads and no tracking. Your links, collections and settings are stored only on this phone. The app uses the internet for one thing: to fetch the title, summary and picture of the links you save. Backups are files on your phone that only you can move or share.'**
   String get privacyBody;
 
   /// No description provided for @sendFeedback.

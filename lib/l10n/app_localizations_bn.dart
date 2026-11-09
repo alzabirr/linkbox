@@ -10,7 +10,7 @@ class AppLocalizationsBn extends AppLocalizations {
   AppLocalizationsBn([String locale = 'bn']) : super(locale);
 
   @override
-  String get appTitle => 'Linkbox';
+  String get appTitle => 'Linkly';
 
   @override
   String get navLinks => 'লিংক';
@@ -770,7 +770,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get lastBackupNever => 'এখনো কোনো ব্যাকআপ নেই';
 
   @override
-  String get downloadFolder => 'Download/Linkbox';
+  String get downloadFolder => 'Download/Linkly';
 
   @override
   String get backupTitle => 'ব্যাকআপ';
@@ -823,11 +823,11 @@ class AppLocalizationsBn extends AppLocalizations {
       'ব্যাকআপ শেষ হয়নি। ফোনে কিছু জায়গা খালি করে আবার চেষ্টা করুন।';
 
   @override
-  String get backupDone => 'ব্যাকআপ Download/Linkbox-এ সেভ হয়েছে';
+  String get backupDone => 'ব্যাকআপ Download/Linkly-এ সেভ হয়েছে';
 
   @override
   String exportDone(String name) {
-    return 'Download/Linkbox/$name-এ সেভ হয়েছে';
+    return 'Download/Linkly/$name-এ সেভ হয়েছে';
   }
 
   @override
@@ -894,7 +894,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get restoreError =>
-      'এটি Linkbox-এর ব্যাকআপ নয়। linkbox-backup (.json) ফাইল বাছুন।';
+      'এটি Linkly-এর ব্যাকআপ নয়। linkly-backup (.json) ফাইল বাছুন।';
 
   @override
   String restoreDone(int imported, int skipped) {
@@ -974,7 +974,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get privacyBody =>
-      'Linkbox-এ কোনো অ্যাকাউন্ট, বিজ্ঞাপন বা ট্র্যাকিং নেই। আপনার লিংক, কালেকশন আর সেটিংস শুধু এই ফোনেই থাকে। অ্যাপটি শুধু একটি কাজে ইন্টারনেট ব্যবহার করে: আপনার সেভ করা লিংকের শিরোনাম, সারাংশ আর ছবি আনতে। ব্যাকআপ আপনার ফোনের ফাইল, শুধু আপনিই সেটি সরাতে বা শেয়ার করতে পারেন।';
+      'Linkly-এ কোনো অ্যাকাউন্ট, বিজ্ঞাপন বা ট্র্যাকিং নেই। আপনার লিংক, কালেকশন আর সেটিংস শুধু এই ফোনেই থাকে। অ্যাপটি শুধু একটি কাজে ইন্টারনেট ব্যবহার করে: আপনার সেভ করা লিংকের শিরোনাম, সারাংশ আর ছবি আনতে। ব্যাকআপ আপনার ফোনের ফাইল, শুধু আপনিই সেটি সরাতে বা শেয়ার করতে পারেন।';
 
   @override
   String get sendFeedback => 'মতামত পাঠান';

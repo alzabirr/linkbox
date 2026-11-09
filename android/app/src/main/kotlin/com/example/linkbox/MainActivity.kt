@@ -30,7 +30,7 @@ class MainActivity : FlutterActivity() {
     }
 
     /**
-     * Backups in Download/Linkbox that this install of the app wrote.
+     * Backups in Download/Linkly (or the old Download/Linkbox) that this install of the app wrote.
      * (After a reinstall Android hides older files; the user picks them.)
      */
     private fun listBackups(): List<Map<String, Any>> {
@@ -42,9 +42,15 @@ class MainActivity : FlutterActivity() {
             MediaStore.Downloads.SIZE,
             MediaStore.Downloads.DATE_MODIFIED,
         )
-        val where = "${MediaStore.Downloads.RELATIVE_PATH} LIKE ? AND " +
-            "${MediaStore.Downloads.DISPLAY_NAME} LIKE ?"
-        val args = arrayOf("Download/Linkbox%", "linkbox-backup-%.json")
+        // Also finds backups made before the app was renamed from Linkbox.
+        val where = "(${MediaStore.Downloads.RELATIVE_PATH} LIKE ? OR " +
+            "${MediaStore.Downloads.RELATIVE_PATH} LIKE ?) AND " +
+            "(${MediaStore.Downloads.DISPLAY_NAME} LIKE ? OR " +
+            "${MediaStore.Downloads.DISPLAY_NAME} LIKE ?)"
+        val args = arrayOf(
+            "Download/Linkly%", "Download/Linkbox%",
+            "linkly-backup-%.json", "linkbox-backup-%.json",
+        )
         val out = mutableListOf<Map<String, Any>>()
         contentResolver.query(
             collection, projection, where, args,

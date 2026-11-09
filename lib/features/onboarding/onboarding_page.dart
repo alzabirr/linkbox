@@ -431,7 +431,7 @@ class _WelcomeArt extends StatelessWidget {
   }
 }
 
-/// 17: a share sheet with Linkbox highlighted, and the mascot looking up.
+/// 17: a share sheet with Linkly highlighted, and the mascot looking up.
 class _ShareArt extends StatelessWidget {
   const _ShareArt({required this.l});
 
@@ -568,7 +568,7 @@ class _ShareArt extends StatelessWidget {
             ),
           ),
         ),
-        // Dotted arrow up to the Linkbox icon.
+        // Dotted arrow up to the Linkly icon.
         Positioned(
           left: 150,
           top: 250,

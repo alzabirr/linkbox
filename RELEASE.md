@@ -1,4 +1,4 @@
-# Releasing Linkbox
+# Releasing Linkly
 
 Do these in order. Steps marked 🧑 need you; nothing here is automatic.
 
@@ -60,7 +60,7 @@ Already checked by Claude Code: release share overlay opens in ~0.3 s;
 
 ## 4. Play Console 🧑
 1. Create a developer account at https://play.google.com/console (one-time fee).
-2. **Create app** → name "Linkbox", app, free.
+2. **Create app** → name "Linkly", app, free.
 3. **App content**:
    - Privacy policy: publish `docs/PRIVACY_POLICY.md` somewhere public
      (e.g. GitHub Pages or a Google Doc shared publicly) and paste the URL.

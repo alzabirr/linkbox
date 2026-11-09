@@ -56,7 +56,7 @@ class AboutPage extends StatelessWidget {
         );
       }),
       (AppIcons.mail, AppColors.sky, l.sendFeedback, l.feedbackSub, () {
-        openLink('mailto:${AppInfo.feedbackEmail}?subject=Linkbox');
+        openLink('mailto:${AppInfo.feedbackEmail}?subject=Linkly');
       }),
       (AppIcons.star, AppColors.sun, l.rateApp, l.rateSub, () {
         openLink(

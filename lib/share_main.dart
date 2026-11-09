@@ -40,6 +40,8 @@ class ShareApp extends ConsumerWidget {
           themeMode: theme.mode,
           color: Colors.transparent,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
+          // Always English, even when the phone is set to Bangla.
+          locale: const Locale('en'),
           supportedLocales: AppLocalizations.supportedLocales,
           home: const ShareOverlayPage(),
         );

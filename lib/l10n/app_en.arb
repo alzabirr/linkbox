@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appTitle": "Linkbox",
+  "appTitle": "Linkly",
   "navLinks": "Links",
   "navCollections": "Collections",
   "navSettings": "Settings",
@@ -432,7 +432,7 @@
     }
   },
   "lastBackupNever": "No backup yet",
-  "downloadFolder": "Download/Linkbox",
+  "downloadFolder": "Download/Linkly",
   "backupTitle": "Backup",
   "backupBody": "Saves every link and collection to {folder} on this phone.",
   "@backupBody": {
@@ -464,8 +464,8 @@
   },
   "importError": "We couldn’t read that file. Pick the .html file your browser exported.",
   "backupFailed": "Backup didn’t finish. Free up some space on your phone and try again.",
-  "backupDone": "Backup saved to Download/Linkbox",
-  "exportDone": "Saved to Download/Linkbox/{name}",
+  "backupDone": "Backup saved to Download/Linkly",
+  "exportDone": "Saved to Download/Linkly/{name}",
   "@exportDone": {
     "placeholders": {
       "name": {
@@ -525,7 +525,7 @@
   },
   "restoreChooseFile": "Choose a backup file",
   "restoreNone": "No backups found here. If you reinstalled the app, choose the backup file yourself.",
-  "restoreError": "That isn’t a Linkbox backup. Pick a linkbox-backup file (.json).",
+  "restoreError": "That isn’t a Linkly backup. Pick a linkly-backup file (.json).",
   "restoreDone": "Restored {imported} links. Skipped {skipped} you already had.",
   "@restoreDone": {
     "placeholders": {
@@ -573,7 +573,7 @@
   },
   "privacyPolicy": "Privacy policy",
   "privacySub": "What we collect: nothing",
-  "privacyBody": "Linkbox has no account, no ads and no tracking. Your links, collections and settings are stored only on this phone. The app uses the internet for one thing: to fetch the title, summary and picture of the links you save. Backups are files on your phone that only you can move or share.",
+  "privacyBody": "Linkly has no account, no ads and no tracking. Your links, collections and settings are stored only on this phone. The app uses the internet for one thing: to fetch the title, summary and picture of the links you save. Backups are files on your phone that only you can move or share.",
   "sendFeedback": "Send feedback",
   "feedbackSub": "Email the developer",
   "rateApp": "Rate on Google Play",

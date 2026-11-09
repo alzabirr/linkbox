@@ -1,7 +1,7 @@
-# Linkbox – Build Spec
+# Linkly – Build Spec
 
 Offline-first Android app, built in Flutter, for saving links from any app and finding them again.
-No account, no ads, no cloud. "Linkbox" is a placeholder name.
+No account, no ads, no cloud. The app is called "Linkly".
 
 Related files:
 - Screens: `docs/SCREENS.md` (all 30 screens, numbered)
@@ -13,13 +13,13 @@ Related files:
 ## 1. Overview
 
 **The problem.** People save links in chats, notes and browser tabs, then lose them.
-Linkbox gives every link a title, summary and picture, and keeps them in collections.
+Linkly gives every link a title, summary and picture, and keeps them in collections.
 
 **Who it's for.** Anyone who saves videos, posts, recipes, articles or design ideas from YouTube,
 Reddit, Chrome, Instagram and similar apps.
 
 **Reference.** The feature set follows the Play Store app Savr (GPL v3). We re-implement the features
-with our own code, name and design. If any Savr code is copied, Linkbox must also be GPL v3.
+with our own code, name and design. If any Savr code is copied, Linkly must also be GPL v3.
 
 ### Goals
 - Save a link from any app in two taps, using the share sheet
@@ -61,7 +61,7 @@ P1 = needed to launch · P2 = finishes the experience · P3 = can come in an upd
 | Settings | Accent color picker + Android dynamic color | P2 | 13, 25 |
 | Data | Import browser bookmarks (Netscape HTML file) | P1 | 14 |
 | Data | Export to HTML and JSON | P1 | 14 |
-| Data | Local backup to Download/Linkbox + restore (add or replace) | P1 | 14, 28 |
+| Data | Local backup to Download/Linkly + restore (add or replace) | P1 | 14, 28 |
 | Onboarding | 3-step intro + empty state | P2 | 05, 16–18 |
 | Extras | About page, licenses, feedback, rate | P2 | 24 |
 | Extras | Home-screen widgets (quick save, recent, collection count) | P3 | 26 |
@@ -78,8 +78,8 @@ everything else is pushed on top or opened as a bottom sheet.
 ## 4. Key user flows
 
 ### Save from another app (share sheet)
-1. In YouTube, Chrome or Reddit, the user taps **Share** and picks **Linkbox**.
-2. Linkbox opens as a transparent overlay activity, not the full app.
+1. In YouTube, Chrome or Reddit, the user taps **Share** and picks **Linkly**.
+2. Linkly opens as a transparent overlay activity, not the full app.
 3. Extract the first URL from the shared text and normalize it.
 4. URL already saved → screen 07 "You already saved this one" → Open saved link / Save a copy.
 5. New → save at once with the URL as a temporary title, show screen 22 "Saved!".
@@ -108,7 +108,7 @@ Must take under 2 seconds.
 4. After delete show the Undo bar (29) for 5 s; purge rows only when it expires.
 
 ### Back up, restore, import
-1. **Back up now** writes a JSON file to Download/Linkbox (14).
+1. **Back up now** writes a JSON file to Download/Linkly (14).
 2. **Restore** lists backups by date (28); default "Add to my links" skips duplicates.
 3. **Choose HTML file** imports a browser export; folders become collections.
 4. Show "Imported {n} links. Skipped {m} you already had."
@@ -137,7 +137,7 @@ Repositories  LinkRepository, CollectionRepository, SettingsRepository
 Services      Metadata fetch+parse · Share intent receiver · Clipboard watcher ·
               Backup/import/export · Home widget updater
    ↓
-Platform      Drift SQLite · shared_preferences · Download/Linkbox files ·
+Platform      Drift SQLite · shared_preferences · Download/Linkly files ·
               Internet (previews only) · Android share + widgets
 ```
 
@@ -278,7 +278,7 @@ Queue fetches, max 3 at once.
 
 ### Export and backup
 - Export HTML = Netscape format. Export JSON / Back up now = backup format above.
-- Backups → `Download/Linkbox/linkbox-backup-YYYY-MM-DD-HHmm.json` via MediaStore (no storage permission).
+- Backups → `Download/Linkly/linkly-backup-YYYY-MM-DD-HHmm.json` via MediaStore (no storage permission).
 - Restore: "Add to my links" (default, skips duplicates) or "Replace everything" (wipe + insert in one transaction).
 
 ### Undo delete
@@ -370,7 +370,7 @@ One milestone at a time. Each ends with something you can run on the phone.
 
 ### M5 · Data
 - [ ] Import browser HTML; export HTML and JSON (14)
-- [ ] Backup to Download/Linkbox; restore Add / Replace (28)
+- [ ] Backup to Download/Linkly; restore Add / Replace (28)
 - **Done when:** a Chrome export imports correctly, and backup → uninstall → reinstall → restore brings everything back.
 
 ### M6 · Settings, onboarding, polish
